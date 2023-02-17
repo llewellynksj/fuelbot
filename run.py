@@ -1,6 +1,10 @@
-# Google API imports
+# Imports to work with Google Sheets
 import gspread
 from google.oauth2.service_account import Credentials
+
+# Imports for Font and color
+from pyfiglet import Figlet
+from termcolor import colored
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -12,3 +16,11 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('fuelbot')
+
+# Variables for spreadsheet worksheets
+logins = SHEET.worksheet("logins")
+
+# Global variables
+title = Figlet(font="slant")
+
+print(colored(title.renderText("F u e l B o t"), 'cyan'))
