@@ -43,6 +43,45 @@ def new_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
+def create_account():
+    """
+    create account
+    """
+    print_colour(title.renderText("S i g n  U p"), "white")
+    while True:
+        print_colour(
+            """Please choose a username that:
+            - has a minimum of 6 characters
+            - is unique
+        """, "magenta")
+        print_colour("Type q to quit and return to the menu", "magenta")
+        username = input("Enter a unique username: ")
+        if user_quits(username):
+            display_login_options()
+        elif check_username(username):
+            break
+
+    print_colour(f"Your username is {username}", "cyan")
+
+
+def user_quits(user_input):
+    """
+    Checks if the user has input 'q' to quit
+    Returns the user to the first menu
+    """
+    if user_input == "q":
+        print_colour("Quitting....please wait...", "magenta")
+
+
+def check_username(username):
+    """
+    Data validation of the username input by the user
+    Checks the string is a minimum of 6 characters
+    Checks the username does not match any other usernames already logged
+    """
+    
+
+
 def display_about():
     """
     Displays the 'about' information to the user
