@@ -116,6 +116,8 @@ def check_password(password):
     Checks password
     """
     password_length = len(password)
+    # code for checking if password contains integer from:
+    # https://www.geeksforgeeks.org/password-validation-in-python/
     if not any(char.isdigit() for char in password):
         print_colour("You forgot to include a number! Try again", "grey")
         return False
