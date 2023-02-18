@@ -1,3 +1,5 @@
+import os
+
 # Imports to work with Google Sheets
 import gspread
 from google.oauth2.service_account import Credentials
@@ -5,6 +7,7 @@ from google.oauth2.service_account import Credentials
 # Imports for Font and color
 from pyfiglet import Figlet
 from termcolor import colored
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -31,10 +34,20 @@ def print_colour(text, colour):
     print(colored(text, colour))
 
 
+def new_terminal():
+    """
+    Clears the current terminal and displays a new blank screen
+    """
+    # code taken from:
+    # https://stackoverflow.com/questions/2084508/clear-terminal-in-python
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
 def print_login_options():
     """
     Displays options to user to login or create account
     """
+    new_terminal()
     print_colour(
         """Select from the below options:
         1. Login
