@@ -43,12 +43,36 @@ def new_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def print_login_options():
+def display_about():
+    """
+    Displays the 'about' information to the user
+    Returns user to the login menu when they hit Enter
+    """
+    print_colour(title.renderText("A b o u t"), "white")
+    print_colour(
+        "FuelBot is an analysis tool for tracking your spend on fuel."
+        "\nYou can add fuel costs as and when you fill up your car."
+        "\nYou will be able to view insights such as your average spend"
+        "\nover the week or month, your average mpg, and trends in "
+        "fuel prices.\n", "cyan")
+
+    print_colour(
+        "Start by adding your car details (you can add more than 1 vehicle),"
+        "\nand then each time you fill up your car you should add a fuel "
+        "\nentry. This will record your odometer reading, the litres you've "
+        "\ntopped up and the cost."
+        "\nYou'll then be able to view your insights! This should help "
+        "\nyou to budget and manage your costs.\n", "cyan")
+    input("Press Enter to return to the menu")
+    display_login_options()
+
+
+def display_login_options():
     """
     Displays options to user to login or create account
     """
     new_terminal()
-    print_colour(title.renderText("L o g i n"), "white")
+    print_colour(title.renderText("M e n u"), "white")
     print_colour(
         """Select from the below options:
         1. Login
@@ -67,7 +91,7 @@ def main():
                 \nRegister an account & add your car details
                 \nLog your fuel costs to view insights & trends\n""", "cyan")
     input("\nShall we get started? Hit Enter to continue")
-    print_login_options()
+    display_login_options()
 
 
-main()
+display_about()
