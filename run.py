@@ -48,6 +48,7 @@ def print_login_options():
     Displays options to user to login or create account
     """
     new_terminal()
+    print_colour(title.renderText("L o g i n"), "white")
     print_colour(
         """Select from the below options:
         1. Login
@@ -62,7 +63,7 @@ def main():
     Prints welcome message
     """
     print_colour(title.renderText("F u e l B o t"), "white")
-    print_colour("""Welcome to your Fuel Cost Analysis programme\n
+    print_colour("""Welcome to your Fuel Cost Analysis programme
                 \nRegister an account & add your car details
                 \nLog your fuel costs to view insights & trends\n""", "cyan")
     input("\nShall we get started? Hit Enter to continue")
