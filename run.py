@@ -22,6 +22,8 @@ SHEET = GSPREAD_CLIENT.open('fuelbot')
 
 # Variables for spreadsheet worksheets
 logins = SHEET.worksheet("logins")
+usernames_list = logins.col_values(1)
+passwords_list = logins.col_values(2)
 
 # Global variables
 title = Figlet(font="slant")
@@ -125,15 +127,39 @@ def check_password(password):
     if not any(char.isdigit() for char in password):
         print_colour("You forgot to include a number! Try again", "grey")
         return False
-    elif password_length < 6:
+    if password_length < 6:
         print_colour("That's too short! Try again", "grey")
         return False
     return True
 
 
+def check_login_details(username, password):
+    """
+    Checks the users inputted username and password
+    matches the saved information in the worksheet
+    """
+    users_dict = logins.get_all_records()
+    if username in usernames_list:
+        current_user = next(
+            (x for x in users_dict if x["username"] == username)
+            )
+    if username not in usernames_list:
+        print_colour("Username not found. Try again\n", "grey")
+        return False
+    
+    stored_password = current_user.get("password")
+    if password == stored_password:
+        print_colour("User account found. Please wait...\n", "cyan")
+    else:
+        print_colour("Password incorrect. Try again\n", "grey")
+        return False
+    
+    return True
+
+
 def update_worksheet_logins(username, password):
     """
-    Saves the users username and password to google sheets
+    Saves the username and password to google sheets
     """
     user_data = [username, password]
 
@@ -141,12 +167,11 @@ def update_worksheet_logins(username, password):
     logins.append_row(user_data)
 
 
-def user_login():
+def display_user_menu():
     """
-    Login
+    menu
     """
-    new_terminal()
-    print_colour(title.renderText("L o g i n"), "white")
+    print("This works")
 
 
 def display_about():
@@ -188,6 +213,27 @@ def display_login_options():
     input("Select an option: ")
 
 
+def user_login():
+    """
+    Login
+    """
+    new_terminal()
+    print_colour(title.renderText("L o g i n"), "white")
+    while True:
+        print_colour(
+            "Enter your username and password below"
+            "\nPress q to quit and go back to the menu\n", "cyan")
+        username = input("Enter your username: \n")
+        password = input("\nEnter your password: \n")
+        if user_quits(username):
+            display_login_options()
+        elif user_quits(password):
+            display_login_options()
+        elif check_login_details(username, password):
+            break
+    display_user_menu()
+
+
 def main():
     """
     Prints the programme logo to the terminal
@@ -201,4 +247,4 @@ def main():
     display_login_options()
 
 
-create_account()
+user_login()
