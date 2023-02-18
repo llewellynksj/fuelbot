@@ -24,6 +24,19 @@ logins = SHEET.worksheet("logins")
 title = Figlet(font="slant")
 
 
+def print_colour(text, colour):
+    """
+    Using the termcolour import, prints text with the selected colour.
+    """
+    print(colored(text, colour))
+
+
+def print_login_options():
+    """
+    Displays options to user to login or create account
+    """
+
+
 def main():
     """
     Prints the programme logo to the terminal
