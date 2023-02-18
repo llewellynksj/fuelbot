@@ -23,4 +23,18 @@ logins = SHEET.worksheet("logins")
 # Global variables
 title = Figlet(font="slant")
 
-print(colored(title.renderText("F u e l B o t"), 'cyan'))
+
+def main():
+    """
+    Prints the programme logo to the terminal
+    Prints welcome message
+    """
+    print(colored(title.renderText("F u e l B o t"), 'cyan'))
+    print("Welcome to this fuel cost analysis programme\n")
+    print("\nABOUT\n")
+    print("Register an account & add your car details")
+    print("Log your fuel costs to view insights and trends\n")
+    print("Shall we get started? (Press Enter)")
+
+
+main()
