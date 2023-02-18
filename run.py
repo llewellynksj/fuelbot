@@ -62,7 +62,7 @@ def create_account():
             display_login_options()
         elif check_username(username):
             break
-    print_colour(f"\nYour username is confirmed: {username}", "cyan")
+    print_colour(f"\nYour username is confirmed: {username}\n", "cyan")
 
     while True:
         print_colour(
@@ -76,7 +76,7 @@ def create_account():
             display_login_options()
         elif check_password(password):
             break
-    print_colour(f"\nYour password is {password}", "cyan")
+    print_colour(f"\nYour password is confirmed: {password}\n", "cyan")
 
 
 def user_quits(user_input):
@@ -115,8 +115,13 @@ def check_password(password):
     """
     Checks password
     """
-    # password_length = len(password)
-    print("Hooray")
+    password_length = len(password)
+    if not any(char.isdigit() for char in password):
+        print_colour("You forgot to include a number! Try again", "grey")
+        return False
+    elif password_length < 6:
+        print_colour("That's too short! Try again", "grey")
+        return False
     return True
 
 
