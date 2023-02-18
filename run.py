@@ -78,6 +78,10 @@ def create_account():
             break
     print_colour(f"\nYour password is confirmed: {password}\n", "cyan")
 
+    update_worksheet_logins(username, password)
+    input("Press Enter to Login")
+    user_login()
+
 
 def user_quits(user_input):
     """
@@ -97,7 +101,7 @@ def check_username(username):
     Checks the username does not match any other usernames already logged
     Returns False if validation is not valid
     """
-    usernames = logins.row_values(1)
+    usernames = logins.col_values(1)
 
     username_length = len(username)
 
@@ -125,6 +129,24 @@ def check_password(password):
         print_colour("That's too short! Try again", "grey")
         return False
     return True
+
+
+def update_worksheet_logins(username, password):
+    """
+    Saves the users username and password to google sheets
+    """
+    user_data = [username, password]
+
+    print_colour("Saving account information...\n", "cyan")
+    logins.append_row(user_data)
+
+
+def user_login():
+    """
+    Login
+    """
+    new_terminal()
+    print_colour(title.renderText("L o g i n"), "white")
 
 
 def display_about():
