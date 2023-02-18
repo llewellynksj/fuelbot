@@ -45,23 +45,38 @@ def new_terminal():
 
 def create_account():
     """
-    create account
+    Requests a username and password from the user
+    Checks if the username and password are valid
+    If validation returns true, displays confirmation to user
     """
     print_colour(title.renderText("S i g n  U p"), "white")
     while True:
         print_colour(
-            """Please choose a username that:
+            """Please choose a USERNAME that:
             - has a minimum of 6 characters
             - is unique
         """, "magenta")
-        print_colour("Type q to quit and return to the menu", "magenta")
-        username = input("Enter a unique username: ")
+        print_colour("Type q to quit and return to the menu\n", "magenta")
+        username = input("Enter a unique username: \n")
         if user_quits(username):
             display_login_options()
         elif check_username(username):
             break
+    print_colour(f"\nYour username is confirmed: {username}", "cyan")
 
-    print_colour(f"Your username is {username}", "cyan")
+    while True:
+        print_colour(
+            """Please choose a PASSWORD that:
+            - has a minimum of 6 characters
+            - contains at least 1 number
+        """, "magenta")
+        print_colour("Type q to quit and return to the menu\n", "magenta")
+        password = input("Enter your password: \n")
+        if user_quits(password):
+            display_login_options()
+        elif check_password(password):
+            break
+    print_colour(f"\nYour password is {password}", "cyan")
 
 
 def user_quits(user_input):
@@ -71,6 +86,8 @@ def user_quits(user_input):
     """
     if user_input == "q":
         print_colour("Quitting....please wait...", "magenta")
+        return True
+    return False
 
 
 def check_username(username):
@@ -78,8 +95,29 @@ def check_username(username):
     Data validation of the username input by the user
     Checks the string is a minimum of 6 characters
     Checks the username does not match any other usernames already logged
+    Returns False if validation is not valid
     """
-    
+    usernames = logins.row_values(1)
+
+    username_length = len(username)
+
+    if username_length < 6:
+        print_colour("That's too short! Enter at least 6 characters", "grey")
+        return False
+    elif username in usernames:
+        print_colour("Not available. Please try something else", "grey")
+        return False
+    else:
+        return True
+
+
+def check_password(password):
+    """
+    Checks password
+    """
+    # password_length = len(password)
+    print("Hooray")
+    return True
 
 
 def display_about():
@@ -118,6 +156,7 @@ def display_login_options():
         2. Create Account
         3. About
     """, "cyan")
+    input("Select an option: ")
 
 
 def main():
@@ -133,4 +172,4 @@ def main():
     display_login_options()
 
 
-display_about()
+create_account()
