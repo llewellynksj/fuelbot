@@ -146,14 +146,12 @@ def check_login_details(username, password):
     if username not in usernames_list:
         print_colour("Username not found. Try again\n", "grey")
         return False
-    
     stored_password = current_user.get("password")
     if password == stored_password:
         print_colour("User account found. Please wait...\n", "cyan")
     else:
         print_colour("Password incorrect. Try again\n", "grey")
         return False
-    
     return True
 
 
@@ -204,13 +202,40 @@ def display_login_options():
     """
     new_terminal()
     print_colour(title.renderText("M e n u"), "white")
-    print_colour(
-        """Select from the below options:
-        1. Login
-        2. Create Account
-        3. About
-    """, "cyan")
-    input("Select an option: ")
+    while True:
+        print_colour(
+            """Select from the below options:
+            1. Login
+            2. Create Account
+            3. About
+        """, "cyan")
+        user_login_choice = input("Enter the number of your selection: ")
+        break
+        
+    if check_login_choice(user_login_choice):
+        if int(user_login_choice) == 1:
+            user_login()
+        elif int(user_login_choice) == 2:
+            create_account()
+        else:
+            display_about()
+
+
+def check_login_choice(choice):
+    """
+    Validates the users input from the login menu
+    Triggers the relevant function
+    """
+    try:
+        if int(choice) > 3 or int(choice) < 1:
+            raise ValueError(
+                "Please enter a number between 1 and 3"
+            )
+    except ValueError:
+        print("Invalid data. Please enter a number between 1 and 3")
+        return False
+   
+    return True
 
 
 def user_login():
@@ -247,4 +272,4 @@ def main():
     display_login_options()
 
 
-user_login()
+main()
