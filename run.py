@@ -9,6 +9,7 @@ def create_account():
     Checks if the username and password are valid
     If validation returns true, displays confirmation to user
     """
+    utils.new_terminal()
     utils.print_colour(utils.title.renderText("S i g n  U p"), "white")
     while True:
         utils.print_colour(
@@ -109,7 +110,7 @@ def display_login_options():
         elif int(user_login_choice) == 3:
             display_about()
         else:
-            display_login_options()
+            main()
 
 
 def user_login():
