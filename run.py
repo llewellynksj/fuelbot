@@ -208,6 +208,7 @@ def display_login_options():
             1. Login
             2. Create Account
             3. About
+            4. Quit
         """, "cyan")
         user_login_choice = input("Enter the number of your selection: ")
         break
@@ -217,8 +218,10 @@ def display_login_options():
             user_login()
         elif int(user_login_choice) == 2:
             create_account()
-        else:
+        elif int(user_login_choice) == 3:
             display_about()
+        else:
+            display_login_options()
 
 
 def check_login_choice(choice):
@@ -227,12 +230,12 @@ def check_login_choice(choice):
     Triggers the relevant function
     """
     try:
-        if int(choice) > 3 or int(choice) < 1:
+        if int(choice) > 4 or int(choice) < 1:
             raise ValueError(
-                "Please enter a number between 1 and 3"
+                "Please enter a number between 1 and 4"
             )
     except ValueError:
-        print("Invalid data. Please enter a number between 1 and 3")
+        print("Invalid data. Please enter a number between 1 and 4")
         return False
    
     return True
