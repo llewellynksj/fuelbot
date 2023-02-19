@@ -1,6 +1,6 @@
 # Functions that carry out validation checks
 import utils
-import api
+import gsheets
 
 
 def user_quits(user_input):
@@ -21,7 +21,7 @@ def check_username(username):
     Checks the username does not match any other usernames already logged
     Returns False if validation is not valid
     """
-    usernames = api.logins.col_values(1)
+    usernames = gsheets.logins.col_values(1)
 
     username_length = len(username)
 
@@ -56,12 +56,11 @@ def check_login_details(username, password):
     Checks the users inputted username and password
     matches the saved information in the worksheet
     """
-    users_dict = api.logins.get_all_records()
-    if username in api.usernames_list:
-        current_user = next(
-            (x for x in users_dict if x["username"] == username)
-            )
-    if username not in api.usernames_list:
+    users_dict = gsheets.logins.get_all_records()
+    current_user = next(
+        (x for x in users_dict if x['username'] == username)
+    )
+    if username not in gsheets.usernames_list:
         utils.print_colour("Username not found. Try again\n", "grey")
         return False
     stored_password = current_user.get("password")

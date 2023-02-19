@@ -1,6 +1,6 @@
 import utils
 import checks
-import api
+import gsheets
 
 
 def create_account():
@@ -39,26 +39,17 @@ def create_account():
             break
     utils.print_colour(f"\nYour password is confirmed: {password}\n", "cyan")
 
-    update_worksheet_logins(username, password)
+    gsheets.update_worksheet_logins(username, password)
     input("Press Enter to Login")
     user_login()
-
-
-def update_worksheet_logins(username, password):
-    """
-    Saves the username and password to google sheets
-    """
-    user_data = [username, password]
-
-    utils.print_colour("Saving account information...\n", "cyan")
-    api.logins.append_row(user_data)
 
 
 def display_user_menu():
     """
     menu
     """
-    print("This works")
+    utils.new_terminal()
+    utils.print_colour(utils.title.renderText("V e h i c l e s"), "white")
 
 
 def display_about():
@@ -66,6 +57,7 @@ def display_about():
     Displays the 'about' information to the user
     Returns user to the login menu when they hit Enter
     """
+    utils.new_terminal()
     utils.print_colour(utils.title.renderText("A b o u t"), "white")
     utils.print_colour(
         "FuelBot is an analysis tool for tracking your spend on fuel."

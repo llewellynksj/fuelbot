@@ -1,3 +1,6 @@
+import utils
+
+
 # Imports to work with Google Sheets
 import gspread
 from google.oauth2.service_account import Credentials
@@ -17,3 +20,20 @@ SHEET = GSPREAD_CLIENT.open('fuelbot')
 logins = SHEET.worksheet("logins")
 usernames_list = logins.col_values(1)
 passwords_list = logins.col_values(2)
+
+
+def update_worksheet_logins(username, password):
+    """
+    Saves the username and password to google sheets
+    """
+    user_data = [username, password]
+
+    utils.print_colour("Saving account information...\n", "cyan")
+    logins.append_row(user_data)
+
+
+def get_updated_worksheet():
+    """
+    Retrieves the most up-to-date version of the logins worksheet
+    """
+    print("hi")
