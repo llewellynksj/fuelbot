@@ -1,4 +1,7 @@
 # Functions that carry out validation checks
+import utils
+import api
+
 
 def user_quits(user_input):
     """
@@ -6,7 +9,7 @@ def user_quits(user_input):
     Returns the user to the first menu
     """
     if user_input == "q":
-        print_colour("Quitting....please wait...", "magenta")
+        utils.print_colour("Quitting....please wait...", "magenta")
         return True
     return False
 
@@ -18,15 +21,15 @@ def check_username(username):
     Checks the username does not match any other usernames already logged
     Returns False if validation is not valid
     """
-    usernames = logins.col_values(1)
+    usernames = api.logins.col_values(1)
 
     username_length = len(username)
 
     if username_length < 6:
-        print_colour("That's too short! Enter at least 6 characters", "grey")
+        utils.print_colour("Please enter at least 6 characters", "grey")
         return False
     elif username in usernames:
-        print_colour("Not available. Please try something else", "grey")
+        utils.print_colour("Not available. Please try something else", "grey")
         return False
     else:
         return True
@@ -40,10 +43,10 @@ def check_password(password):
     # code for checking if password contains integer from:
     # https://www.geeksforgeeks.org/password-validation-in-python/
     if not any(char.isdigit() for char in password):
-        print_colour("You forgot to include a number! Try again", "grey")
+        utils.print_colour("You forgot to include a number! Try again", "grey")
         return False
     if password_length < 6:
-        print_colour("That's too short! Try again", "grey")
+        utils.print_colour("That's too short! Try again", "grey")
         return False
     return True
 
@@ -53,19 +56,19 @@ def check_login_details(username, password):
     Checks the users inputted username and password
     matches the saved information in the worksheet
     """
-    users_dict = logins.get_all_records()
-    if username in usernames_list:
+    users_dict = api.logins.get_all_records()
+    if username in api.usernames_list:
         current_user = next(
             (x for x in users_dict if x["username"] == username)
             )
-    if username not in usernames_list:
-        print_colour("Username not found. Try again\n", "grey")
+    if username not in api.usernames_list:
+        utils.print_colour("Username not found. Try again\n", "grey")
         return False
     stored_password = current_user.get("password")
     if password == stored_password:
-        print_colour("User account found. Please wait...\n", "cyan")
+        utils.print_colour("User account found. Please wait...\n", "cyan")
     else:
-        print_colour("Password incorrect. Try again\n", "grey")
+        utils.print_colour("Password incorrect. Try again\n", "grey")
         return False
     return True
 
