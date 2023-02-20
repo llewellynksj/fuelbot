@@ -14,18 +14,11 @@ class Vehicle:
     """
     Creates the Vehicle class where vehicle objects will be added
     """
-    def __init__(self, nickname, vehicle_type, make, model, fuel_type):
-        self.nickname = nickname
+    def __init__(self, vehicle_type, make, model, fuel_type):
         self.vehicle_type = vehicle_type
         self.make = make
         self.model = model
         self.fuel_type = fuel_type
-
-    def confirmation(self):
-        """
-        Method that confirms the vehicle details are saved
-        """
-        print(f"{self.make} {self.model}, Nickname: {self.nickname}. Saved")
 
 
 def print_colour(text, colour):

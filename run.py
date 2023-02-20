@@ -27,14 +27,14 @@ def get_vehicle_details():
             break
     if is_correct == "y":
         utils.print_colour("Great!", "cyan")
+        print(f"{nickname} has been successfully saved.")
+        nickname = utils.Vehicle(vehicle_type, make, model, fuel_type)
+        utils.delay()
+        display_user_menu()
     elif is_correct == 'n':
         utils.print_colour("Okay let's try again...", "magenta")
         get_vehicle_details()
-
-    vehicle = utils.Vehicle(nickname, vehicle_type, make, model, fuel_type)
-    utils.delay()
-    print(f"{vehicle.nickname} has been successfully saved.")
-    
+        
 
 def create_account():
     """
