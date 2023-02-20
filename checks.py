@@ -86,12 +86,13 @@ def check_login_choice(choice):
     except ValueError:
         print("Invalid data. Please enter a number between 1 and 4")
         return False
-   
     return True
 
 
 def check_input(user_input):
-    """"""
+    """
+    Checks users input
+    """
     if user_input == "y" or user_input == "n":
         return True
     else:

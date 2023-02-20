@@ -42,9 +42,3 @@ def delay():
     Creates a delay before the next
     """
     time.sleep(1.5)
-
-
-def create_car_object():
-    """
-    
-    """

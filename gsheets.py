@@ -25,14 +25,19 @@ def update_worksheet_logins(username, password):
     Saves the username and password to google sheets
     """
     user_data = [username, password]
-
     utils.print_colour("Saving account information...\n", "cyan")
     logins.append_row(user_data)
 
 
-def get_updated_worksheet():
+def update_worksheet_vehicle(username, vehicle_nickname):
     """
-    Retrieves the most up-to-date version of the logins worksheet
+    Saves the vehicle variable name (nickname) to the worksheet
+    alongside the username and password
     """
-    print("Loading....")
+    utils.print_colour("Saving vehicle to your account...\n", "cyan")
+    utils.delay()
+    current_user = logins.find(username)
+    current_user_row = current_user.row
+    current_user_col = current_user.col
+    logins.update_cell(current_user_row, current_user_col+2, vehicle_nickname)
     

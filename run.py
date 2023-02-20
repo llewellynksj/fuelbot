@@ -3,7 +3,7 @@ import checks
 import gsheets
 
 
-def get_vehicle_details():
+def get_vehicle_details(username):
     """
     Requests details from user to build vehicle object
     """
@@ -27,14 +27,14 @@ def get_vehicle_details():
             break
     if is_correct == "y":
         utils.print_colour("Great!", "cyan")
-        print(f"{nickname} has been successfully saved.")
+        gsheets.update_worksheet_vehicle(username, nickname)
         nickname = utils.Vehicle(vehicle_type, make, model, fuel_type)
         utils.delay()
-        display_user_menu()
+        # display_user_menu(username)
     elif is_correct == 'n':
         utils.print_colour("Okay let's try again...", "magenta")
-        get_vehicle_details()
-        
+        get_vehicle_details(username)
+
 
 def create_account():
     """
@@ -77,12 +77,15 @@ def create_account():
     user_login()
 
 
-def display_user_menu():
+def display_user_menu(username):
     """
     menu
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("V e h i c l e s"), "white")
+    utils.print_colour("Account details for: ", "cyan")
+    print(f"{username}")
+    get_vehicle_details(username)
 
 
 def display_about():
@@ -126,7 +129,7 @@ def display_login_options():
         """, "cyan")
         user_login_choice = input("Enter the number of your selection: ")
         break
-   
+
     if checks.check_login_choice(user_login_choice):
         if int(user_login_choice) == 1:
             user_login()
@@ -158,7 +161,7 @@ def user_login():
             display_login_options()
         elif checks.check_login_details(username, password):
             break
-    display_user_menu()
+    display_user_menu(username)
 
 
 def main():
@@ -174,4 +177,4 @@ def main():
     display_login_options()
 
 
-get_vehicle_details()
+main()
