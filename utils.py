@@ -4,6 +4,8 @@ import os
 from pyfiglet import Figlet
 from termcolor import colored
 
+import time
+
 # Global variables
 title = Figlet(font="slant")
 
@@ -24,10 +26,8 @@ def new_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def search_dict(search_element, name, dict_list):
+def delay():
     """
-    Searched the list passed in as a parameter
-    Returns result
+    Creates a delay before the next
     """
-    return [x for x in dict_list if x[search_element] == name]
-    
+    time.sleep(1.5)

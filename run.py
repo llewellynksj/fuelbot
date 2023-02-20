@@ -117,6 +117,8 @@ def user_login():
             "\nPress q to quit and go back to the menu\n", "cyan")
         username = input("Enter your username: \n")
         password = input("\nEnter your password: \n")
+        utils.print_colour("Searching....please wait...", "magenta")
+        utils.delay()
         if checks.user_quits(username):
             display_login_options()
         elif checks.user_quits(password):
