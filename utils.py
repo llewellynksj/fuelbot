@@ -25,7 +25,7 @@ class Vehicle:
         """
         Method that confirms the vehicle details are saved
         """
-        print(f"{self.make} {self.model}: Nickname {self.nickname} saved")
+        print(f"{self.make} {self.model}, Nickname: {self.nickname}. Saved")
 
 
 def print_colour(text, colour):

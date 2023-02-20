@@ -88,3 +88,12 @@ def check_login_choice(choice):
         return False
    
     return True
+
+
+def check_input(user_input):
+    """"""
+    if user_input == "y" or user_input == "n":
+        return True
+    else:
+        print("Something went wrong. Please enter y or no.")
+        return False
