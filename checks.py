@@ -57,7 +57,6 @@ def check_login_details(username, password):
     matches the saved information in the worksheet
     """
     usernames_list = gsheets.logins.col_values(1)
-    # passwords_list = gsheets.logins.col_values(2)
     users_dict = gsheets.logins.get_all_records()
     current_user = next(
         (x for x in users_dict if x['username'] == username)
