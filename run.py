@@ -3,10 +3,10 @@ import checks
 import gsheets
 
 USER_ID = None
-current_user = None
-vehicle1 = None
-vehicle2 = None
-vehicle3 = None
+CURRENT_USER = None
+VEHICLE1 = None
+VEHICLE2 = None
+VEHICLE3 = None
 
 
 class Vehicle:
@@ -130,17 +130,17 @@ def display_vehicle_menu(username):
     """
     menu
     """
-    global vehicle1
-    global vehicle2
-    global vehicle3
+    global VEHICLE1
+    global VEHICLE2
+    global VEHICLE3
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("V e h i c l e s"), "white")
     utils.print_colour(f"Account details for {username}", "cyan")
     utils.print_colour(
         f"""\nYour Vehicles:
-        1. {vehicle1}
-        2. {vehicle2}
-        3. {vehicle3}
+        1. {VEHICLE1}
+        2. {VEHICLE2}
+        3. {VEHICLE3}
         """, "cyan")
     while True:
         utils.print_colour(
@@ -151,13 +151,13 @@ def display_vehicle_menu(username):
         if checks.user_quits(vehicle_choice):
             display_login_options()
         elif int(vehicle_choice) == 1:
-            if check_vehicle_cell(username, vehicle1):
+            if check_vehicle_cell(username, VEHICLE1):
                 break
         elif int(vehicle_choice) == 2:
-            if check_vehicle_cell(username, vehicle2):
+            if check_vehicle_cell(username, VEHICLE2):
                 break
         elif int(vehicle_choice) == 3:
-            if check_vehicle_cell(username, vehicle3):
+            if check_vehicle_cell(username, VEHICLE3):
                 break
         else:
             print("Try again. Please select a number between 1 and 3.")
@@ -168,9 +168,9 @@ def user_login():
     Login
     """
     global USER_ID
-    global vehicle1
-    global vehicle2
-    global vehicle3
+    global VEHICLE1
+    global VEHICLE2
+    global VEHICLE3
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("L o g i n"), "white")
     while True:
@@ -190,9 +190,9 @@ def user_login():
             break
 
     current_user = gsheets.logins.find(username)
-    vehicle1 = gsheets.logins.cell(current_user.row, current_user.col+2).value
-    vehicle2 = gsheets.logins.cell(current_user.row, current_user.col+3).value
-    vehicle3 = gsheets.logins.cell(current_user.row, current_user.col+4).value
+    VEHICLE1 = gsheets.logins.cell(current_user.row, current_user.col+2).value
+    VEHICLE2 = gsheets.logins.cell(current_user.row, current_user.col+3).value
+    VEHICLE3 = gsheets.logins.cell(current_user.row, current_user.col+4).value
     display_vehicle_menu(username)
 
 
