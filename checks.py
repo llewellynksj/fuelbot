@@ -73,7 +73,7 @@ def check_login_details(username, password):
     return True
 
 
-def check_login_choice(choice):
+def check_choice(choice):
     """
     Validates the users input from the login menu
     Triggers the relevant function

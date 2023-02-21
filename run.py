@@ -13,25 +13,55 @@ class Vehicle:
         self.model = model
         self.fuel_type = fuel_type
 
-    def add_fuel(self):
-        """
-        Adds a fuel entry to the vehicle
-        """
-        utils.print_colour(utils.title.renderText("A d d  F u e l"), "white")
-        odometer = input("\nEnter your odometer reading:")
-        litres_in = input("Enter the number of litres in: ")
-        cost_per_litre = input("Enter the cost per litre : £")
-        fuel_entry = [odometer, litres_in, cost_per_litre]
-        gsheets.fuel_sheet.append_row(fuel_entry)
+
+def add_fuel(vehicle_choice):
+    """
+    Adds a fuel entry to the vehicle
+    """
+    utils.print_colour(utils.title.renderText("A d d  F u e l"), "white")
+    odometer = input("\nEnter your odometer reading: ")
+    litres_in = input("Enter the number of litres in: ")
+    cost_per_litre = input("Enter the cost per litre : £")
+    fuel_entry = [odometer, litres_in, cost_per_litre]
+    gsheets.fuel_sheet.append_row(fuel_entry)
+    utils.print_colour("Updating....", "magenta")
+    utils.delay()
+    utils.print_colour("Success! Your fuel entry has been added", "magenta")
+    utils.delay()
+    vehicle_account_menu(vehicle_choice)
 
 
 def vehicle_account_menu(vehicle_choice):
     """
-    something
+    Displays vehicle account menu choices to user
+    Gets selection choice from user
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("M e n u"), "white")
     utils.print_colour(f"{vehicle_choice}", "cyan")
+    while True:
+        utils.print_colour(
+            """Please select one:
+            1. Add Fuel
+            2. Add Expenses
+            3. View previous entries
+            4. View Insights
+            """, "cyan")
+        utils.print_colour("Enter q to quit", "magenta")
+        features_choice = input("Enter the number of your selection: ")
+        if checks.user_quits(features_choice):
+            display_login_options()
+        break
+
+    if checks.check_choice(features_choice):
+        if int(features_choice) == 1:
+            add_fuel(vehicle_choice)
+        elif int(features_choice) == 2:
+            print("number 2)")
+        elif int(features_choice) == 3:
+            print("number 3")
+        else:
+            print("choice 4")
 
 
 def check_vehicle_cell(username, vehicle_choice):
@@ -74,7 +104,7 @@ def add_vehicle(username):
         utils.print_colour("Great!", "cyan")
         gsheets.update_worksheet_vehicle(username, nickname)
         nickname = Vehicle(vehicle_type, make, model, fuel_type)
-        utils.delay()
+        return nickname
     elif is_correct == 'n':
         utils.print_colour("Okay let's try again...", "magenta")
         add_vehicle(username)
@@ -225,7 +255,7 @@ def display_login_options():
         user_login_choice = input("Enter the number of your selection: ")
         break
 
-    if checks.check_login_choice(user_login_choice):
+    if checks.check_choice(user_login_choice):
         if int(user_login_choice) == 1:
             user_login()
         elif int(user_login_choice) == 2:
