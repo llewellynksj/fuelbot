@@ -1,39 +1,7 @@
 import utils
 import checks
 import gsheets
-
-
-def add_vehicle(username):
-    """
-    Requests details from user to build vehicle object
-    """
-    nickname = input("Please enter a nickname for this vehicle: ")
-    vehicle_type = input("What is your vehicle type (e.g. Car/Motorbike): ")
-    make = input("What is the make of your vehicle: ")
-    model = input("What is the model of your vehicle: ")
-    fuel_type = input("What is the Fuel type (Petrol or Diesel): ")
-
-    utils.print_colour("\nPlease check the below details are correct", "cyan")
-    print(f"""\n
-        Nickname: {nickname}
-        Vehicle Type: {vehicle_type}
-        Vehicle Make: {make}
-        Vehicle Model: {model}
-        Fuel Type: {fuel_type}
-        """)
-    while True:
-        is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
-        if checks.check_input(is_correct):
-            break
-    if is_correct == "y":
-        utils.print_colour("Great!", "cyan")
-        gsheets.update_worksheet_vehicle(username, nickname)
-        nickname = utils.Vehicle(vehicle_type, make, model, fuel_type)
-        utils.delay()
-        # display_user_menu(username)
-    elif is_correct == 'n':
-        utils.print_colour("Okay let's try again...", "magenta")
-        add_vehicle(username)
+# import vehicles
 
 
 def create_account():
@@ -99,12 +67,15 @@ def display_vehicle_menu(username, vehicle1, vehicle2, vehicle3):
         vehicle_choice = input("\nEnter the number of your selection: ")
         if checks.user_quits(vehicle_choice):
             display_login_options()
-        if int(vehicle_choice) == 1:
-            checks.check_vehicle_cell(vehicle1)
+        elif int(vehicle_choice) == 1:
+            if checks.check_vehicle_cell(username, vehicle1):
+                break
         elif int(vehicle_choice) == 2:
-            checks.check_vehicle_cell(vehicle2)
+            if checks.check_vehicle_cell(username, vehicle2):
+                break
         elif int(vehicle_choice) == 3:
-            checks.check_vehicle_cell(vehicle3)
+            if checks.check_vehicle_cell(username, vehicle3):
+                break
         else:
             print("Try again. Please select a number between 1 and 3.")
 
