@@ -2,6 +2,8 @@ import utils
 import checks
 import gsheets
 
+USER_ID = None
+
 
 class Vehicle:
     """
@@ -18,11 +20,20 @@ def add_fuel(vehicle_choice):
     """
     Adds a fuel entry to the vehicle
     """
+    global USER_ID
     utils.print_colour(utils.title.renderText("A d d  F u e l"), "white")
+    entry_date = input("Please enter the date (dd/mm/yy): ")
     odometer = input("\nEnter your odometer reading: ")
     litres_in = input("Enter the number of litres in: ")
     cost_per_litre = input("Enter the cost per litre : £")
-    fuel_entry = [odometer, litres_in, cost_per_litre]
+    fuel_entry = [
+        USER_ID,
+        entry_date,
+        vehicle_choice,
+        odometer,
+        litres_in,
+        cost_per_litre
+        ]
     gsheets.fuel_sheet.append_row(fuel_entry)
     utils.print_colour("Updating....", "magenta")
     utils.delay()
@@ -148,6 +159,7 @@ def user_login():
     """
     Login
     """
+    global USER_ID
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("L o g i n"), "white")
     while True:
@@ -155,6 +167,7 @@ def user_login():
             "Enter your username and password below"
             "\nPress q to quit and go back to the menu\n", "cyan")
         username = input("Enter your username: \n")
+        USER_ID = username
         password = input("\nEnter your password: \n")
         utils.print_colour("Searching....please wait...", "magenta")
         utils.delay()
