@@ -98,3 +98,12 @@ def check_input(user_input):
     else:
         print("Something went wrong. Please enter y or no.")
         return False
+
+
+def check_vehicle_cell(vehicle_choice):
+    """
+    Takes the parameter of the users vehicle choice
+    and checks it against the value of the cell in the worksheet
+    """
+    if vehicle_choice == "None":
+        add_vehicle()

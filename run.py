@@ -3,7 +3,7 @@ import checks
 import gsheets
 
 
-def get_vehicle_details(username):
+def add_vehicle(username):
     """
     Requests details from user to build vehicle object
     """
@@ -33,7 +33,7 @@ def get_vehicle_details(username):
         # display_user_menu(username)
     elif is_correct == 'n':
         utils.print_colour("Okay let's try again...", "magenta")
-        get_vehicle_details(username)
+        add_vehicle(username)
 
 
 def create_account():
@@ -77,7 +77,7 @@ def create_account():
     user_login()
 
 
-def display_user_menu(username, vehicle1, vehicle2, vehicle3):
+def display_vehicle_menu(username, vehicle1, vehicle2, vehicle3):
     """
     menu
     """
@@ -91,13 +91,22 @@ def display_user_menu(username, vehicle1, vehicle2, vehicle3):
         2. {vehicle2}
         3. {vehicle3}
         """, "cyan")
-    utils.print_colour(
-        "If you would like to add a vehicle please select an empty slot"
-        "You can add up to 3 vehicles"
-        "Press q to quit", "magenta")
-    vehicle_choice = input("\nEnter the number of your selection: ")
-    if checks.user_quits(vehicle_choice):
-        display_login_options()
+    while True:
+        utils.print_colour(
+            "If you would like to add a vehicle please select an empty slot"
+            "\nYou can add up to 3 vehicles"
+            "\nPress q to quit", "magenta")
+        vehicle_choice = input("\nEnter the number of your selection: ")
+        if checks.user_quits(vehicle_choice):
+            display_login_options()
+        if int(vehicle_choice) == 1:
+            checks.check_vehicle_cell(vehicle1)
+        elif int(vehicle_choice) == 2:
+            checks.check_vehicle_cell(vehicle2)
+        elif int(vehicle_choice) == 3:
+            checks.check_vehicle_cell(vehicle3)
+        else:
+            print("Try again. Please select a number between 1 and 3.")
 
 
 def display_about():
@@ -178,7 +187,7 @@ def user_login():
     vehicle1 = gsheets.logins.cell(current_user.row, current_user.col+2).value
     vehicle2 = gsheets.logins.cell(current_user.row, current_user.col+3).value
     vehicle3 = gsheets.logins.cell(current_user.row, current_user.col+4).value
-    display_user_menu(username, vehicle1, vehicle2, vehicle3)
+    display_vehicle_menu(username, vehicle1, vehicle2, vehicle3)
 
 
 def main():
