@@ -3,11 +3,35 @@ import checks
 import gsheets
 
 
+class Vehicle:
+    """
+    Creates the Vehicle class where vehicle objects will be added
+    """
+    def __init__(self, vehicle_type, make, model, fuel_type):
+        self.vehicle_type = vehicle_type
+        self.make = make
+        self.model = model
+        self.fuel_type = fuel_type
+
+    def add_fuel(self):
+        """
+        Adds a fuel entry to the vehicle
+        """
+        utils.print_colour(utils.title.renderText("A d d  F u e l"), "white")
+        odometer = input("\nEnter your odometer reading:")
+        litres_in = input("Enter the number of litres in: ")
+        cost_per_litre = input("Enter the cost per litre : £")
+        fuel_entry = [odometer, litres_in, cost_per_litre]
+        gsheets.fuel_sheet.append_row(fuel_entry)
+
+
 def vehicle_account_menu(vehicle_choice):
     """
     something
     """
-    print("This worked")
+    utils.new_terminal()
+    utils.print_colour(utils.title.renderText("M e n u"), "white")
+    utils.print_colour(f"{vehicle_choice}", "cyan")
 
 
 def check_vehicle_cell(username, vehicle_choice):
@@ -49,7 +73,7 @@ def add_vehicle(username):
     if is_correct == "y":
         utils.print_colour("Great!", "cyan")
         gsheets.update_worksheet_vehicle(username, nickname)
-        nickname = utils.Vehicle(vehicle_type, make, model, fuel_type)
+        nickname = Vehicle(vehicle_type, make, model, fuel_type)
         utils.delay()
     elif is_correct == 'n':
         utils.print_colour("Okay let's try again...", "magenta")
@@ -63,7 +87,6 @@ def display_vehicle_menu(username, vehicle1, vehicle2, vehicle3):
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("V e h i c l e s"), "white")
     utils.print_colour(f"Account details for {username}", "cyan")
-    # get_vehicle_details(username)
     utils.print_colour(
         f"""\nYour Vehicles:
         1. {vehicle1}
