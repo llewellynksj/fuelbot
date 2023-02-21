@@ -37,7 +37,4 @@ def update_worksheet_vehicle(username, vehicle_nickname):
     utils.print_colour("Saving vehicle to your account...\n", "cyan")
     utils.delay()
     current_user = logins.find(username)
-    current_user_row = current_user.row
-    current_user_col = current_user.col
-    logins.update_cell(current_user_row, current_user_col+2, vehicle_nickname)
-    
+    logins.update_cell(current_user.row, current_user.col+2, vehicle_nickname)
