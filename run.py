@@ -77,15 +77,27 @@ def create_account():
     user_login()
 
 
-def display_user_menu(username):
+def display_user_menu(username, vehicle1, vehicle2, vehicle3):
     """
     menu
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("V e h i c l e s"), "white")
-    utils.print_colour("Account details for: ", "cyan")
-    print(f"{username}")
-    get_vehicle_details(username)
+    utils.print_colour(f"Account details for {username}", "cyan")
+    # get_vehicle_details(username)
+    utils.print_colour(
+        f"""\nYour Vehicles:
+        1. {vehicle1}
+        2. {vehicle2}
+        3. {vehicle3}
+        """, "cyan")
+    utils.print_colour(
+        "If you would like to add a vehicle please select an empty slot"
+        "You can add up to 3 vehicles"
+        "Press q to quit", "magenta")
+    vehicle_choice = input("\nEnter the number of your selection: ")
+    if checks.user_quits(vehicle_choice):
+        display_login_options()
 
 
 def display_about():
@@ -161,7 +173,12 @@ def user_login():
             display_login_options()
         elif checks.check_login_details(username, password):
             break
-    display_user_menu(username)
+
+    current_user = gsheets.logins.find(username)
+    vehicle1 = gsheets.logins.cell(current_user.row, current_user.col+2).value
+    vehicle2 = gsheets.logins.cell(current_user.row, current_user.col+3).value
+    vehicle3 = gsheets.logins.cell(current_user.row, current_user.col+4).value
+    display_user_menu(username, vehicle1, vehicle2, vehicle3)
 
 
 def main():
