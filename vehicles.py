@@ -3,22 +3,16 @@ import checks
 import gsheets
 
 
-class Vehicle:
-    """
-    Creates the Vehicle class where vehicle objects will be added
-    """
-    def __init__(self, vehicle_type, make, model, fuel_type):
-        self.vehicle_type = vehicle_type
-        self.make = make
-        self.model = model
-        self.fuel_type = fuel_type
+
 
 
 def add_vehicle(username):
     """
     Requests details from user to build vehicle object
     """
-    nickname = input("Please enter a nickname for this vehicle: ")
+    utils.new_terminal()
+    utils.print_colour(utils.title.renderText("A d d  V e h i c l e"), "white")
+    nickname = input("\nPlease enter a nickname for this vehicle: ")
     vehicle_type = input("What is your vehicle type (e.g. Car/Motorbike): ")
     make = input("What is the make of your vehicle: ")
     model = input("What is the model of your vehicle: ")
@@ -41,7 +35,9 @@ def add_vehicle(username):
         gsheets.update_worksheet_vehicle(username, nickname)
         nickname = Vehicle(vehicle_type, make, model, fuel_type)
         utils.delay()
-        # display_user_menu(username)
     elif is_correct == 'n':
         utils.print_colour("Okay let's try again...", "magenta")
         add_vehicle(username)
+
+
+

@@ -1,7 +1,6 @@
 # Functions that carry out validation checks
 import utils
 import gsheets
-import vehicles
 
 
 def user_quits(user_input):
@@ -99,22 +98,3 @@ def check_input(user_input):
     else:
         print("Something went wrong. Please enter y or no.")
         return False
-
-
-def check_vehicle_cell(username, vehicle_choice):
-    """
-    Takes the parameter of the users vehicle choice
-    and checks it against the value of the cell in the worksheet
-    """
-    if vehicle_choice is None:
-        vehicles.add_vehicle(username)
-    else:
-        account_menu(vehicle_choice)
-    return True
-
-
-def account_menu(vehicle_choice):
-    """
-    something
-    """
-    print("This worked")

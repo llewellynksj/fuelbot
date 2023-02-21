@@ -1,7 +1,122 @@
 import utils
 import checks
 import gsheets
-# import vehicles
+
+
+def vehicle_account_menu(vehicle_choice):
+    """
+    something
+    """
+    print("This worked")
+
+
+def check_vehicle_cell(username, vehicle_choice):
+    """
+    Takes the parameter of the users vehicle choice
+    and checks it against the value of the cell in the worksheet
+    """
+    if vehicle_choice is None:
+        add_vehicle(username)
+    else:
+        vehicle_account_menu(vehicle_choice)
+    return True
+
+
+def add_vehicle(username):
+    """
+    Requests details from user to build vehicle object
+    """
+    utils.new_terminal()
+    utils.print_colour(utils.title.renderText("A d d"), "white")
+    nickname = input("\nPlease enter a nickname for this vehicle: ")
+    vehicle_type = input("What is your vehicle type (e.g. Car/Motorbike): ")
+    make = input("What is the make of your vehicle: ")
+    model = input("What is the model of your vehicle: ")
+    fuel_type = input("What is the Fuel type (Petrol or Diesel): ")
+
+    utils.print_colour("\nPlease check the below details are correct", "cyan")
+    print(f"""\n
+        Nickname: {nickname}
+        Vehicle Type: {vehicle_type}
+        Vehicle Make: {make}
+        Vehicle Model: {model}
+        Fuel Type: {fuel_type}
+        """)
+    while True:
+        is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
+        if checks.check_input(is_correct):
+            break
+    if is_correct == "y":
+        utils.print_colour("Great!", "cyan")
+        gsheets.update_worksheet_vehicle(username, nickname)
+        nickname = utils.Vehicle(vehicle_type, make, model, fuel_type)
+        utils.delay()
+    elif is_correct == 'n':
+        utils.print_colour("Okay let's try again...", "magenta")
+        add_vehicle(username)
+
+
+def display_vehicle_menu(username, vehicle1, vehicle2, vehicle3):
+    """
+    menu
+    """
+    utils.new_terminal()
+    utils.print_colour(utils.title.renderText("V e h i c l e s"), "white")
+    utils.print_colour(f"Account details for {username}", "cyan")
+    # get_vehicle_details(username)
+    utils.print_colour(
+        f"""\nYour Vehicles:
+        1. {vehicle1}
+        2. {vehicle2}
+        3. {vehicle3}
+        """, "cyan")
+    while True:
+        utils.print_colour(
+            "If you would like to add a vehicle please select an empty slot"
+            "\nYou can add up to 3 vehicles"
+            "\nPress q to quit", "magenta")
+        vehicle_choice = input("\nEnter the number of your selection: ")
+        if checks.user_quits(vehicle_choice):
+            display_login_options()
+        elif int(vehicle_choice) == 1:
+            if check_vehicle_cell(username, vehicle1):
+                break
+        elif int(vehicle_choice) == 2:
+            if check_vehicle_cell(username, vehicle2):
+                break
+        elif int(vehicle_choice) == 3:
+            if check_vehicle_cell(username, vehicle3):
+                break
+        else:
+            print("Try again. Please select a number between 1 and 3.")
+
+
+def user_login():
+    """
+    Login
+    """
+    utils.new_terminal()
+    utils.print_colour(utils.title.renderText("L o g i n"), "white")
+    while True:
+        utils.print_colour(
+            "Enter your username and password below"
+            "\nPress q to quit and go back to the menu\n", "cyan")
+        username = input("Enter your username: \n")
+        password = input("\nEnter your password: \n")
+        utils.print_colour("Searching....please wait...", "magenta")
+        utils.delay()
+        if checks.user_quits(username):
+            display_login_options()
+        elif checks.user_quits(password):
+            display_login_options()
+        elif checks.check_login_details(username, password):
+            break
+
+    current_user = gsheets.logins.find(username)
+    vehicle1 = gsheets.logins.cell(current_user.row, current_user.col+2).value
+    vehicle2 = gsheets.logins.cell(current_user.row, current_user.col+3).value
+    vehicle3 = gsheets.logins.cell(current_user.row, current_user.col+4).value
+    display_vehicle_menu(username, vehicle1, vehicle2, vehicle3)
 
 
 def create_account():
@@ -43,41 +158,6 @@ def create_account():
     gsheets.update_worksheet_logins(username, password)
     input("Press Enter to Login")
     user_login()
-
-
-def display_vehicle_menu(username, vehicle1, vehicle2, vehicle3):
-    """
-    menu
-    """
-    utils.new_terminal()
-    utils.print_colour(utils.title.renderText("V e h i c l e s"), "white")
-    utils.print_colour(f"Account details for {username}", "cyan")
-    # get_vehicle_details(username)
-    utils.print_colour(
-        f"""\nYour Vehicles:
-        1. {vehicle1}
-        2. {vehicle2}
-        3. {vehicle3}
-        """, "cyan")
-    while True:
-        utils.print_colour(
-            "If you would like to add a vehicle please select an empty slot"
-            "\nYou can add up to 3 vehicles"
-            "\nPress q to quit", "magenta")
-        vehicle_choice = input("\nEnter the number of your selection: ")
-        if checks.user_quits(vehicle_choice):
-            display_login_options()
-        elif int(vehicle_choice) == 1:
-            if checks.check_vehicle_cell(username, vehicle1):
-                break
-        elif int(vehicle_choice) == 2:
-            if checks.check_vehicle_cell(username, vehicle2):
-                break
-        elif int(vehicle_choice) == 3:
-            if checks.check_vehicle_cell(username, vehicle3):
-                break
-        else:
-            print("Try again. Please select a number between 1 and 3.")
 
 
 def display_about():
@@ -131,34 +211,6 @@ def display_login_options():
             display_about()
         else:
             main()
-
-
-def user_login():
-    """
-    Login
-    """
-    utils.new_terminal()
-    utils.print_colour(utils.title.renderText("L o g i n"), "white")
-    while True:
-        utils.print_colour(
-            "Enter your username and password below"
-            "\nPress q to quit and go back to the menu\n", "cyan")
-        username = input("Enter your username: \n")
-        password = input("\nEnter your password: \n")
-        utils.print_colour("Searching....please wait...", "magenta")
-        utils.delay()
-        if checks.user_quits(username):
-            display_login_options()
-        elif checks.user_quits(password):
-            display_login_options()
-        elif checks.check_login_details(username, password):
-            break
-
-    current_user = gsheets.logins.find(username)
-    vehicle1 = gsheets.logins.cell(current_user.row, current_user.col+2).value
-    vehicle2 = gsheets.logins.cell(current_user.row, current_user.col+3).value
-    vehicle3 = gsheets.logins.cell(current_user.row, current_user.col+4).value
-    display_vehicle_menu(username, vehicle1, vehicle2, vehicle3)
 
 
 def main():
