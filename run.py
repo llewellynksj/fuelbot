@@ -3,6 +3,10 @@ import checks
 import gsheets
 
 USER_ID = None
+current_user = None
+vehicle1 = None
+vehicle2 = None
+vehicle3 = None
 
 
 class Vehicle:
@@ -38,6 +42,7 @@ def add_fuel(vehicle_choice):
     utils.print_colour("Updating....", "magenta")
     utils.delay()
     utils.print_colour("Success! Your fuel entry has been added", "magenta")
+    utils.print_colour("Transferring you back to the Vehicle Menu", "magenta")
     utils.delay()
     vehicle_account_menu(vehicle_choice)
 
@@ -115,16 +120,19 @@ def add_vehicle(username):
         utils.print_colour("Great!", "cyan")
         gsheets.update_worksheet_vehicle(username, nickname)
         nickname = Vehicle(vehicle_type, make, model, fuel_type)
-        return nickname
+        display_vehicle_menu(username)
     elif is_correct == 'n':
         utils.print_colour("Okay let's try again...", "magenta")
         add_vehicle(username)
 
 
-def display_vehicle_menu(username, vehicle1, vehicle2, vehicle3):
+def display_vehicle_menu(username):
     """
     menu
     """
+    global vehicle1
+    global vehicle2
+    global vehicle3
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("V e h i c l e s"), "white")
     utils.print_colour(f"Account details for {username}", "cyan")
@@ -160,6 +168,9 @@ def user_login():
     Login
     """
     global USER_ID
+    global vehicle1
+    global vehicle2
+    global vehicle3
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("L o g i n"), "white")
     while True:
@@ -182,7 +193,7 @@ def user_login():
     vehicle1 = gsheets.logins.cell(current_user.row, current_user.col+2).value
     vehicle2 = gsheets.logins.cell(current_user.row, current_user.col+3).value
     vehicle3 = gsheets.logins.cell(current_user.row, current_user.col+4).value
-    display_vehicle_menu(username, vehicle1, vehicle2, vehicle3)
+    display_vehicle_menu(username)
 
 
 def create_account():
