@@ -295,7 +295,9 @@ def check_first_entry(vehicle_choice):
     and will not calc_mpg
     If no then triggers add_fuel which includes calc_mpg function
     """
-    utils.print_colour("Is this the first fuel entry for this vehicle?", "magenta")
+    utils.print_colour(
+        "\nIs this the first fuel entry for this vehicle?", "magenta"
+        )
     while True:
         first_entry_choice = input("Enter 'y' or 'n': ")
         if checks.check_yes_no_input(first_entry_choice):
@@ -423,6 +425,27 @@ def display_insights(vehicle_choice):
             calc_expense_trends()
         else:
             print("choice 4")
+
+
+def calc_averages():
+    """
+    Calculate averages
+    """
+    print("Calculate averages")
+
+
+def calc_fuel_trends():
+    """
+    Calculate fuel trends
+    """
+    print("Calculate fuel trends")
+
+
+def calc_expense_trends():
+    """
+    Calculate expense trends
+    """
+    print("Calculate expense trends")
 
 
 main()
