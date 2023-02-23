@@ -207,9 +207,15 @@ def lookup_vehicle_cell(username, vehicle_choice):
         else:
             vehicle_account_menu(VEHICLE1)
     if int(vehicle_choice) == 2:
-        print("This is 2")
+        if VEHICLE1 == "Empty":
+            add_vehicle(username, 3)
+        else:
+            vehicle_account_menu(VEHICLE2)
     if int(vehicle_choice) == 3:
-        print("This is 3")
+        if VEHICLE1 == "Empty":
+            add_vehicle(username, 4)
+        else:
+            vehicle_account_menu(VEHICLE3)
     else:
         return False
 
