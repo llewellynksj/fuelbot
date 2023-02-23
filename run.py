@@ -294,7 +294,7 @@ def add_fuel(vehicle_choice):
     Updates fuel worksheet with entry
     """
     global USER_ID
-    utils.print_colour(utils.title.renderText("A d d  F u e l"), "white")
+    utils.print_colour(utils.title.renderText("+  F u e l"), "white")
     entry_date = input("Please enter the date (dd/mm/yy): ")
     odometer = input("\nEnter your odometer reading: ")
     litres_in = input("Enter the number of litres in: ")
@@ -314,6 +314,29 @@ def add_fuel(vehicle_choice):
     utils.print_colour(f"Going back to {vehicle_choice}'s Menu...", "magenta")
     utils.delay()
     vehicle_account_menu(vehicle_choice)
+
+
+def add_expenses():
+    """
+    Adds an expenses entry to the vehicle
+    Updates expenses worksheet with entry
+    """
+    utils.print_colour(utils.title.renderText("+  E X P E N S E S"), "white")
+    print("Add expenses")
+
+
+def display_previous_entries():
+    """
+    Displays records attached to vehicle
+    """
+    print("Display previous entries")
+
+
+def display_insights():
+    """
+    Displays insights on current records
+    """
+    utils.print_colour(utils.title.renderText("I N S I G H T S"), "white")
 
 
 main()
