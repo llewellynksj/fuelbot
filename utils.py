@@ -39,6 +39,5 @@ def calc_mpg(current_odometer, prev_odometer, litres_in):
     """
     Calculates the mpg figure for fuel entry
     """
-    mpg = int(current_odometer) - int(prev_odometer) / litres_in * 4.544
-    print(mpg)
+    mpg = ((float(current_odometer) - float(prev_odometer)) / litres_in) * 4.544
     return mpg

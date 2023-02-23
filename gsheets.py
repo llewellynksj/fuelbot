@@ -20,6 +20,7 @@ SHEET = GSPREAD_CLIENT.open('fuelbot')
 logins = SHEET.worksheet("logins")
 fuel_sheet = SHEET.worksheet("add_fuel")
 expenses_sheet = SHEET.worksheet("add_expenses")
+final_fuel_sheet = SHEET.worksheet("complete_entry")
 
 
 def update_worksheet_new_user(username, password):
@@ -49,8 +50,8 @@ def find_prev_odometer(current_odometer):
     last odometer reading that was logged
     """
     location_current_odometer = fuel_sheet.find(current_odometer)
-    # prev_odometer = fuel_sheet.cell(
-    #     location_current_odometer.row-1, location_current_odometer.col
-    #     ).value
-    # return prev_odometer
-    print(location_current_odometer)
+    prev_odometer = final_fuel_sheet.cell(
+        location_current_odometer.row, location_current_odometer.col
+        ).value
+    return prev_odometer
+    

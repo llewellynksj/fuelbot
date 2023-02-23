@@ -96,3 +96,4 @@ def check_login_details(username, password):
         utils.print_colour("Password incorrect. Try again\n", "grey")
         return False
     return True
+

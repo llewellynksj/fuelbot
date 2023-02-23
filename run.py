@@ -279,13 +279,60 @@ def vehicle_account_menu(vehicle_choice):
             display_login_options()
         if checks.check_number_input(features_choice):
             if int(features_choice) == 1:
-                add_fuel(vehicle_choice)
+                check_first_entry(vehicle_choice)
             elif int(features_choice) == 2:
                 add_expenses(vehicle_choice)
             elif int(features_choice) == 3:
                 print("number 3")
             else:
                 print("choice 4")
+
+
+def check_first_entry(vehicle_choice):
+    """
+    Checks with the user if this is the first fuel entry
+    If yes then triggers add_first_fuel function to get initial details
+    and will not calc_mpg
+    If no then triggers add_fuel which includes calc_mpg function
+    """
+    utils.print_colour("Is this the first fuel entry for this vehicle?", "magenta")
+    while True:
+        first_entry_choice = input("Enter 'y' or 'n': ")
+        if checks.check_yes_no_input(first_entry_choice):
+            break
+    if first_entry_choice == "y":
+        add_first_fuel(vehicle_choice)
+    else:
+        add_fuel(vehicle_choice)
+        
+
+def add_first_fuel(vehicle_choice):
+    """
+    Adds a fuel entry to the vehicle but excludes calculating
+    the mpg as this is the first entry
+    Updates fuel worksheet with entry
+    """
+    global USER_ID
+    utils.print_colour(utils.title.renderText("+F u e l"), "white")
+    entry_date = input("Please enter the date (dd/mm/yy): ")
+    odometer = input("Enter your odometer reading: ")
+    litres_in = float(input("Enter the number of litres in: "))
+    cost_per_litre = float(input("Enter the cost per litre: £"))
+    fuel_entry = [
+        USER_ID,
+        entry_date,
+        vehicle_choice,
+        odometer,
+        litres_in,
+        cost_per_litre
+    ]
+    gsheets.final_fuel_sheet.append_row(fuel_entry)
+    utils.print_colour("Updating....", "magenta")
+    utils.delay()
+    utils.print_colour("Success! Your fuel entry has been added", "magenta")
+    utils.print_colour(f"Going back to {vehicle_choice}'s Menu...", "magenta")
+    utils.delay()
+    vehicle_account_menu(vehicle_choice)
 
 
 def add_fuel(vehicle_choice):
@@ -296,22 +343,23 @@ def add_fuel(vehicle_choice):
     global USER_ID
     utils.print_colour(utils.title.renderText("+F u e l"), "white")
     entry_date = input("Please enter the date (dd/mm/yy): ")
-    current_odometer = input("\nEnter your odometer reading: ")
+    current_odometer = input("Enter your odometer reading: ")
     litres_in = float(input("Enter the number of litres in: "))
     cost_per_litre = float(input("Enter the cost per litre: £"))
-    prev_odometer = gsheets.find_prev_odometer(current_odometer)
-    mpg = utils.calc_mpg(current_odometer, prev_odometer, litres_in)
     fuel_entry = [
         USER_ID,
         entry_date,
         vehicle_choice,
         current_odometer,
         litres_in,
-        cost_per_litre,
-        mpg
+        cost_per_litre
     ]
     gsheets.fuel_sheet.append_row(fuel_entry)
     utils.print_colour("Updating....", "magenta")
+    prev_odometer = gsheets.find_prev_odometer(current_odometer)
+    mpg = utils.calc_mpg(int(current_odometer), int(prev_odometer), litres_in)
+    fuel_entry.append(mpg)
+    gsheets.final_fuel_sheet.append_row(fuel_entry)
     utils.delay()
     utils.print_colour("Success! Your fuel entry has been added", "magenta")
     utils.print_colour(f"Going back to {vehicle_choice}'s Menu...", "magenta")
