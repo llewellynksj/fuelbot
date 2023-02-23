@@ -298,7 +298,7 @@ def add_fuel(vehicle_choice):
     entry_date = input("Please enter the date (dd/mm/yy): ")
     odometer = input("\nEnter your odometer reading: ")
     litres_in = input("Enter the number of litres in: ")
-    cost_per_litre = input("Enter the cost per litre : £")
+    cost_per_litre = input("Enter the cost per litre: £")
     fuel_entry = [
         USER_ID,
         entry_date,
@@ -306,7 +306,7 @@ def add_fuel(vehicle_choice):
         odometer,
         litres_in,
         cost_per_litre
-        ]
+    ]
     gsheets.fuel_sheet.append_row(fuel_entry)
     utils.print_colour("Updating....", "magenta")
     utils.delay()
@@ -316,23 +316,39 @@ def add_fuel(vehicle_choice):
     vehicle_account_menu(vehicle_choice)
 
 
-def add_expenses():
+def add_expenses(vehicle_choice):
     """
     Adds an expenses entry to the vehicle
     Updates expenses worksheet with entry
     """
     utils.print_colour(utils.title.renderText("+  E X P E N S E S"), "white")
-    print("Add expenses")
+    entry_date = input("Please enter the date (dd/mm/yy): ")
+    description = input("Enter a short description of the expense: ")
+    expense_cost = input("Enter the total cost: £")
+    expense_entry = [
+        USER_ID,
+        entry_date,
+        vehicle_choice,
+        description,
+        expense_cost
+    ]
+    gsheets.expenses_sheet.append_row(expense_entry)
+    utils.print_colour("Updating...", "magenta")
+    utils.delay()
+    utils.print_colour("Success! Your expense entry has been added", "magenta")
+    utils.print_colour(f"Going back to {vehicle_choice}'s Menu...", "magenta")
+    utils.delay()
+    vehicle_account_menu(vehicle_choice)
 
 
-def display_previous_entries():
+def display_previous_entries(vehicle_choice):
     """
     Displays records attached to vehicle
     """
     print("Display previous entries")
 
 
-def display_insights():
+def display_insights(vehicle_choice):
     """
     Displays insights on current records
     """

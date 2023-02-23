@@ -19,6 +19,7 @@ SHEET = GSPREAD_CLIENT.open('fuelbot')
 # Variables for spreadsheet worksheets
 logins = SHEET.worksheet("logins")
 fuel_sheet = SHEET.worksheet("add_fuel")
+expenses_sheet = SHEET.worksheet("add_expenses")
 
 
 def update_worksheet_new_user(username, password):
