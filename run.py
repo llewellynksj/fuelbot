@@ -281,7 +281,7 @@ def vehicle_account_menu(vehicle_choice):
             if int(features_choice) == 1:
                 add_fuel(vehicle_choice)
             elif int(features_choice) == 2:
-                print("number 2)")
+                add_expenses(vehicle_choice)
             elif int(features_choice) == 3:
                 print("number 3")
             else:
@@ -321,7 +321,7 @@ def add_expenses(vehicle_choice):
     Adds an expenses entry to the vehicle
     Updates expenses worksheet with entry
     """
-    utils.print_colour(utils.title.renderText("+  E X P E N S E S"), "white")
+    utils.print_colour(utils.title.renderText("+  E X P E N S E"), "white")
     entry_date = input("Please enter the date (dd/mm/yy): ")
     description = input("Enter a short description of the expense: ")
     expense_cost = input("Enter the total cost: £")
@@ -341,11 +341,11 @@ def add_expenses(vehicle_choice):
     vehicle_account_menu(vehicle_choice)
 
 
-def display_previous_entries(vehicle_choice):
-    """
-    Displays records attached to vehicle
-    """
-    print("Display previous entries")
+# def display_previous_entries(vehicle_choice):
+#     """
+#     Displays records attached to vehicle
+#     """
+#     print("Display previous entries")
 
 
 def display_insights(vehicle_choice):
