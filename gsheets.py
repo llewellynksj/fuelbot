@@ -41,3 +41,16 @@ def update_worksheet_vehicle(username, col_step, vehicle_nickname):
     current_user = logins.find(username)
     current_user_col = current_user.col + col_step
     logins.update_cell(current_user.row, current_user_col, vehicle_nickname)
+
+
+def find_prev_odometer(current_odometer):
+    """
+    Uses the current odometer input to find and return the
+    last odometer reading that was logged
+    """
+    location_current_odometer = fuel_sheet.find(current_odometer)
+    # prev_odometer = fuel_sheet.cell(
+    #     location_current_odometer.row-1, location_current_odometer.col
+    #     ).value
+    # return prev_odometer
+    print(location_current_odometer)

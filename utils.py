@@ -1,10 +1,12 @@
+# Import for clearing the terminal
 import os
+
+# Import for using delay function
+import time
 
 # Imports for Font and color
 from pyfiglet import Figlet
 from termcolor import colored
-
-import time
 
 # Global variables
 title = Figlet(font="slant")
@@ -31,3 +33,12 @@ def delay():
     Creates a delay before executing next code
     """
     time.sleep(1.5)
+
+
+def calc_mpg(current_odometer, prev_odometer, litres_in):
+    """
+    Calculates the mpg figure for fuel entry
+    """
+    mpg = int(current_odometer) - int(prev_odometer) / litres_in * 4.544
+    print(mpg)
+    return mpg

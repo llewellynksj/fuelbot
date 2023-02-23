@@ -294,18 +294,21 @@ def add_fuel(vehicle_choice):
     Updates fuel worksheet with entry
     """
     global USER_ID
-    utils.print_colour(utils.title.renderText("+  F u e l"), "white")
+    utils.print_colour(utils.title.renderText("+F u e l"), "white")
     entry_date = input("Please enter the date (dd/mm/yy): ")
-    odometer = input("\nEnter your odometer reading: ")
-    litres_in = input("Enter the number of litres in: ")
-    cost_per_litre = input("Enter the cost per litre: £")
+    current_odometer = input("\nEnter your odometer reading: ")
+    litres_in = float(input("Enter the number of litres in: "))
+    cost_per_litre = float(input("Enter the cost per litre: £"))
+    prev_odometer = gsheets.find_prev_odometer(current_odometer)
+    mpg = utils.calc_mpg(current_odometer, prev_odometer, litres_in)
     fuel_entry = [
         USER_ID,
         entry_date,
         vehicle_choice,
-        odometer,
+        current_odometer,
         litres_in,
-        cost_per_litre
+        cost_per_litre,
+        mpg
     ]
     gsheets.fuel_sheet.append_row(fuel_entry)
     utils.print_colour("Updating....", "magenta")
@@ -321,7 +324,7 @@ def add_expenses(vehicle_choice):
     Adds an expenses entry to the vehicle
     Updates expenses worksheet with entry
     """
-    utils.print_colour(utils.title.renderText("+  E X P E N S E"), "white")
+    utils.print_colour(utils.title.renderText("+E X P E N S E S"), "white")
     entry_date = input("Please enter the date (dd/mm/yy): ")
     description = input("Enter a short description of the expense: ")
     expense_cost = input("Enter the total cost: £")
@@ -353,6 +356,25 @@ def display_insights(vehicle_choice):
     Displays insights on current records
     """
     utils.print_colour(utils.title.renderText("I N S I G H T S"), "white")
+    utils.print_colour(
+            """Please select one:
+            1. Average Consumption
+            2. Fuel Cost Trends
+            3. Expenses Overview
+            4. Quit
+            """, "cyan")
+    insights_choice = input("Enter the number of your selection: ")
+    if checks.user_quits(insights_choice):
+        display_login_options()
+    if checks.check_number_input(insights_choice):
+        if int(insights_choice) == 1:
+            calc_averages()
+        elif int(insights_choice) == 2:
+            calc_fuel_trends()
+        elif int(insights_choice) == 3:
+            calc_expense_trends()
+        else:
+            print("choice 4")
 
 
 main()
