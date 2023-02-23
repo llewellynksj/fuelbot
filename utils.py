@@ -10,23 +10,6 @@ import time
 title = Figlet(font="slant")
 
 
-class Vehicle:
-    """
-    Creates the Vehicle class where vehicle objects will be added
-    """
-    def __init__(self, vehicle_type, make, model, fuel_type):
-        self.vehicle_type = vehicle_type
-        self.make = make
-        self.model = model
-        self.fuel_type = fuel_type
-
-    def add_fuel(self):
-        """
-        Adds a fuel entry to the vehicle
-        """
-        print_colour(title.renderText("A d d  F u e l"), "white")
-
-
 def print_colour(text, colour):
     """
     Using the termcolour import, prints text with the selected colour.

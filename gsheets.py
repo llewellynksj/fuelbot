@@ -21,16 +21,16 @@ logins = SHEET.worksheet("logins")
 fuel_sheet = SHEET.worksheet("add_fuel")
 
 
-def update_worksheet_logins(username, password):
+def update_worksheet_new_user(username, password):
     """
     Saves the username and password to google sheets
     """
-    user_data = [username, password]
+    user_data = [username, password, "Empty", "Empty", "Empty"]
     utils.print_colour("Saving account information...\n", "cyan")
     logins.append_row(user_data)
 
 
-def update_worksheet_vehicle(username, vehicle_nickname):
+def update_worksheet_vehicle(username, col_step, vehicle_nickname):
     """
     Saves the vehicle variable name (nickname) to the worksheet
     alongside the username and password
@@ -38,4 +38,5 @@ def update_worksheet_vehicle(username, vehicle_nickname):
     utils.print_colour("Saving vehicle to your account...\n", "cyan")
     utils.delay()
     current_user = logins.find(username)
-    logins.update_cell(current_user.row, current_user.col+2, vehicle_nickname)
+    current_user_col = current_user.col + col_step
+    logins.update_cell(current_user.row, current_user_col, vehicle_nickname)
