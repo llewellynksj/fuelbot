@@ -28,6 +28,6 @@ def new_terminal():
 
 def delay():
     """
-    Creates a delay before the next
+    Creates a delay before executing next code
     """
     time.sleep(1.5)

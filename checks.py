@@ -6,12 +6,37 @@ import gsheets
 def user_quits(user_input):
     """
     Checks if the user has input 'q' to quit
-    Returns the user to the first menu
     """
     if user_input == "q":
         utils.print_colour("Quitting....please wait...", "magenta")
         return True
     return False
+
+
+def check_number_input(choice):
+    """
+    Validates the users input is between 1 and 4
+    """
+    try:
+        if int(choice) > 4 or int(choice) < 1:
+            raise ValueError(
+                "Please enter a number between 1 and 4"
+            )
+    except ValueError:
+        print("Invalid data. Please enter a number between 1 and 4")
+        return False
+    return True
+
+
+def check_yes_no_input(user_input):
+    """
+    Checks users input is equal to 'y' or 'n'
+    """
+    if user_input == "y" or user_input == "n":
+        return True
+    else:
+        print("Something went wrong. Please enter y or no.")
+        return False
 
 
 def check_username(username):
@@ -37,7 +62,7 @@ def check_username(username):
 
 def check_password(password):
     """
-    Checks password
+    Checks password is correct format
     """
     password_length = len(password)
     # code for checking if password contains integer from:
@@ -53,8 +78,8 @@ def check_password(password):
 
 def check_login_details(username, password):
     """
-    Checks the users inputted username and password
-    matches the saved information in the worksheet
+    Checks the users inputted username and password matches
+    the saved information in the worksheet.
     """
     usernames_list = gsheets.logins.col_values(1)
     users_dict = gsheets.logins.get_all_records()
@@ -71,30 +96,3 @@ def check_login_details(username, password):
         utils.print_colour("Password incorrect. Try again\n", "grey")
         return False
     return True
-
-
-def check_choice(choice):
-    """
-    Validates the users input from the login menu
-    Triggers the relevant function
-    """
-    try:
-        if int(choice) > 4 or int(choice) < 1:
-            raise ValueError(
-                "Please enter a number between 1 and 4"
-            )
-    except ValueError:
-        print("Invalid data. Please enter a number between 1 and 4")
-        return False
-    return True
-
-
-def check_input(user_input):
-    """
-    Checks users input
-    """
-    if user_input == "y" or user_input == "n":
-        return True
-    else:
-        print("Something went wrong. Please enter y or no.")
-        return False

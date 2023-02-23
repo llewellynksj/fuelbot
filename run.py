@@ -22,8 +22,8 @@ class Vehicle:
 
 def main():
     """
-    Prints the programme logo to the terminal
-    Prints welcome message
+    Prints the logo to the terminal and welcome message
+    Triggers the function to display login options
     """
     utils.print_colour(utils.title.renderText("F u e l B o t"), "white")
     utils.print_colour("""Welcome to your Fuel Cost Analysis programme
@@ -36,6 +36,7 @@ def main():
 def display_login_options():
     """
     Displays options to user to login or create account
+    Takes user input and triggers relevant function
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("M e n u"), "white")
@@ -50,7 +51,7 @@ def display_login_options():
         user_login_choice = input("Enter the number of your selection: ")
         break
 
-    if checks.check_choice(user_login_choice):
+    if checks.check_number_input(user_login_choice):
         if int(user_login_choice) == 1:
             user_login()
         elif int(user_login_choice) == 2:
@@ -76,7 +77,7 @@ def display_about():
         "fuel prices.\n", "cyan")
 
     utils.print_colour(
-        "Start by adding your car details (you can add more than 1 vehicle),"
+        "Start by adding your car details (you can add up to 3 vehicles),"
         "\nand then each time you fill up your car you should add a fuel "
         "\nentry. This will record your odometer reading, the litres you've "
         "\ntopped up and the cost."
@@ -91,6 +92,7 @@ def create_account():
     Requests a username and password from the user
     Checks if the username and password are valid
     If validation returns true, displays confirmation to user
+    and triggers function to update logins worksheet
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("S i g n  U p"), "white")
@@ -129,12 +131,12 @@ def create_account():
 
 def user_login():
     """
-    Login
+    Requests user login and password
+    Validates inputs and checks data against saved account
+    information in logins worksheet.
+    Triggers function to display saved vehicles on users account.
     """
     global USER_ID
-    # global VEHICLE1
-    # global VEHICLE2
-    # global VEHICLE3
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("L o g i n"), "white")
     while True:
@@ -194,8 +196,10 @@ def display_users_vehicles(username):
 
 def lookup_vehicle_cell(username, vehicle_choice):
     """
-    Takes the parameter of the users vehicle choice
-    and checks it against the value of the cell in the worksheet
+    Takes the parameter of the users vehicle choice and checks
+    it against the value of the cell in the worksheet.
+    Triggers relevant function based on value of cell
+
     """
     if int(vehicle_choice) == 1:
         if VEHICLE1 == "Empty":
@@ -212,7 +216,9 @@ def lookup_vehicle_cell(username, vehicle_choice):
 
 def add_vehicle(username, col_step):
     """
-    Requests details from user to build vehicle object
+    Requests car details from user
+    Updates login worksheet with new vehicle nickname
+    Builds new object from Vehicle class
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("A d d"), "white")
@@ -232,7 +238,7 @@ def add_vehicle(username, col_step):
         """)
     while True:
         is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
-        if checks.check_input(is_correct):
+        if checks.check_yes_no_input(is_correct):
             break
     if is_correct == "y":
         utils.print_colour("Great!", "cyan")
@@ -247,7 +253,8 @@ def add_vehicle(username, col_step):
 def vehicle_account_menu(vehicle_choice):
     """
     Displays vehicle account menu choices to user
-    Gets selection choice from user
+    Retrieves input selection from user and triggers relevant
+    function.
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("M e n u"), "white")
@@ -264,7 +271,7 @@ def vehicle_account_menu(vehicle_choice):
         features_choice = input("Enter the number of your selection: ")
         if checks.user_quits(features_choice):
             display_login_options()
-        if checks.check_choice(features_choice):
+        if checks.check_number_input(features_choice):
             if int(features_choice) == 1:
                 add_fuel(vehicle_choice)
             elif int(features_choice) == 2:
@@ -278,6 +285,7 @@ def vehicle_account_menu(vehicle_choice):
 def add_fuel(vehicle_choice):
     """
     Adds a fuel entry to the vehicle
+    Updates fuel worksheet with entry
     """
     global USER_ID
     utils.print_colour(utils.title.renderText("A d d  F u e l"), "white")
@@ -297,9 +305,9 @@ def add_fuel(vehicle_choice):
     utils.print_colour("Updating....", "magenta")
     utils.delay()
     utils.print_colour("Success! Your fuel entry has been added", "magenta")
-    utils.print_colour("Transferring you back to the Vehicle Menu", "magenta")
+    utils.print_colour(f"Going back to {vehicle_choice}'s Menu...", "magenta")
     utils.delay()
-    display_users_vehicles(USER_ID)
+    vehicle_account_menu(vehicle_choice)
 
 
 main()
