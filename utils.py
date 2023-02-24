@@ -4,9 +4,13 @@ import os
 # Import for using delay function
 import time
 
+from statistics import mean
+
 # Imports for Font and color
 from pyfiglet import Figlet
 from termcolor import colored
+
+import gsheets
 
 # Global variables
 title = Figlet(font="slant")
@@ -42,3 +46,32 @@ def calc_mpg(current_odometer, prev_odometer, litres_in):
     mpg = ((float(current_odometer)
             - float(prev_odometer)) / litres_in) * 4.544
     return round(mpg, 2)
+
+
+def get_totals(vehicle_choice):
+    """
+    Filetrs the worksheet by vehicle choice
+    Gets totals from the worksheet and saves them in a list
+    to be used in calculations for insights
+    """
+    all_list = gsheets.final_fuel_sheet.get_all_values()
+    vehicle_list = [x for x in all_list if vehicle_choice in x]
+    subject = [i[6] for i in vehicle_list]
+    subject.remove("")
+    subject = [float(i) for i in subject]
+    return subject
+
+
+def calc_average(subject_list):
+    """
+    Takes the subjects totals list as a parameter and returns 
+    the average
+    """
+    average = mean(subject_list)
+    return average
+
+
+def calc_total_spend():
+    """
+    Calculates the total spend 
+    """

@@ -1,6 +1,7 @@
 import utils
 import checks
 import gsheets
+from statistics import mean
 
 USER_ID = None
 CURRENT_USER = None
@@ -285,15 +286,15 @@ def vehicle_account_menu(vehicle_choice):
             elif int(features_choice) == 3:
                 print("number 3")
             else:
-                print("choice 4")
+                display_insights(vehicle_choice)
 
 
 def check_first_entry(vehicle_choice):
     """
     Checks with the user if this is the first fuel entry
-    If yes then triggers add_first_fuel function to get initial details
-    and will not calc_mpg
-    If no then triggers add_fuel which includes calc_mpg function
+    If yes, then triggers add_first_fuel function to get initial details
+    and will not calculate an mpg
+    If no, then triggers add_fuel which includes calc_mpg function
     """
     utils.print_colour(
         "\nIs this the first fuel entry for this vehicle?", "magenta"
@@ -418,30 +419,39 @@ def display_insights(vehicle_choice):
         display_login_options()
     if checks.check_number_input(insights_choice):
         if int(insights_choice) == 1:
-            calc_averages()
+            calc_averages_all(vehicle_choice)
         elif int(insights_choice) == 2:
-            calc_fuel_trends()
+            calc_fuel_trends(vehicle_choice)
         elif int(insights_choice) == 3:
-            calc_expense_trends()
+            calc_expense_trends(vehicle_choice)
         else:
             print("choice 4")
 
 
-def calc_averages():
+def calc_averages_all(vehicle_choice):
     """
     Calculate averages
     """
-    print("Calculate averages")
+    mpg_totals = utils.get_totals(vehicle_choice)
+    average_mpg = utils.calc_average(mpg_totals)
+    print(average_mpg)
+    # litre_cost_totals = gsheets.get_totals(6)
+    # average_cost_litre = utils.calc_average(litre_cost_totals)
+    # average_cost_month = 
+    # average_cost_week = 
+    # average_cost_day =
+    # average_cost_mile =
+    # print("Calculate averages")
 
 
-def calc_fuel_trends():
+def calc_fuel_trends(vehicle_choice):
     """
     Calculate fuel trends
     """
     print("Calculate fuel trends")
 
 
-def calc_expense_trends():
+def calc_expense_trends(vehicle_choice):
     """
     Calculate expense trends
     """

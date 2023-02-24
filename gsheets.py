@@ -1,6 +1,5 @@
 import utils
 
-
 # Imports to work with Google Sheets
 import gspread
 from google.oauth2.service_account import Credentials
@@ -54,4 +53,17 @@ def find_prev_odometer(current_odometer):
         location_current_odometer.row, location_current_odometer.col
         ).value
     return prev_odometer
-    
+
+
+def get_totals(vehicle_choice):
+    """
+    Filetrs the worksheet by vehicle choice
+    Gets totals from the worksheet and saves them in a list
+    to be used in calculations for insights
+    """
+    all_list = final_fuel_sheet.get_all_values()
+    vehicle_list = [x for x in all_list if vehicle_choice in x]
+    vehicle_list.remove("")
+    subject = [i[6] for i in vehicle_list]
+    subject = [float(i) for i in subject]
+    return subject
