@@ -2,12 +2,12 @@
 Main script that runs all main functions
 Defines class
 """
+from rich.console import Console
+from rich.table import Table
+
 import utils
 import checks
 import gsheets
-
-from rich.console import Console
-from rich.table import Table
 
 USER_ID = None
 CURRENT_USER = None
@@ -322,7 +322,6 @@ def add_first_fuel(vehicle_choice):
     the mpg as this is the first entry
     Updates fuel worksheet with entry
     """
-    global USER_ID
     utils.print_colour(utils.title.renderText("+F u e l"), "white")
     utils.print_colour("\nIs this fuel entry for today?", "cyan")
     date_response = input("Enter 'y' for yes or 'n' for no: ")
@@ -357,7 +356,6 @@ def add_fuel(vehicle_choice):
     Adds a fuel entry to the vehicle
     Updates fuel worksheet with entry
     """
-    global USER_ID
     utils.print_colour(utils.title.renderText("+F u e l"), "white")
     utils.print_colour("\nIs this fuel entry for today?", "cyan")
     date_response = input("Enter 'y' for yes or 'n' for no: ")
@@ -380,11 +378,11 @@ def add_fuel(vehicle_choice):
     ]
     gsheets.fuel_sheet.append_row(fuel_entry)
     utils.print_colour("Updating....", "magenta")
+    utils.delay()
     prev_odometer = gsheets.find_prev_odometer(current_odometer)
     mpg = utils.calc_mpg(int(current_odometer), int(prev_odometer), litres_in)
     fuel_entry.append(mpg)
     gsheets.final_fuel_sheet.append_row(fuel_entry)
-    utils.delay()
     utils.print_colour("Success! Your fuel entry has been added", "magenta")
     utils.print_colour(f"Going back to {vehicle_choice}'s Menu...", "magenta")
     utils.delay()
@@ -483,31 +481,31 @@ def display_averages_all(vehicle_choice):
     average_cost_litre = float(utils.calc_average(litre_cost_full_list))
     # Find average cost per week / day
     date_list = utils.get_dates(vehicle_choice)
-    earliest_date = min(date_list)
-    latest_date = max(date_list)
-    days = utils.get_days(earliest_date, latest_date)
+    days = utils.get_days(date_list)
     weeks = days // 7
     total_spend = utils.calc_total_spend(vehicle_choice)
+
     average_cost_week = float(total_spend / weeks)
     average_cost_day = float(total_spend / days)
+
     average_weekly = "£" + str(average_cost_week)
     average_daily = "£" + str(average_cost_day)
-    
-    table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
 
+    # Display table
+    table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
+    # Table columns
     table.add_column("Average", style="chartreuse4")
     table.add_column("Fuel", style="chartreuse4")
-    table.add_column("Expenses", style="chartreuse4")
-
+    # Table rows
     table.add_row("MPG", str(average_mpg), "N/A")
-    table.add_row("£ per litre", str(average_cost_litre), "N/A")
-    table.add_row("£ per month", str(average_mpg), "N/A")
-    table.add_row("£ per week", average_weekly, "N/A")
-    table.add_row("£ per day", average_daily, "N/A")
+    table.add_row("£ per litre", str(average_cost_litre))
+    table.add_row("£ per month", str(average_mpg))
+    table.add_row("£ per week", average_weekly)
+    table.add_row("£ per day", average_daily)
 
     console = Console()
     console.print(table)
-    
+
     input("Hit Enter to return to the menu")
     display_insights(vehicle_choice)
 
@@ -523,7 +521,14 @@ def calc_expense_trends(vehicle_choice):
     """
     Calculate expense trends
     """
-    print("Calculate expense trends")
+    table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
+    # Table columns
+    table.add_column("Average", style="chartreuse4")
+    table.add_column("Expenses", style="chartreuse4")
+    # Table rows
+    table.add_row("£ per month", )
+    table.add_row("£ per week", )
+    table.add_row("£ per day", )
 
 
 main()

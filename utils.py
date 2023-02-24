@@ -127,7 +127,8 @@ def calc_total_spend(vehicle_choice):
 
 def get_dates(vehicle_choice):
     """
-    Months
+    Retrieves dates from worksheet and converts to datetime objects
+    Returns a list of datetime objects
     """
     all_list = gsheets.final_fuel_sheet.get_all_values()
     vehicle_list = [x for x in all_list if vehicle_choice in x]
@@ -139,11 +140,13 @@ def get_dates(vehicle_choice):
     return date_list
 
 
-def get_days(earliest_date, latest_date):
+def get_days(date_list):
     """
-    Gets days and weeks
+    Calculates number of days using the datetime object list
     """
     # code from:
     # https://www.codespeedy.com/find-the-number-of-weeks-between-two-dates-in-python/
+    earliest_date = min(date_list)
+    latest_date = max(date_list)
     days = abs(earliest_date - latest_date).days
     return days
