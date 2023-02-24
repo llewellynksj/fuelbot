@@ -320,8 +320,15 @@ def add_first_fuel(vehicle_choice):
     """
     global USER_ID
     utils.print_colour(utils.title.renderText("+F u e l"), "white")
-    entry_date = input("Please enter the date (dd/mm/yy): ")
-    odometer = input("Enter your odometer reading: ")
+    utils.print_colour("\nIs this fuel entry for today?", "cyan")
+    date_response = input("Enter 'y' for yes or 'n' for no: ")
+    if date_response == "y":
+        utils.print_colour(
+            f"\nThanks. Todays date, {utils.get_today()}, is saved", "cyan")
+        entry_date = utils.get_today()
+    elif date_response == "n":
+        entry_date = utils.get_entry_date()
+    odometer = input("\nEnter your odometer reading: ")
     litres_in = float(input("Enter the number of litres in: "))
     cost_per_litre = float(input("Enter the cost per litre: £"))
     fuel_entry = [
@@ -348,7 +355,13 @@ def add_fuel(vehicle_choice):
     """
     global USER_ID
     utils.print_colour(utils.title.renderText("+F u e l"), "white")
-    entry_date = input("Please enter the date (dd/mm/yy): ")
+    date_response = input("Enter 'y' for yes or 'n' for no: ")
+    if date_response == "y":
+        utils.print_colour(
+            f"\nThanks. Todays date, {utils.get_today()}, is saved", "cyan")
+        entry_date = utils.get_today()
+    elif date_response == "n":
+        entry_date = utils.get_entry_date()
     current_odometer = input("Enter your odometer reading: ")
     litres_in = float(input("Enter the number of litres in: "))
     cost_per_litre = float(input("Enter the cost per litre: £"))

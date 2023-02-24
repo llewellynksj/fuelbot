@@ -5,6 +5,8 @@ import os
 import time
 
 from statistics import mean
+from datetime import date
+import re
 
 # Imports for Font and color
 from pyfiglet import Figlet
@@ -37,6 +39,38 @@ def delay():
     Creates a delay before executing next code
     """
     time.sleep(1.5)
+
+
+def get_today():
+    """
+    Gets todays date
+    """
+    todays_date = date.today()
+    print_today = todays_date.strftime('%d/%m/%y')
+    return print_today
+
+
+def get_entry_date():
+    """
+    Requests date of fuel entry from user
+    Returns date as the entry_date to be saved
+    """
+    while True:
+        entry_date = input("Enter the date of this fuel entry (dd/mm/yy): ")
+        # code to match the date taken from:
+        # https://www.adamsmith.haus/python/answers/how-to-check-if-a-string-matches-a-pattern-in-python
+        match_date = re.match(
+            r"^[0-3][0-9]['/'][0-1][0-9]['/'][1-2][0-9]$", entry_date
+            )
+        is_matched = bool(match_date)
+        if is_matched is False:
+            raise ValueError(
+                "Invalid date format. Please try again using format dd/mm/yy"
+                )
+        else:
+            break    
+    if is_matched is True:
+        return entry_date
 
 
 def calc_mpg(current_odometer, prev_odometer, litres_in):
