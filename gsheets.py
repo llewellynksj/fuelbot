@@ -53,3 +53,14 @@ def find_prev_odometer(current_odometer):
         location_current_odometer.row, location_current_odometer.col
         ).value
     return prev_odometer
+
+
+def get_all_records(vehicle_choice):
+    """
+    Retrieves all previous entries for the selected vehicle
+    name
+    Returns a list
+    """
+    all_records = final_fuel_sheet.get_all_values()
+    vehicle_records = [x for x in all_records if vehicle_choice in x]
+    return vehicle_records

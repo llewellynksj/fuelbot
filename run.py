@@ -286,7 +286,7 @@ def vehicle_account_menu(vehicle_choice):
             elif int(features_choice) == 2:
                 add_expenses(vehicle_choice)
             elif int(features_choice) == 3:
-                print("number 3")
+                display_previous_entries(vehicle_choice)
             else:
                 display_insights(vehicle_choice)
                 break
@@ -310,7 +310,7 @@ def check_first_entry(vehicle_choice):
         add_first_fuel(vehicle_choice)
     else:
         add_fuel(vehicle_choice)
-        
+
 
 def add_first_fuel(vehicle_choice):
     """
@@ -355,6 +355,7 @@ def add_fuel(vehicle_choice):
     """
     global USER_ID
     utils.print_colour(utils.title.renderText("+F u e l"), "white")
+    utils.print_colour("\nIs this fuel entry for today?", "cyan")
     date_response = input("Enter 'y' for yes or 'n' for no: ")
     if date_response == "y":
         utils.print_colour(
@@ -411,11 +412,30 @@ def add_expenses(vehicle_choice):
     vehicle_account_menu(vehicle_choice)
 
 
-# def display_previous_entries(vehicle_choice):
-#     """
-#     Displays records attached to vehicle
-#     """
-#     print("Display previous entries")
+def display_previous_entries(vehicle_choice):
+    """
+    Displays records attached to vehicle
+    """
+    utils.print_colour(utils.title.renderText("R E C O R D S"), "white")
+    table = Table(title=f"{vehicle_choice} Records", header_style="dark_red")
+    previous_entries = gsheets.get_all_records(vehicle_choice)
+
+    table.add_column("Username", style="chartreuse4")
+    table.add_column("Date", style="chartreuse4")
+    table.add_column("Vehicle", style="chartreuse4")
+    table.add_column("Odometer", style="chartreuse4")
+    table.add_column("Litres in", style="chartreuse4")
+    table.add_column("£ per litre", style="chartreuse4")
+    table.add_column("MPG", style="chartreuse4")
+
+    for entry in previous_entries:
+        table.add_row(
+            entry[0], entry[1], entry[2], entry[3],
+            entry[4], entry[5], entry[6]
+            )
+
+    console = Console()
+    console.print(table)
 
 
 def display_insights(vehicle_choice):
