@@ -1,3 +1,7 @@
+"""
+General helper functions
+"""
+
 # Import for clearing the terminal
 import os
 
@@ -6,6 +10,7 @@ import time
 
 from statistics import mean
 from datetime import date
+from datetime import datetime
 import re
 
 # Imports for Font and color
@@ -82,7 +87,7 @@ def calc_mpg(current_odometer, prev_odometer, litres_in):
     return round(mpg, 2)
 
 
-def get_totals(vehicle_choice, list_index):
+def get_full_list(vehicle_choice, list_index):
     """
     Filetrs the worksheet by vehicle choice
     Gets totals from the worksheet and saves them in a list
@@ -109,7 +114,36 @@ def calc_average(subject_list):
     return average
 
 
-def calc_total_spend():
+def calc_total_spend(vehicle_choice):
     """
-    Calculates the total spend 
+    Calculates the total spend
     """
+    all_list = gsheets.final_fuel_sheet.get_all_values()
+    vehicle_list = [x for x in all_list if vehicle_choice in x]
+    result = [float(i[5]) * float(i[4]) for i in vehicle_list]
+    total_spend = sum(result)
+    return float(total_spend)
+
+
+def get_dates(vehicle_choice):
+    """
+    Months
+    """
+    all_list = gsheets.final_fuel_sheet.get_all_values()
+    vehicle_list = [x for x in all_list if vehicle_choice in x]
+    subject = [i[1] for i in vehicle_list]
+    date_list = []
+    for date_item in subject:
+        date_list.append(datetime.strptime(date_item, "%d/%m/%y"))
+    
+    return date_list
+
+
+def get_days(earliest_date, latest_date):
+    """
+    Gets days and weeks
+    """
+    # code from:
+    # https://www.codespeedy.com/find-the-number-of-weeks-between-two-dates-in-python/
+    days = abs(earliest_date - latest_date).days
+    return days

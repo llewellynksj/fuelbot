@@ -1,4 +1,6 @@
-# Functions that carry out validation checks
+"""
+Functions that carry out validation checks
+"""
 import utils
 import gsheets
 

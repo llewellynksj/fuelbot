@@ -1,3 +1,7 @@
+"""
+Functions that rely mainly on access to the google worksheets
+"""
+
 import utils
 
 # Imports to work with Google Sheets

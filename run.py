@@ -1,3 +1,7 @@
+"""
+Main script that runs all main functions
+Defines class
+"""
 import utils
 import checks
 import gsheets
@@ -437,6 +441,9 @@ def display_previous_entries(vehicle_choice):
     console = Console()
     console.print(table)
 
+    input("Hit Enter to return to the menu")
+    vehicle_account_menu(vehicle_choice)
+
 
 def display_insights(vehicle_choice):
     """
@@ -468,13 +475,23 @@ def display_averages_all(vehicle_choice):
     """
     Calculate averages
     """
-    mpg_totals = utils.get_totals(vehicle_choice, 6)
-    average_mpg = utils.calc_average(mpg_totals)
-    litre_cost_totals = utils.get_totals(vehicle_choice, 5)
-    average_cost_litre = utils.calc_average(litre_cost_totals)
-    # average_cost_month = 
-    # average_cost_week = 
-    # average_cost_day =
+    # Find average mpg
+    mpg_full_list = utils.get_full_list(vehicle_choice, 6)
+    average_mpg = utils.calc_average(mpg_full_list)
+    # Find average cost per litre
+    litre_cost_full_list = utils.get_full_list(vehicle_choice, 5)
+    average_cost_litre = float(utils.calc_average(litre_cost_full_list))
+    # Find average cost per week / day
+    date_list = utils.get_dates(vehicle_choice)
+    earliest_date = min(date_list)
+    latest_date = max(date_list)
+    days = utils.get_days(earliest_date, latest_date)
+    weeks = days // 7
+    total_spend = utils.calc_total_spend(vehicle_choice)
+    average_cost_week = float(total_spend / weeks)
+    average_cost_day = float(total_spend / days)
+    average_weekly = "£" + str(average_cost_week)
+    average_daily = "£" + str(average_cost_day)
     
     table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
 
@@ -485,13 +502,14 @@ def display_averages_all(vehicle_choice):
     table.add_row("MPG", str(average_mpg), "N/A")
     table.add_row("£ per litre", str(average_cost_litre), "N/A")
     table.add_row("£ per month", str(average_mpg), "N/A")
-    table.add_row("£ per week", str(average_mpg), "N/A")
-    table.add_row("£ per day", str(average_mpg), "N/A")
+    table.add_row("£ per week", average_weekly, "N/A")
+    table.add_row("£ per day", average_daily, "N/A")
 
     console = Console()
     console.print(table)
     
-    print("Thanks!")
+    input("Hit Enter to return to the menu")
+    display_insights(vehicle_choice)
 
 
 def calc_fuel_trends(vehicle_choice):
