@@ -41,4 +41,4 @@ def calc_mpg(current_odometer, prev_odometer, litres_in):
     """
     mpg = ((float(current_odometer)
             - float(prev_odometer)) / litres_in) * 4.544
-    return mpg
+    return round(mpg, 2)
