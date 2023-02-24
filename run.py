@@ -462,11 +462,12 @@ def display_insights(vehicle_choice):
         if int(insights_choice) == 1:
             display_averages_all(vehicle_choice)
         elif int(insights_choice) == 2:
-            calc_fuel_trends(vehicle_choice)
+            display_fuel_trends(vehicle_choice)
         elif int(insights_choice) == 3:
-            calc_expense_trends(vehicle_choice)
+            display_expense_trends(vehicle_choice)
         else:
-            print("choice 4")
+            utils.print_colour("Returning to vehicle menu...", "magenta")
+            vehicle_account_menu(vehicle_choice)
 
 
 def display_averages_all(vehicle_choice):
@@ -510,14 +511,14 @@ def display_averages_all(vehicle_choice):
     display_insights(vehicle_choice)
 
 
-def calc_fuel_trends(vehicle_choice):
+def display_fuel_trends(vehicle_choice):
     """
     Calculate fuel trends
     """
     print("Calculate fuel trends")
 
 
-def calc_expense_trends(vehicle_choice):
+def display_expense_trends(vehicle_choice):
     """
     Calculate expense trends
     """
