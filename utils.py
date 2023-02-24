@@ -48,7 +48,7 @@ def calc_mpg(current_odometer, prev_odometer, litres_in):
     return round(mpg, 2)
 
 
-def get_totals(vehicle_choice):
+def get_totals(vehicle_choice, list_index):
     """
     Filetrs the worksheet by vehicle choice
     Gets totals from the worksheet and saves them in a list
@@ -56,10 +56,14 @@ def get_totals(vehicle_choice):
     """
     all_list = gsheets.final_fuel_sheet.get_all_values()
     vehicle_list = [x for x in all_list if vehicle_choice in x]
-    subject = [i[6] for i in vehicle_list]
-    subject.remove("")
-    subject = [float(i) for i in subject]
-    return subject
+    subject = [i[list_index] for i in vehicle_list]
+    try:
+        subject.remove("")
+        subject = [float(i) for i in subject]
+        return subject
+    except ValueError:
+        subject = [float(i) for i in subject]
+        return subject
 
 
 def calc_average(subject_list):
