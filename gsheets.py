@@ -1,12 +1,11 @@
 """
 Functions that rely mainly on access to the google worksheets
 """
-
-import utils
-
 # Imports to work with Google Sheets
 import gspread
 from google.oauth2.service_account import Credentials
+
+import utils
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
