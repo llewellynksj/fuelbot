@@ -105,22 +105,22 @@ def calc_average(subject_list):
     return round(average, 2)
 
 
-def calc_total_spend(worksheet, vehicle_choice):
+def calc_total_spend(vehicle_choice):
     """
     Calculates the total spend
     """
-    vehicle_list = gsheets.get_all_records(worksheet, vehicle_choice)
+    vehicle_list = gsheets.get_all_records(gsheets.fuel_sheet, vehicle_choice)
     result = [float(i[5]) * float(i[4]) for i in vehicle_list]
     total_spend = sum(result)
     return total_spend
 
 
-def get_dates(vehicle_choice):
+def get_dates(worksheet, vehicle_choice):
     """
     Retrieves dates from worksheet and converts to datetime objects
     Returns a list of datetime objects
     """
-    vehicle_list = gsheets.get_all_records(gsheets.fuel_sheet, vehicle_choice)
+    vehicle_list = gsheets.get_all_records(worksheet, vehicle_choice)
     subject = [i[1] for i in vehicle_list]
     date_list = []
     for date_item in subject:

@@ -427,14 +427,14 @@ def display_averages_all(vehicle_choice):
     """
     Calculate averages and displays to user in a table
     """
-    date_list = utils.get_dates(vehicle_choice)
+    spend = utils.calc_total_spend(vehicle_choice)
+    date_list = utils.get_dates(gsheets.fuel_sheet, vehicle_choice)
     days = utils.get_days(date_list)
     weeks = days // 7
     months = utils.get_months(date_list)
-    spend = utils.calc_total_spend(gsheets.fuel_sheet, vehicle_choice)
 
-    average_cost_month = spend / months
-    average_cost_week = spend / weeks
+    average_cost_month = round(spend / months, 2)
+    average_cost_week = round(spend / weeks, 2)
     average_cost_day = round(spend / days, 2)
 
     averages = {
@@ -448,10 +448,8 @@ def display_averages_all(vehicle_choice):
 
     # Display table
     table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
-    # Table columns
     table.add_column("Average", style="chartreuse4")
     table.add_column("Fuel", style="chartreuse4")
-    # Table rows
     table.add_row("MPG", str(averages["mpg"]))
     table.add_row("£ per litre", str(averages["cost_litre"]))
     table.add_row("£ per month", averages["cost_month"])
@@ -476,15 +474,31 @@ def display_expense_trends(vehicle_choice):
     """
     Calculate expense trends
     """
+    spend = sum(gsheets.expenses_sheet.col_values(4))
+    date_list = utils.get_dates(gsheets.expenses_sheet, vehicle_choice)
+    days = utils.get_days(date_list)
+    weeks = days // 7
+    months = utils.get_months(date_list)
+
+    average_cost_month = round(spend / months, 2)
+    average_cost_week = round(spend / weeks, 2)
+    average_cost_day = round(spend / days, 2)
+
+    expense_averages = {
+        'per_day': "£" + str(average_cost_day),
+        'per_week': "£" + str(average_cost_week),
+        'per_month': "£" + str(average_cost_month)
+    }
+
     # Display Table
     table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
     # Table columns
     table.add_column("Average", style="chartreuse4")
     table.add_column("Expenses", style="chartreuse4")
     # Table rows
-    table.add_row("£ per month", )
-    table.add_row("£ per week", )
-    table.add_row("£ per day", )
+    table.add_row("£ per month", expense_averages['per_month'])
+    table.add_row("£ per week", expense_averages['per_week'])
+    table.add_row("£ per day", expense_averages['per_day'])
 
 
 main()
