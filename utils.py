@@ -109,10 +109,10 @@ def calc_total_spend(worksheet, vehicle_choice):
     """
     Calculates the total spend
     """
-    vehicle_list = worksheet(gsheets.fuel_sheet, vehicle_choice)
+    vehicle_list = gsheets.get_all_records(worksheet, vehicle_choice)
     result = [float(i[5]) * float(i[4]) for i in vehicle_list]
     total_spend = sum(result)
-    return float(total_spend)
+    return total_spend
 
 
 def get_dates(vehicle_choice):

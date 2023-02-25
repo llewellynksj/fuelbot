@@ -428,25 +428,23 @@ def display_averages_all(vehicle_choice):
     Calculate averages and displays to user in a table
     """
     date_list = utils.get_dates(vehicle_choice)
-    
+    days = utils.get_days(date_list)
+    weeks = days // 7
+    months = utils.get_months(date_list)
+    spend = utils.calc_total_spend(gsheets.fuel_sheet, vehicle_choice)
+
+    average_cost_month = spend / months
+    average_cost_week = spend / weeks
+    average_cost_day = round(spend / days, 2)
+
     averages = {
         'mpg': utils.calc_average(utils.get_full_list(vehicle_choice, 6)),
-        'cost_litre': utils.calc_average(utils.get_full_list(vehicle_choice, 5)),
-        'days': utils.get_days(date_list),
-        'weeks': utils.get_days(date_list) // 7,
-        'months': utils.get_months(date_list),  
-        'total_spend': utils.calc_total_spend(
-            gsheets.fuel_sheet, vehicle_choice
-            )
+        'cost_litre': utils.calc_average(
+            utils.get_full_list(vehicle_choice, 5)),
+        'cost_day': "£" + str(average_cost_day),
+        'cost_week': "£" + str(average_cost_week),
+        'cost_month': "£" + str(average_cost_month)
     }
-
-    average_cost_month = round((averages["total_spend"] / averages["months"], 2))
-    average_cost_week = round((averages["total_spend"] / averages["weeks"]), 2)
-    average_cost_day = round((averages["total_spend"] / averages["days"], 2))
-
-    average_monthly = "£" + str(average_cost_month)
-    average_weekly = "£" + str(average_cost_week)
-    average_daily = "£" + str(average_cost_day)
 
     # Display table
     table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
@@ -456,9 +454,9 @@ def display_averages_all(vehicle_choice):
     # Table rows
     table.add_row("MPG", str(averages["mpg"]))
     table.add_row("£ per litre", str(averages["cost_litre"]))
-    table.add_row("£ per month", average_monthly)
-    table.add_row("£ per week", average_weekly)
-    table.add_row("£ per day", average_daily)
+    table.add_row("£ per month", averages["cost_month"])
+    table.add_row("£ per week", averages["cost_week"])
+    table.add_row("£ per day", averages["cost_day"])
 
     console = Console()
     console.print(table)
@@ -478,11 +476,6 @@ def display_expense_trends(vehicle_choice):
     """
     Calculate expense trends
     """
-    total_spend = utils.calc_total_spend(
-        gsheets.expenses_sheet, vehicle_choice
-        )
-    
-
     # Display Table
     table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
     # Table columns
