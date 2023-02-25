@@ -1,22 +1,15 @@
-"""
-General helper functions
-"""
-
-# Import for clearing the terminal
+# Imports
 import os
-
-# Import for using delay function
 import time
-
+import re
 from statistics import mean
 from datetime import date
 from datetime import datetime
-import re
-
-# Imports for Font and color
 from pyfiglet import Figlet
 from termcolor import colored
+from dateutil import relativedelta
 
+# Local imports
 import gsheets
 
 # Global variables
@@ -132,7 +125,6 @@ def get_dates(vehicle_choice):
     date_list = []
     for date_item in subject:
         date_list.append(datetime.strptime(date_item, "%d/%m/%y"))
-    
     return date_list
 
 
@@ -140,9 +132,23 @@ def get_days(date_list):
     """
     Calculates number of days using the datetime object list
     """
-    # code from:
-    # https://bit.ly/3xPI9Cr
     earliest_date = min(date_list)
     latest_date = max(date_list)
+    # code from:
+    # https://bit.ly/3xPI9Cr
     days = abs(earliest_date - latest_date).days
     return days
+
+
+def get_months(date_list):
+    """
+    Calculates number of months using the datetime object list
+    and relativedelta import
+    """
+    earliest_date = min(date_list)
+    latest_date = max(date_list)
+    # code from
+    # https://bit.ly/3m0zBFX
+    delta = relativedelta.relativedelta(latest_date, earliest_date)
+    months = delta.months
+    return months

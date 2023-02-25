@@ -1,12 +1,11 @@
-"""
-Functions that rely mainly on access to the google worksheets
-"""
-# Imports to work with Google Sheets
+# Imports
 import gspread
 from google.oauth2.service_account import Credentials
 
+# Local imports
 import utils
 
+# API
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",

@@ -2,6 +2,7 @@
 from rich.console import Console
 from rich.table import Table
 
+# Local imports
 import utils
 import checks
 import gsheets
@@ -432,15 +433,18 @@ def display_averages_all(vehicle_choice):
     # Find average cost per litre
     litre_cost_full_list = utils.get_full_list(vehicle_choice, 5)
     average_cost_litre = utils.calc_average(litre_cost_full_list)
-    # Find average cost per week / day
+    # Find average cost per month/week/day
     date_list = utils.get_dates(vehicle_choice)
     days = utils.get_days(date_list)
     weeks = days // 7
+    months = utils.get_months(date_list)
     total_spend = utils.calc_total_spend(vehicle_choice)
 
+    average_cost_month = round((total_spend / months, 2))
     average_cost_week = round((total_spend / weeks), 2)
     average_cost_day = round((total_spend / days), 2)
 
+    average_monthly = "£" + str(average_cost_month)
     average_weekly = "£" + str(average_cost_week)
     average_daily = "£" + str(average_cost_day)
 
@@ -452,7 +456,7 @@ def display_averages_all(vehicle_choice):
     # Table rows
     table.add_row("MPG", str(average_mpg))
     table.add_row("£ per litre", str(average_cost_litre))
-    table.add_row("£ per month", str(average_mpg))
+    table.add_row("£ per month", str(average_monthly))
     table.add_row("£ per week", average_weekly)
     table.add_row("£ per day", average_daily)
 

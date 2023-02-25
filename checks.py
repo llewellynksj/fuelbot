@@ -1,6 +1,4 @@
-"""
-Functions that carry out validation checks
-"""
+# Local imports
 import utils
 import gsheets
 
