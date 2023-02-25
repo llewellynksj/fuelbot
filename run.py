@@ -103,6 +103,7 @@ def create_account():
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("S i g n  U p"), "white")
+    # Request username and validate
     while True:
         utils.print_colour(
             """Please choose a USERNAME that:
@@ -116,7 +117,7 @@ def create_account():
         elif checks.check_username(username):
             break
     utils.print_colour(f"\nYour username is confirmed: {username}\n", "cyan")
-
+    # Request password and validate
     while True:
         utils.print_colour(
             """Please choose a PASSWORD that:
@@ -130,7 +131,7 @@ def create_account():
         elif checks.check_password(password):
             break
     utils.print_colour(f"\nYour password is confirmed: {password}\n", "cyan")
-
+    # Update worksheet
     gsheets.update_worksheet_new_user(username, password)
     input("Press Enter to Login")
     user_login()
@@ -321,6 +322,7 @@ def add_fuel(vehicle_choice):
         litres_in,
         cost_per_litre
     ]
+    # Check if this is first fuel entry
     utils.print_colour(
         "\nIs this the first fuel entry for this vehicle?", "magenta"
         )
@@ -328,10 +330,12 @@ def add_fuel(vehicle_choice):
         first_entry_choice = input("Enter 'y' or 'n': ")
         if checks.check_yes_no_input(first_entry_choice):
             break
+    # If not first entry calculates mpg
     if first_entry_choice == "n":
         prev_odometer = gsheets.find_prev_odometer(vehicle_choice)
         mpg = utils.calc_mpg(current_odometer, prev_odometer, litres_in)
         fuel_entry.append(mpg)
+    # Add entry to worksheet
     utils.print_colour("Updating....", "magenta")
     utils.delay()
     gsheets.fuel_sheet.append_row(fuel_entry)
@@ -371,8 +375,9 @@ def display_previous_entries(vehicle_choice):
     Displays records attached to vehicle
     """
     utils.print_colour(utils.title.renderText("R E C O R D S"), "white")
-    table = Table(title=f"{vehicle_choice} Records", header_style="dark_red")
     previous_entries = gsheets.get_all_records(vehicle_choice)
+    # Display table 
+    table = Table(title=f"{vehicle_choice} Records", header_style="dark_red")
 
     table.add_column("Username", style="chartreuse4")
     table.add_column("Date", style="chartreuse4")
@@ -424,22 +429,22 @@ def display_insights(vehicle_choice):
 
 def display_averages_all(vehicle_choice):
     """
-    Calculate averages
+    Calculate averages and displays to user in a table
     """
     # Find average mpg
     mpg_full_list = utils.get_full_list(vehicle_choice, 6)
     average_mpg = utils.calc_average(mpg_full_list)
     # Find average cost per litre
     litre_cost_full_list = utils.get_full_list(vehicle_choice, 5)
-    average_cost_litre = float(utils.calc_average(litre_cost_full_list))
+    average_cost_litre = utils.calc_average(litre_cost_full_list)
     # Find average cost per week / day
     date_list = utils.get_dates(vehicle_choice)
     days = utils.get_days(date_list)
     weeks = days // 7
     total_spend = utils.calc_total_spend(vehicle_choice)
 
-    average_cost_week = float(total_spend / weeks)
-    average_cost_day = float(total_spend / days)
+    average_cost_week = round((total_spend / weeks), 2)
+    average_cost_day = round((total_spend / days), 2)
 
     average_weekly = "£" + str(average_cost_week)
     average_daily = "£" + str(average_cost_day)

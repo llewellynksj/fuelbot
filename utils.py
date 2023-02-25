@@ -109,7 +109,7 @@ def calc_average(subject_list):
     the average
     """
     average = mean(subject_list)
-    return average
+    return round(average, 2)
 
 
 def calc_total_spend(vehicle_choice):

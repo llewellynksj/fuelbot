@@ -22,7 +22,6 @@ SHEET = GSPREAD_CLIENT.open('fuelbot')
 logins = SHEET.worksheet("logins")
 fuel_sheet = SHEET.worksheet("add_fuel")
 expenses_sheet = SHEET.worksheet("add_expenses")
-final_fuel_sheet = SHEET.worksheet("complete_entry")
 
 
 def update_worksheet_new_user(username, password):
