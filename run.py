@@ -32,6 +32,7 @@ def main():
     Prints the logo to the terminal and welcome message
     Triggers the function to display login options
     """
+    utils.new_terminal()
     utils.print_colour(utils.title.renderText("F u e l B o t"), "white")
     utils.print_colour("""Welcome to your Fuel Cost Analysis programme
                 \nRegister an account & add your car details
@@ -302,6 +303,7 @@ def add_fuel(vehicle_choice):
     Adds a fuel entry to the vehicle
     Updates fuel worksheet with entry
     """
+    utils.new_terminal()
     utils.print_colour(utils.title.renderText("+F u e l"), "white")
     utils.print_colour("\nIs this fuel entry for today?", "cyan")
     date_response = input("Enter 'y' for yes or 'n' for no: ")
@@ -350,6 +352,7 @@ def add_expenses(vehicle_choice):
     Adds an expenses entry to the vehicle
     Updates expenses worksheet with entry
     """
+    utils.new_terminal()
     utils.print_colour(utils.title.renderText("+E X P E N S E S"), "white")
     entry_date = input("Please enter the date (dd/mm/yy): ")
     description = input("Enter a short description of the expense: ")
@@ -374,6 +377,7 @@ def display_previous_entries(vehicle_choice):
     """
     Displays records attached to vehicle
     """
+    utils.new_terminal()
     utils.print_colour(utils.title.renderText("R E C O R D S"), "white")
     previous_entries = gsheets.get_all_records(vehicle_choice)
     # Display table 
@@ -404,6 +408,7 @@ def display_insights(vehicle_choice):
     """
     Displays insights on current records
     """
+    utils.new_terminal()
     utils.print_colour(utils.title.renderText("I N S I G H T S"), "white")
     utils.print_colour(
             """Please select one:
