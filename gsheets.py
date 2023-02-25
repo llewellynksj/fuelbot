@@ -45,13 +45,13 @@ def update_worksheet_vehicle(username, col_step, vehicle_nickname):
     logins.update_cell(current_user.row, current_user_col, vehicle_nickname)
 
 
-def get_all_records(vehicle_choice):
+def get_all_records(worksheet, vehicle_choice):
     """
     Retrieves all previous entries for the selected vehicle
     name
     Returns a list
     """
-    all_records = fuel_sheet.get_all_values()
+    all_records = worksheet.get_all_values()
     vehicle_records = [x for x in all_records if vehicle_choice in x]
     return vehicle_records
 
@@ -61,7 +61,7 @@ def find_prev_odometer(vehicle_choice):
     Uses the current odometer input to find and return the
     last odometer reading that was logged
     """
-    vehicle_list = get_all_records(vehicle_choice)
+    vehicle_list = get_all_records(fuel_sheet, vehicle_choice)
     last_entry = vehicle_list[-1]
     prev_odometer = last_entry[3]
     return prev_odometer

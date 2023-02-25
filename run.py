@@ -1,7 +1,4 @@
-"""
-Main script that runs all main functions
-Defines class
-"""
+# Imports
 from rich.console import Console
 from rich.table import Table
 
@@ -9,11 +6,11 @@ import utils
 import checks
 import gsheets
 
-USER_ID = None
-CURRENT_USER = None
-VEHICLE1 = None
-VEHICLE2 = None
-VEHICLE3 = None
+# Global variables
+user_id = None
+vehicle1 = None
+vehicle2 = None
+vehicle3 = None
 
 
 class Vehicle:
@@ -29,8 +26,8 @@ class Vehicle:
 
 def main():
     """
-    Prints the logo to the terminal and welcome message
-    Triggers the function to display login options
+    Entry point
+    Prints logo and welcome message
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("F u e l B o t"), "white")
@@ -44,7 +41,6 @@ def main():
 def display_login_options():
     """
     Displays options to user to login or create account
-    Takes user input and triggers relevant function
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("M e n u"), "white")
@@ -73,7 +69,6 @@ def display_login_options():
 def display_about():
     """
     Displays the 'about' information to the user
-    Returns user to the login menu when they hit Enter
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("A b o u t"), "white")
@@ -98,9 +93,7 @@ def display_about():
 def create_account():
     """
     Requests a username and password from the user
-    Checks if the username and password are valid
-    If validation returns true, displays confirmation to user
-    and triggers function to update logins worksheet
+    Checks inputs are valid
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("S i g n  U p"), "white")
@@ -141,11 +134,9 @@ def create_account():
 def user_login():
     """
     Requests user login and password
-    Validates inputs and checks data against saved account
-    information in logins worksheet.
-    Triggers function to display saved vehicles on users account.
+    Validates inputs and checks data against worksheet
     """
-    global USER_ID
+    global user_id
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("L o g i n"), "white")
     while True:
@@ -153,7 +144,7 @@ def user_login():
             "Enter your username and password below"
             "\nPress q to quit and go back to the menu\n", "cyan")
         username = input("Enter your username: \n")
-        USER_ID = username
+        user_id = username
         password = input("\nEnter your password: \n")
         utils.print_colour("Searching....please wait...", "magenta")
         utils.delay()
@@ -164,7 +155,7 @@ def user_login():
         elif checks.check_login_details(username, password):
             break
 
-    display_users_vehicles(USER_ID)
+    display_users_vehicles(user_id)
 
 
 def display_users_vehicles(username):
@@ -172,21 +163,21 @@ def display_users_vehicles(username):
     Retrieves the value of the users saved vehicles from the worksheet
     Displays vehicle names and requests a selection from the user
     """
-    global VEHICLE1
-    global VEHICLE2
-    global VEHICLE3
+    global vehicle1
+    global vehicle2
+    global vehicle3
     current_user = gsheets.logins.find(username)
-    VEHICLE1 = gsheets.logins.cell(current_user.row, current_user.col+2).value
-    VEHICLE2 = gsheets.logins.cell(current_user.row, current_user.col+3).value
-    VEHICLE3 = gsheets.logins.cell(current_user.row, current_user.col+4).value
+    vehicle1 = gsheets.logins.cell(current_user.row, current_user.col+2).value
+    vehicle2 = gsheets.logins.cell(current_user.row, current_user.col+3).value
+    vehicle3 = gsheets.logins.cell(current_user.row, current_user.col+4).value
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("V e h i c l e s"), "white")
     utils.print_colour(f"Account details for {username}", "cyan")
     utils.print_colour(
         f"""\nYour Vehicles:
-        1. {VEHICLE1}
-        2. {VEHICLE2}
-        3. {VEHICLE3}
+        1. {vehicle1}
+        2. {vehicle2}
+        3. {vehicle3}
         """, "cyan")
     while True:
         utils.print_colour(
@@ -207,24 +198,22 @@ def lookup_vehicle_cell(username, vehicle_choice):
     """
     Takes the parameter of the users vehicle choice and checks
     it against the value of the cell in the worksheet.
-    Triggers relevant function based on value of cell
-
     """
     if int(vehicle_choice) == 1:
-        if VEHICLE1 == "Empty":
+        if vehicle1 == "Empty":
             add_vehicle(username, 2)
         else:
-            vehicle_account_menu(VEHICLE1)
+            vehicle_account_menu(vehicle1)
     if int(vehicle_choice) == 2:
-        if VEHICLE2 == "Empty":
+        if vehicle2 == "Empty":
             add_vehicle(username, 3)
         else:
-            vehicle_account_menu(VEHICLE2)
+            vehicle_account_menu(vehicle2)
     if int(vehicle_choice) == 3:
-        if VEHICLE3 == "Empty":
+        if vehicle3 == "Empty":
             add_vehicle(username, 4)
         else:
-            vehicle_account_menu(VEHICLE3)
+            vehicle_account_menu(vehicle3)
     else:
         return False
 
@@ -268,8 +257,7 @@ def add_vehicle(username, col_step):
 def vehicle_account_menu(vehicle_choice):
     """
     Displays vehicle account menu choices to user
-    Retrieves input selection from user and triggers relevant
-    function.
+    Retrieves input selection
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("M e n u"), "white")
@@ -317,7 +305,7 @@ def add_fuel(vehicle_choice):
     litres_in = float(input("Enter the number of litres in: "))
     cost_per_litre = float(input("Enter the cost per litre: £"))
     fuel_entry = [
-        USER_ID,
+        user_id,
         entry_date,
         vehicle_choice,
         current_odometer,
@@ -358,7 +346,7 @@ def add_expenses(vehicle_choice):
     description = input("Enter a short description of the expense: ")
     expense_cost = input("Enter the total cost: £")
     expense_entry = [
-        USER_ID,
+        user_id,
         entry_date,
         vehicle_choice,
         description,
@@ -379,7 +367,9 @@ def display_previous_entries(vehicle_choice):
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("R E C O R D S"), "white")
-    previous_entries = gsheets.get_all_records(vehicle_choice)
+    previous_entries = gsheets.get_all_records(
+        gsheets.fuel_sheet, vehicle_choice
+        )
     # Display table 
     table = Table(title=f"{vehicle_choice} Records", header_style="dark_red")
 
@@ -460,7 +450,7 @@ def display_averages_all(vehicle_choice):
     table.add_column("Average", style="chartreuse4")
     table.add_column("Fuel", style="chartreuse4")
     # Table rows
-    table.add_row("MPG", str(average_mpg), "N/A")
+    table.add_row("MPG", str(average_mpg))
     table.add_row("£ per litre", str(average_cost_litre))
     table.add_row("£ per month", str(average_mpg))
     table.add_row("£ per week", average_weekly)

@@ -35,7 +35,7 @@ def new_terminal():
     Clears the current terminal and displays a new blank screen
     """
     # code taken from:
-    # https://stackoverflow.com/questions/2084508/clear-terminal-in-python
+    # https://bit.ly/3IVzcOk
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
@@ -63,7 +63,7 @@ def get_entry_date():
     while True:
         entry_date = input("Enter the date of this fuel entry (dd/mm/yy): ")
         # code to match the date taken from:
-        # https://www.adamsmith.haus/python/answers/how-to-check-if-a-string-matches-a-pattern-in-python
+        # https://bit.ly/3kqGLD0
         match_date = re.match(
             r"^[0-3][0-9]['/'][0-1][0-9]['/'][1-2][0-9]$", entry_date
             )
@@ -92,7 +92,7 @@ def get_full_list(vehicle_choice, list_index):
     Gets totals from the worksheet and saves them in a list
     to be used in calculations for insights
     """
-    vehicle_list = gsheets.get_all_records(vehicle_choice)
+    vehicle_list = gsheets.get_all_records(gsheets.fuel_sheet, vehicle_choice)
     subject = [i[list_index] for i in vehicle_list]
     try:
         subject.remove("")
@@ -116,7 +116,7 @@ def calc_total_spend(vehicle_choice):
     """
     Calculates the total spend
     """
-    vehicle_list = gsheets.get_all_records(vehicle_choice)
+    vehicle_list = gsheets.get_all_records(gsheets.fuel_sheet, vehicle_choice)
     result = [float(i[5]) * float(i[4]) for i in vehicle_list]
     total_spend = sum(result)
     return float(total_spend)
@@ -127,7 +127,7 @@ def get_dates(vehicle_choice):
     Retrieves dates from worksheet and converts to datetime objects
     Returns a list of datetime objects
     """
-    vehicle_list = gsheets.get_all_records(vehicle_choice)
+    vehicle_list = gsheets.get_all_records(gsheets.fuel_sheet, vehicle_choice)
     subject = [i[1] for i in vehicle_list]
     date_list = []
     for date_item in subject:
@@ -141,7 +141,7 @@ def get_days(date_list):
     Calculates number of days using the datetime object list
     """
     # code from:
-    # https://www.codespeedy.com/find-the-number-of-weeks-between-two-dates-in-python/
+    # https://bit.ly/3xPI9Cr
     earliest_date = min(date_list)
     latest_date = max(date_list)
     days = abs(earliest_date - latest_date).days
