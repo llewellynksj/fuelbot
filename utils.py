@@ -89,12 +89,10 @@ def calc_mpg(current_odometer, prev_odometer, litres_in):
 
 def get_full_list(vehicle_choice, list_index):
     """
-    Filetrs the worksheet by vehicle choice
     Gets totals from the worksheet and saves them in a list
     to be used in calculations for insights
     """
-    all_list = gsheets.final_fuel_sheet.get_all_values()
-    vehicle_list = [x for x in all_list if vehicle_choice in x]
+    vehicle_list = gsheets.get_all_records(vehicle_choice)
     subject = [i[list_index] for i in vehicle_list]
     try:
         subject.remove("")
@@ -107,7 +105,7 @@ def get_full_list(vehicle_choice, list_index):
 
 def calc_average(subject_list):
     """
-    Takes the subjects totals list as a parameter and returns 
+    Takes the subjects totals list as a parameter and returns
     the average
     """
     average = mean(subject_list)
@@ -118,8 +116,7 @@ def calc_total_spend(vehicle_choice):
     """
     Calculates the total spend
     """
-    all_list = gsheets.final_fuel_sheet.get_all_values()
-    vehicle_list = [x for x in all_list if vehicle_choice in x]
+    vehicle_list = gsheets.get_all_records(vehicle_choice)
     result = [float(i[5]) * float(i[4]) for i in vehicle_list]
     total_spend = sum(result)
     return float(total_spend)
@@ -130,8 +127,7 @@ def get_dates(vehicle_choice):
     Retrieves dates from worksheet and converts to datetime objects
     Returns a list of datetime objects
     """
-    all_list = gsheets.final_fuel_sheet.get_all_values()
-    vehicle_list = [x for x in all_list if vehicle_choice in x]
+    vehicle_list = gsheets.get_all_records(vehicle_choice)
     subject = [i[1] for i in vehicle_list]
     date_list = []
     for date_item in subject:
