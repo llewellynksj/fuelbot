@@ -305,7 +305,7 @@ def add_fuel(vehicle_choice):
     utils.print_colour(utils.title.renderText("+F u e l"), "white")
     utils.print_colour("\nIs this fuel entry for today?", "cyan")
     date_response = input("Enter 'y' for yes or 'n' for no: ")
-    if date_response == "y":
+    if date_response.lower() == "y" or date_response.lower() == "yes":
         utils.print_colour(
             f"\nTodays date, {utils.get_today()}, is saved", "cyan")
         entry_date = utils.get_today()
@@ -354,7 +354,7 @@ def add_fuel(vehicle_choice):
         first_entry_choice = input("Enter 'y' or 'n': ")
         if checks.check_yes_no_input(first_entry_choice):
             break
-    if first_entry_choice == "n":
+    if first_entry_choice.lower() == "n" or first_entry_choice.lower() == "no":
         prev_odometer = gsheets.find_prev_odometer(vehicle_choice)
         mpg = utils.calc_mpg(current_odometer, prev_odometer, litres_in)
         fuel_entry.append(mpg)

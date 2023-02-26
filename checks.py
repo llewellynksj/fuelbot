@@ -85,12 +85,11 @@ def check_login_details(username, password):
     """
     usernames_list = gsheets.logins.col_values(1)
     users_dict = gsheets.logins.get_all_records()
-    current_user = next(
-        (x for x in users_dict if x['username'] == username)
-    )
     if username not in usernames_list:
         utils.print_colour("Username not found. Try again\n", "grey")
         return False
+    current_user = next(
+        (x for x in users_dict if x['username'] == username))
     stored_password = current_user.get("password")
     if password == stored_password:
         utils.print_colour("User account found. Please wait...\n", "cyan")
