@@ -314,6 +314,27 @@ def add_fuel(vehicle_choice):
     current_odometer = input("Enter your odometer reading: ")
     litres_in = float(input("Enter the number of litres in: "))
     cost_per_litre = float(input("Enter the cost per litre: £"))
+    # Check for user to confirm details
+    utils.print_colour("\nPlease check the below details are correct", "cyan")
+    print(f"""\n
+        Date: {entry_date}
+        Odometer: {current_odometer}
+        Litres: £{litres_in}
+        Cost: £{cost_per_litre}
+        """)
+    utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
+    while True:
+        is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
+        if checks.user_quits(is_correct):
+            vehicle_account_menu(vehicle_choice)
+        if checks.check_yes_no_input(is_correct):
+            break
+    if is_correct.lower() == "y" or is_correct.lower() == "yes":
+        utils.print_colour("Great!", "cyan")
+    elif is_correct.lower() == 'n' or is_correct.lower() == "no":
+        utils.print_colour("Okay let's try again...", "magenta")
+        add_expenses(vehicle_choice)
+    
     fuel_entry = [
         user_id,
         entry_date,
