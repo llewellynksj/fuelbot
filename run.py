@@ -53,17 +53,15 @@ def display_login_options():
             4. Quit
         """, "cyan")
         user_login_choice = input("Enter the number of your selection: ")
-        break
-
-    if checks.check_number_input(user_login_choice, 4):
-        if int(user_login_choice) == 1:
-            user_login()
-        elif int(user_login_choice) == 2:
-            create_account()
-        elif int(user_login_choice) == 3:
-            display_about()
-        else:
-            main()
+        if checks.check_number_input(user_login_choice, 4):
+            if int(user_login_choice) == 1:
+                user_login()
+            elif int(user_login_choice) == 2:
+                create_account()
+            elif int(user_login_choice) == 3:
+                display_about()
+            else:
+                main()
 
 
 def display_about():
@@ -128,7 +126,7 @@ def create_account():
     # Update worksheet
     gsheets.update_worksheet_new_user(username, password)
     input("Press Enter to Login")
-    display_users_vehicles(username)
+    user_login()
 
 
 def user_login():
@@ -179,11 +177,12 @@ def display_users_vehicles(username):
         2. {vehicle2}
         3. {vehicle3}
         """, "cyan")
+    
+    utils.print_colour(
+        "To ADD a vehicle please select an empty slot"
+        "\nYou can add up to 3 vehicles"
+        "\nPress q to quit", "magenta")
     while True:
-        utils.print_colour(
-            "To ADD a vehicle please select an empty slot"
-            "\nYou can add up to 3 vehicles"
-            "\nPress q to quit", "magenta")
         vehicle_choice = input("\nEnter the number of your selection: ")
         if checks.user_quits(vehicle_choice):
             display_login_options()
@@ -244,7 +243,7 @@ def add_vehicle(username, col_step):
     fuel_type = input("What is the Fuel type (Petrol or Diesel): ")
 
     utils.print_colour("\nPlease check the below details are correct", "cyan")
-    print(f"""\n
+    print(f"""
         Nickname: {nickname}
         Vehicle Type: {vehicle_type}
         Vehicle Make: {make}
@@ -308,34 +307,13 @@ def add_fuel(vehicle_choice):
     date_response = input("Enter 'y' for yes or 'n' for no: ")
     if date_response == "y":
         utils.print_colour(
-            f"\nThanks. Todays date, {utils.get_today()}, is saved", "cyan")
+            f"\nTodays date, {utils.get_today()}, is saved", "cyan")
         entry_date = utils.get_today()
     elif date_response == "n":
         entry_date = utils.get_entry_date()
     current_odometer = input("Enter your odometer reading: ")
     litres_in = float(input("Enter the number of litres in: "))
     cost_per_litre = float(input("Enter the cost per litre: £"))
-    # Check for user to confirm details
-    utils.print_colour("\nPlease check the below details are correct", "cyan")
-    print(f"""\n
-        Date: {entry_date}
-        Odometer: {current_odometer}
-        Litres in: {litres_in}
-        Cost p/litre: {cost_per_litre}
-        """)
-    utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
-    while True:
-        is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
-        if checks.user_quits(is_correct):
-            vehicle_account_menu(vehicle_choice)
-        if checks.check_yes_no_input(is_correct):
-            break
-    if is_correct.lower() == "y" or is_correct.lower() == "yes":
-        utils.print_colour("Great!", "cyan")
-    elif is_correct.lower() == 'n' or is_correct.lower() == "no":
-        utils.print_colour("Okay let's try again...", "magenta")
-        add_fuel(vehicle_choice)
-
     fuel_entry = [
         user_id,
         entry_date,
@@ -344,6 +322,7 @@ def add_fuel(vehicle_choice):
         litres_in,
         cost_per_litre
     ]
+    print(entry_date)
     # Check if this is first fuel entry
     utils.print_colour(
         "\nIs this the first fuel entry for this vehicle?", "magenta"

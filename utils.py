@@ -68,7 +68,7 @@ def get_entry_date():
         else:
             break
         if is_matched is True:
-            return entry_date
+            return str(entry_date)
 
 
 def calc_mpg(current_odometer, prev_odometer, litres_in):
