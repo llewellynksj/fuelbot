@@ -152,3 +152,14 @@ def get_months(date_list):
     delta = relativedelta.relativedelta(latest_date, earliest_date)
     months = delta.months
     return months
+
+
+def calc_distance(vehicle_choice):
+    """
+    distance
+    """
+    odometer_list = get_list(vehicle_choice, 3)
+    latest_reading = odometer_list.pop(-1)
+    first_reading = odometer_list.pop(0)
+    total_distance = float(latest_reading) - float(first_reading)
+    return total_distance

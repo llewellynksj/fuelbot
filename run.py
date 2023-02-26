@@ -290,9 +290,9 @@ def vehicle_account_menu(vehicle_choice):
             elif int(features_choice) == 2:
                 add_expenses(vehicle_choice)
             elif int(features_choice) == 3:
-                display_previous_entries(vehicle_choice)
+                display_records_menu(vehicle_choice)
             else:
-                display_insights(vehicle_choice)
+                display_insights_menu(vehicle_choice)
                 break
 
 
@@ -408,18 +408,40 @@ def add_expenses(vehicle_choice):
     vehicle_account_menu(vehicle_choice)
 
 
-def display_previous_entries(vehicle_choice):
+def display_records_menu(vehicle_choice):
     """
-    Displays records attached to vehicle
+    Displays records options to user for specific vehicle
+    """
+    utils.new_terminal()
+    utils.print_colour(utils.title.renderText("R E C O R D S"), "white")
+    utils.print_colour(
+            """Please select one:
+            1. Fuel
+            2. Expenses
+            """, "cyan")
+    utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
+    records_choice = input("Enter the number of your selection: ")
+    if checks.user_quits(records_choice):
+        vehicle_account_menu(vehicle_choice)
+    if checks.check_number_input(records_choice, 2):
+        if int(records_choice) == 1:
+            display_fuel_records(vehicle_choice)
+        elif int(records_choice) == 2:
+            display_expense_records(vehicle_choice)
+
+
+def display_fuel_records(vehicle_choice):
+    """
+    Retrieves all fuel records from the worksheet and displays
+    them in a table
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("R E C O R D S"), "white")
     previous_entries = gsheets.get_all_records(
         gsheets.fuel_sheet, vehicle_choice)
-    # Display table 
-    table = Table(title=f"{vehicle_choice} Records", header_style="dark_red")
+    # Display table
+    table = Table(title=f"{vehicle_choice} Fuel Records", header_style="dark_red")
 
-    table.add_column("Username", style="chartreuse4")
     table.add_column("Date", style="chartreuse4")
     table.add_column("Vehicle", style="chartreuse4")
     table.add_column("Odometer", style="chartreuse4")
@@ -429,17 +451,45 @@ def display_previous_entries(vehicle_choice):
 
     for entry in previous_entries:
         table.add_row(
-            entry[0], entry[1], entry[2], entry[3],
+            entry[1], entry[2], entry[3],
             entry[4], entry[5], entry[6])
 
     console = Console()
     console.print(table)
 
     input("Hit Enter to return to the menu")
-    vehicle_account_menu(vehicle_choice)
+    display_records_menu(vehicle_choice)
 
 
-def display_insights(vehicle_choice):
+def display_expense_records(vehicle_choice):
+    """
+    Retrieves all expenses from the worksheet and displays
+    them in a table
+    """
+    utils.new_terminal()
+    utils.print_colour(utils.title.renderText("R E C O R D S"), "white")
+    previous_entries = gsheets.get_all_records(
+        gsheets.expenses_sheet, vehicle_choice)
+    # Display table 
+    table = Table(title=f"{vehicle_choice} Expense Records", header_style="dark_red")
+
+    table.add_column("Date", style="chartreuse4")
+    table.add_column("Vehicle", style="chartreuse4")
+    table.add_column("Description", style="chartreuse4")
+    table.add_column("Litres in", style="chartreuse4")
+    table.add_column("Cost £", style="chartreuse4")
+
+    for entry in previous_entries:
+        table.add_row(entry[1], entry[2], entry[3], entry[4])
+
+    console = Console()
+    console.print(table)
+
+    input("Hit Enter to return to the menu")
+    display_records_menu(vehicle_choice)
+
+
+def display_insights_menu(vehicle_choice):
     """
     Displays insights on current records
     """
@@ -466,26 +516,36 @@ def display_fuel_insights(vehicle_choice):
     Calculate averages and displays to user in a table
     """
     spend = utils.calc_total_spend(vehicle_choice)
+    total_distance = utils.calc_distance(vehicle_choice)
     date_list = utils.get_dates(gsheets.fuel_sheet, vehicle_choice)
     days = utils.get_days(date_list)
     weeks = days // 7
     months = utils.get_months(date_list)
 
     try:
-        average_cost_month = round(spend / months, 2)
-        average_cost_week = round(spend / weeks, 2)
-        average_cost_day = round(spend / days, 2)
+        avg_cost_month = round(spend / months, 2)
+        avg_cost_week = round(spend / weeks, 2)
+        avg_cost_day = round(spend / days, 2)
+        avg_distance_month = round(total_distance / months, 2)
+        avg_distance_week = round(total_distance / weeks, 2)
+        avg_distance_day = round(total_distance / days, 2)
     except:
-        average_cost_month = "N/A"
-        average_cost_week = "N/A"
-        average_cost_day = "N/A"
+        avg_cost_month = "N/A"
+        avg_cost_week = "N/A"
+        avg_cost_day = "N/A"
+        avg_distance_month = "N/A"
+        avg_distance_week = "N/A"
+        avg_distance_day = "N/A"
 
     averages = {
         'mpg': utils.calc_average(utils.get_list(vehicle_choice, 6)),
         'cost_litre': utils.calc_average(utils.get_list(vehicle_choice, 5)),
-        'cost_day': "£" + str(average_cost_day),
-        'cost_week': "£" + str(average_cost_week),
-        'cost_month': "£" + str(average_cost_month)
+        'cost_day': "£" + str(avg_cost_day),
+        'cost_week': "£" + str(avg_cost_week),
+        'cost_month': "£" + str(avg_cost_month),
+        'distance_day': str(avg_distance_day) + " miles",
+        'distance_week': str(avg_distance_week) + " miles",
+        'distance_month': str(avg_distance_month) + " miles"
     }
 
     # Display table
@@ -497,13 +557,18 @@ def display_fuel_insights(vehicle_choice):
     table.add_row("£ per month", averages["cost_month"])
     table.add_row("£ per week", averages["cost_week"])
     table.add_row("£ per day", averages["cost_day"])
+    table.add_row("Miles per month", averages["distance_month"])
+    table.add_row("Miles per week", averages["distance_week"])
+    table.add_row("Miles per day", averages["distance_day"])
 
     console = Console()
     console.print(table)
 
-    utils.print_colour("\nN/A: Not enough data available", "magenta")
+    utils.print_colour(
+        "\nIf you see N/A, there is not currently enough data available",
+        "magenta")
     input("Hit Enter to return to the menu")
-    display_insights(vehicle_choice)
+    display_insights_menu(vehicle_choice)
 
 
 def display_expense_insights(vehicle_choice):
@@ -548,9 +613,22 @@ def display_expense_insights(vehicle_choice):
     console = Console()
     console.print(table)
 
-    utils.print_colour("\nN/A: Not enough data available", "magenta")
-    input("\nHit Enter to return to the menu")
-    display_insights(vehicle_choice)
+    utils.print_colour(
+        "\nIf you see N/A, there is not currently enough data available",
+        "magenta")
+    view_records = input(
+        "\nWould you like to see the full records of your expenses? (y/n): ")
+    while True:
+        if checks.check_yes_no_input(view_records):
+            break
+    if view_records.lower() == "y" or view_records.lower() == "yes":
+        utils.print_colour("Great! Stand by...", "cyan")
+        utils.delay()
+        display_expense_records(vehicle_choice)
+    elif view_records.lower() == 'n' or view_records.lower() == "no":
+        utils.print_colour("Okay, let's go back to the menu...", "magenta")
+        utils.delay()
+        display_insights_menu(vehicle_choice)
 
 
 main()
