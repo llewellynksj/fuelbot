@@ -517,26 +517,25 @@ def display_fuel_insights(vehicle_choice):
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("I N S I G H T S"), "white")
     spend = utils.calc_total_spend(vehicle_choice)
-    total_distance = utils.calc_distance(vehicle_choice)
+    odometer_list = utils.get_list(vehicle_choice, 3)
+    if len(odometer_list) < 2:
+        utils.print_colour(
+            "Oops something went wrong! You haven't entered enough data to be"
+            "\nable to show stats. Try again.", "magenta")
+        utils.delay()
+        vehicle_account_menu(vehicle_choice)
+    total_distance = utils.calc_distance(odometer_list)
     date_list = utils.get_dates(gsheets.fuel_sheet, vehicle_choice)
     days = utils.get_days(date_list)
     weeks = days // 7
     months = utils.get_months(date_list)
 
-    try:
-        avg_cost_month = round(spend / months, 2)
-        avg_cost_week = round(spend / weeks, 2)
-        avg_cost_day = round(spend / days, 2)
-        avg_distance_month = round(total_distance / months, 2)
-        avg_distance_week = round(total_distance / weeks, 2)
-        avg_distance_day = round(total_distance / days, 2)
-    except:
-        avg_cost_month = "N/A"
-        avg_cost_week = "N/A"
-        avg_cost_day = "N/A"
-        avg_distance_month = "N/A"
-        avg_distance_week = "N/A"
-        avg_distance_day = "N/A"
+    avg_cost_month = round(spend / months, 2)
+    avg_cost_week = round(spend / weeks, 2)
+    avg_cost_day = round(spend / days, 2)
+    avg_distance_month = round(total_distance / months, 2)
+    avg_distance_week = round(total_distance / weeks, 2)
+    avg_distance_day = round(total_distance / days, 2)
 
     averages = {
         'mpg': utils.calc_average(utils.get_list(vehicle_choice, 6)),
@@ -584,18 +583,19 @@ def display_expense_insights(vehicle_choice):
     spend = sum(conv_cost_list)
 
     date_list = utils.get_dates(gsheets.expenses_sheet, vehicle_choice)
+    if len(date_list) < 2:
+        utils.print_colour(
+            "Oops something went wrong! You haven't entered enough data to be"
+            "\nable to show stats. Try again.", "magenta")
+        utils.delay()
+        vehicle_account_menu(vehicle_choice)
     days = utils.get_days(date_list)
     weeks = days // 7
     months = utils.get_months(date_list)
 
-    try:
-        average_cost_month = round(spend / months, 2)
-        average_cost_week = round(spend / weeks, 2)
-        average_cost_day = round(spend / days, 2)
-    except:
-        average_cost_month = "N/A"
-        average_cost_week = "N/A"
-        average_cost_day = "N/A"
+    average_cost_month = round(spend / months, 2)
+    average_cost_week = round(spend / weeks, 2)
+    average_cost_day = round(spend / days, 2)
 
     expense_averages = {
         'per_day': "£" + str(average_cost_day),
