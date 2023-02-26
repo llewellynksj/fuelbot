@@ -332,7 +332,7 @@ def add_fuel(vehicle_choice):
         if checks.check_yes_no_input(first_entry_choice):
             break
     # If not first entry calculates mpg
-    if first_entry_choice.lower() == "n" or first_entry_choice.lower() == "no":
+    if first_entry_choice == "n":
         prev_odometer = gsheets.find_prev_odometer(vehicle_choice)
         mpg = utils.calc_mpg(current_odometer, prev_odometer, litres_in)
         fuel_entry.append(mpg)
