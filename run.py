@@ -371,8 +371,15 @@ def add_expenses(vehicle_choice):
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("+E X P E N S E S"), "white")
     expenses = {}
-    expenses['Date'] = input("Please enter the date (dd/mm/yy): ")
-    expenses['Description'] = input("Enter a short description of the expense: ")
+    utils.print_colour("\nIs this expenses entry for today?", "cyan")
+    date_response = input("Enter 'y' for yes or 'n' for no: ")
+    if date_response.lower() == "y" or date_response.lower() == "yes":
+        utils.print_colour(
+            f"\nTodays date, {utils.get_today()}, is saved", "cyan")
+        expenses['Date'] = utils.get_today()
+    elif date_response == "n":
+        expenses['Date'] = utils.get_entry_date()
+    expenses['Description'] = input("Enter a short description: ")
     expenses['Cost'] = input("Enter the total cost: £")
     # Check for user to confirm details:
     if checks.user_conf(expenses):
