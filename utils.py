@@ -156,7 +156,8 @@ def get_months(date_list):
 
 def calc_distance(vehicle_choice):
     """
-    distance
+    Retrieves odometer readings from the worksheet
+    Calculates the total distance travelled
     """
     odometer_list = get_list(vehicle_choice, 3)
     latest_reading = odometer_list.pop(-1)
