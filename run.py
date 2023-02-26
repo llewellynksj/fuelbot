@@ -440,14 +440,15 @@ def display_fuel_records(vehicle_choice):
     previous_entries = gsheets.get_all_records(
         gsheets.fuel_sheet, vehicle_choice)
     # Display table
-    table = Table(title=f"{vehicle_choice} Fuel Records", header_style="dark_red")
+    table = Table(
+        title=f"{vehicle_choice} Fuel Records", header_style="magenta")
 
-    table.add_column("Date", style="chartreuse4")
-    table.add_column("Vehicle", style="chartreuse4")
-    table.add_column("Odometer", style="chartreuse4")
-    table.add_column("Litres in", style="chartreuse4")
-    table.add_column("£ per litre", style="chartreuse4")
-    table.add_column("MPG", style="chartreuse4")
+    table.add_column("Date", style="cyan1")
+    table.add_column("Vehicle", style="cyan1")
+    table.add_column("Odometer", style="cyan1")
+    table.add_column("Litres in", style="cyan1")
+    table.add_column("£ per litre", style="cyan1")
+    table.add_column("MPG", style="cyan1")
 
     for entry in previous_entries:
         table.add_row(
@@ -471,12 +472,12 @@ def display_expense_records(vehicle_choice):
     previous_entries = gsheets.get_all_records(
         gsheets.expenses_sheet, vehicle_choice)
     # Display table 
-    table = Table(title=f"{vehicle_choice} Expense Records", header_style="dark_red")
+    table = Table(title=f"{vehicle_choice} Expense Records", header_style="magenta")
 
-    table.add_column("Date", style="chartreuse4")
-    table.add_column("Vehicle", style="chartreuse4")
-    table.add_column("Description", style="chartreuse4")
-    table.add_column("Cost £", style="chartreuse4")
+    table.add_column("Date", style="cyan1")
+    table.add_column("Vehicle", style="cyan1")
+    table.add_column("Description", style="cyan1")
+    table.add_column("Cost £", style="cyan1")
 
     for entry in previous_entries:
         table.add_row(entry[1], entry[2], entry[3], entry[4])
@@ -548,9 +549,9 @@ def display_fuel_insights(vehicle_choice):
     }
 
     # Display table
-    table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
-    table.add_column("", style="chartreuse4")
-    table.add_column("Average", style="chartreuse4")
+    table = Table(title=f"{vehicle_choice} Averages", header_style="magenta")
+    table.add_column("", style="cyan1")
+    table.add_column("Average", style="cyan1")
     table.add_row("MPG", str(averages["mpg"]))
     table.add_row("£ per litre", str(averages["cost_litre"]))
     table.add_row("£ per month", averages["cost_month"])
@@ -600,10 +601,10 @@ def display_expense_insights(vehicle_choice):
     }
 
     # Display Table
-    table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
+    table = Table(title=f"{vehicle_choice} Averages", header_style="magenta")
 
-    table.add_column("", style="chartreuse4")
-    table.add_column("Average", style="chartreuse4")
+    table.add_column("", style="cyan1")
+    table.add_column("Average", style="cyan1")
 
     table.add_row("£ per month", expense_averages['per_month'])
     table.add_row("£ per week", expense_averages['per_week'])
