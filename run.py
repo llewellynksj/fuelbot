@@ -1,5 +1,4 @@
 # Imports
-from tabulate import tabulate
 from rich.console import Console
 from rich.table import Table
 
@@ -56,7 +55,7 @@ def display_login_options():
         user_login_choice = input("Enter the number of your selection: ")
         break
 
-    if checks.check_number_input(user_login_choice):
+    if checks.check_number_input(user_login_choice, 4):
         if int(user_login_choice) == 1:
             user_login()
         elif int(user_login_choice) == 2:
@@ -287,7 +286,7 @@ def vehicle_account_menu(vehicle_choice):
         utils.print_colour("Enter q to quit", "magenta")
         features_choice = input("Enter the number of your selection: ")
         if checks.user_quits(features_choice):
-            display_login_options()
+            display_users_vehicles(user_id)
         if checks.check_number_input(features_choice, 4):
             if int(features_choice) == 1:
                 add_fuel(vehicle_choice)
@@ -461,7 +460,7 @@ def display_insights(vehicle_choice):
     utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
     insights_choice = input("Enter the number of your selection: ")
     if checks.user_quits(insights_choice):
-        display_login_options()
+        vehicle_account_menu(vehicle_choice)
     if checks.check_number_input(insights_choice, 2):
         if int(insights_choice) == 1:
             display_fuel_insights(vehicle_choice)
@@ -493,8 +492,8 @@ def display_fuel_insights(vehicle_choice):
 
     # Display table
     table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
+    table.add_column("", style="chartreuse4")
     table.add_column("Average", style="chartreuse4")
-    table.add_column("Fuel", style="chartreuse4")
     table.add_row("MPG", str(averages["mpg"]))
     table.add_row("£ per litre", str(averages["cost_litre"]))
     table.add_row("£ per month", averages["cost_month"])
@@ -539,8 +538,8 @@ def display_expense_insights(vehicle_choice):
 
     # Display Table
     table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
-   
-    table.add_column("Expenses", style="chartreuse4")
+
+    table.add_column("", style="chartreuse4")
     table.add_column("Average", style="chartreuse4")
 
     table.add_row("£ per month", expense_averages['per_month'])
