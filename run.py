@@ -241,7 +241,7 @@ def add_vehicle(username, col_step):
     make = input("What is the make of your vehicle: ")
     model = input("What is the model of your vehicle: ")
     fuel_type = input("What is the Fuel type (Petrol or Diesel): ")
-
+    utils.new_terminal()
     utils.print_colour("\nPlease check the below details are correct", "cyan")
     print(f"""
         Nickname: {nickname}
@@ -315,6 +315,7 @@ def add_fuel(vehicle_choice):
     litres_in = float(input("Enter the number of litres in: "))
     cost_per_litre = float(input("Enter the cost per litre: £"))
     # Check for user to confirm details
+    utils.new_terminal()
     utils.print_colour("\nPlease check the below details are correct", "cyan")
     print(f"""\n
         Date: {entry_date}
@@ -334,7 +335,7 @@ def add_fuel(vehicle_choice):
     elif is_correct.lower() == 'n' or is_correct.lower() == "no":
         utils.print_colour("Okay let's try again...", "magenta")
         add_expenses(vehicle_choice)
-    
+    # Create list with user inputs
     fuel_entry = [
         user_id,
         entry_date,
@@ -345,6 +346,7 @@ def add_fuel(vehicle_choice):
     ]
     print(entry_date)
     # Check if this is first fuel entry
+    # If not first entry calculates mpg
     utils.print_colour(
         "\nIs this the first fuel entry for this vehicle?", "magenta"
         )
@@ -352,7 +354,6 @@ def add_fuel(vehicle_choice):
         first_entry_choice = input("Enter 'y' or 'n': ")
         if checks.check_yes_no_input(first_entry_choice):
             break
-    # If not first entry calculates mpg
     if first_entry_choice == "n":
         prev_odometer = gsheets.find_prev_odometer(vehicle_choice)
         mpg = utils.calc_mpg(current_odometer, prev_odometer, litres_in)
@@ -378,6 +379,7 @@ def add_expenses(vehicle_choice):
     description = input("Enter a short description of the expense: ")
     expense_cost = input("Enter the total cost: £")
     # Check for user to confirm details
+    utils.new_terminal()
     utils.print_colour("\nPlease check the below details are correct", "cyan")
     print(f"""\n
         Date: {entry_date}
@@ -396,7 +398,7 @@ def add_expenses(vehicle_choice):
     elif is_correct.lower() == 'n' or is_correct.lower() == "no":
         utils.print_colour("Okay let's try again...", "magenta")
         add_expenses(vehicle_choice)
-
+    # Create list with user inputs
     expense_entry = [
         user_id,
         entry_date,
