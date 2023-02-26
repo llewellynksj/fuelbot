@@ -1,4 +1,5 @@
 # Imports
+from tabulate import tabulate
 from rich.console import Console
 from rich.table import Table
 
@@ -369,8 +370,7 @@ def display_previous_entries(vehicle_choice):
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("R E C O R D S"), "white")
     previous_entries = gsheets.get_all_records(
-        gsheets.fuel_sheet, vehicle_choice
-        )
+        gsheets.fuel_sheet, vehicle_choice)
     # Display table 
     table = Table(title=f"{vehicle_choice} Records", header_style="dark_red")
 
@@ -385,8 +385,7 @@ def display_previous_entries(vehicle_choice):
     for entry in previous_entries:
         table.add_row(
             entry[0], entry[1], entry[2], entry[3],
-            entry[4], entry[5], entry[6]
-            )
+            entry[4], entry[5], entry[6])
 
     console = Console()
     console.print(table)
@@ -438,9 +437,8 @@ def display_averages_all(vehicle_choice):
     average_cost_day = round(spend / days, 2)
 
     averages = {
-        'mpg': utils.calc_average(utils.get_full_list(vehicle_choice, 6)),
-        'cost_litre': utils.calc_average(
-            utils.get_full_list(vehicle_choice, 5)),
+        'mpg': utils.calc_average(utils.get_list(vehicle_choice, 6)),
+        'cost_litre': utils.calc_average(utils.get_list(vehicle_choice, 5)),
         'cost_day': "£" + str(average_cost_day),
         'cost_week': "£" + str(average_cost_week),
         'cost_month': "£" + str(average_cost_month)
@@ -467,22 +465,45 @@ def display_fuel_trends(vehicle_choice):
     """
     Calculate fuel trends
     """
-    print("Calculate fuel trends")
+    vehicle_records = gsheets.get_all_records(
+        gsheets.fuel_sheet, vehicle_choice)
+    date_list = [i[1] for i in vehicle_records]
+    fuel_price = [i[5] for i in vehicle_records]
+
+    trends_table = {
+        'Date': date_list,
+        'Cost p/litre': fuel_price,
+        'Difference': difference
+    }
+
+    print(tabulate(trends_table, headers='keys', tablefmt='fancy_outline'))
+
+    input("Hit Enter to return to the menu")
+    display_insights(vehicle_choice)
 
 
 def display_expense_trends(vehicle_choice):
     """
     Calculate expense trends
     """
-    spend = sum(gsheets.expenses_sheet.col_values(4))
+    cost_list = gsheets.expenses_sheet.col_values(5)
+    cost_list.remove("cost")
+    conv_cost_list = [float(x) for x in cost_list]
+    spend = sum(conv_cost_list)
+
     date_list = utils.get_dates(gsheets.expenses_sheet, vehicle_choice)
     days = utils.get_days(date_list)
     weeks = days // 7
     months = utils.get_months(date_list)
 
-    average_cost_month = round(spend / months, 2)
-    average_cost_week = round(spend / weeks, 2)
-    average_cost_day = round(spend / days, 2)
+    try:
+        average_cost_month = round(spend / months, 2)
+        average_cost_week = round(spend / weeks, 2)
+        average_cost_day = round(spend / days, 2)
+    except:
+        average_cost_month = "N/A"
+        average_cost_week = "N/A"
+        average_cost_day = "N/A"
 
     expense_averages = {
         'per_day': "£" + str(average_cost_day),
@@ -493,12 +514,19 @@ def display_expense_trends(vehicle_choice):
     # Display Table
     table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
     # Table columns
-    table.add_column("Average", style="chartreuse4")
     table.add_column("Expenses", style="chartreuse4")
+    table.add_column("Average", style="chartreuse4")
     # Table rows
     table.add_row("£ per month", expense_averages['per_month'])
     table.add_row("£ per week", expense_averages['per_week'])
     table.add_row("£ per day", expense_averages['per_day'])
+
+    console = Console()
+    console.print(table)
+
+    utils.print_colour("\nN/A: Not enough data available", "magenta")
+    input("\nHit Enter to return to the menu")
+    display_insights(vehicle_choice)
 
 
 main()

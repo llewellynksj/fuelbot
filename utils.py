@@ -80,7 +80,7 @@ def calc_mpg(current_odometer, prev_odometer, litres_in):
     return round(mpg, 2)
 
 
-def get_full_list(vehicle_choice, list_index):
+def get_list(vehicle_choice, list_index):
     """
     Gets totals from the worksheet and saves them in a list
     to be used in calculations for insights
