@@ -116,7 +116,8 @@ def check_nickname(nickname):
 
 def check_fuel_conf(date, odometer, litres, cost):
     """
-    Checks
+    Checks the inputs passed in by the user are correct
+    If user has made an error they can start again
     """
     utils.new_terminal()
     utils.print_colour("\nPlease check the below details are correct", "cyan")
@@ -124,6 +125,27 @@ def check_fuel_conf(date, odometer, litres, cost):
         Date: {date}
         Odometer: {odometer}
         Litres: £{litres}
+        Cost: £{cost}
+        """)
+    while True:
+        is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
+        if check_yes_no_input(is_correct):
+            break
+    if is_correct.lower() == "y" or is_correct.lower() == "yes":
+        return True
+    return False
+
+
+def check_expense_conf(date, description, cost):
+    """
+    Checks the inputs passed in by the user are correct
+    If user has made an error they can start again
+    """
+    utils.new_terminal()
+    utils.print_colour("\nPlease check the below details are correct", "cyan")
+    print(f"""\n
+        Date: {date}
+        Description: {description}
         Cost: £{cost}
         """)
     while True:

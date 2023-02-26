@@ -95,7 +95,7 @@ def create_account():
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("S i g n  U p"), "white")
-    # Request username and validate
+    # Request username and validate:
     while True:
         utils.print_colour(
             """Please choose a USERNAME that:
@@ -109,7 +109,7 @@ def create_account():
         elif checks.check_username(username):
             break
     utils.print_colour(f"\nYour username is confirmed: {username}\n", "cyan")
-    # Request password and validate
+    # Request password and validate:
     while True:
         utils.print_colour(
             """Please choose a PASSWORD that:
@@ -123,7 +123,7 @@ def create_account():
         elif checks.check_password(password):
             break
     utils.print_colour(f"\nYour password is confirmed: {password}\n", "cyan")
-    # Update worksheet
+    # Update worksheet:
     gsheets.update_worksheet_new_user(username, password)
     input("Press Enter to Login")
     user_login()
@@ -152,7 +152,6 @@ def user_login():
         utils.delay()
         if checks.check_login_details(username, password):
             break
-
     display_users_vehicles(user_id)
 
 
@@ -177,7 +176,6 @@ def display_users_vehicles(username):
         2. {vehicle2}
         3. {vehicle3}
         """, "cyan")
-    
     utils.print_colour(
         "To ADD a vehicle please select an empty slot"
         "\nYou can add up to 3 vehicles"
@@ -242,6 +240,7 @@ def add_vehicle(username, col_step):
     model = input("What is the model of your vehicle: ")
     fuel_type = input("What is the Fuel type (Petrol or Diesel): ")
     utils.new_terminal()
+    # Checks the user inputs are correct:
     utils.print_colour("\nPlease check the below details are correct", "cyan")
     print(f"""
         Nickname: {nickname}
@@ -303,6 +302,7 @@ def add_fuel(vehicle_choice):
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("+F u e l"), "white")
+
     utils.print_colour("\nIs this fuel entry for today?", "cyan")
     date_response = input("Enter 'y' for yes or 'n' for no: ")
     if date_response.lower() == "y" or date_response.lower() == "yes":
@@ -314,14 +314,14 @@ def add_fuel(vehicle_choice):
     new_odometer = input("Enter your odometer reading: ")
     litres = float(input("Enter the number of litres in: "))
     cost_per_litre = float(input("Enter the cost per litre: £"))
-    # Check for user to confirm details
+    # Check for user to confirm details:
     if checks.check_fuel_conf(
             entry_date, new_odometer, litres, cost_per_litre):
         utils.print_colour("Great! One more question...", "magenta")
     else:
         utils.print_colour("Okay let's try again...", "magenta")
         add_fuel(vehicle_choice)
-    # Create list with user inputs
+    # Create list with user inputs:
     fuel_entry = [
         user_id,
         entry_date,
@@ -330,8 +330,8 @@ def add_fuel(vehicle_choice):
         litres,
         cost_per_litre
     ]
-    # Check if this is first fuel entry
-    # If not first entry calculates mpg
+    # Check if this is the first fuel entry
+    # If not first entry calculate mpg:
     utils.print_colour(
         "Is this the FIRST fuel entry for this vehicle?"
         "\nPlease note if you select 'y' mpg stats will be reset", "magenta")
@@ -351,7 +351,7 @@ def add_fuel(vehicle_choice):
                         "Invalid! No other records are found for this vehicle."
                         "Please select 'y' as this is your first entry",
                         "magenta")
-    # Add entry to worksheet
+    # Add entry to worksheet:
     utils.print_colour("Updating....", "magenta")
     utils.delay()
     gsheets.fuel_sheet.append_row(fuel_entry)
@@ -371,24 +371,10 @@ def add_expenses(vehicle_choice):
     entry_date = input("Please enter the date (dd/mm/yy): ")
     description = input("Enter a short description of the expense: ")
     expense_cost = input("Enter the total cost: £")
-    # Check for user to confirm details
-    utils.new_terminal()
-    utils.print_colour("\nPlease check the below details are correct", "cyan")
-    print(f"""\n
-        Date: {entry_date}
-        Description: {description}
-        Cost: £{expense_cost}
-        """)
-    utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
-    while True:
-        is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
-        if checks.user_quits(is_correct):
-            vehicle_account_menu(vehicle_choice)
-        if checks.check_yes_no_input(is_correct):
-            break
-    if is_correct.lower() == "y" or is_correct.lower() == "yes":
+    # Check for user to confirm details:
+    if checks.check_expense_conf(entry_date, description, expense_cost):
         utils.print_colour("Great!", "cyan")
-    elif is_correct.lower() == 'n' or is_correct.lower() == "no":
+    else:
         utils.print_colour("Okay let's try again...", "magenta")
         add_expenses(vehicle_choice)
     # Create list with user inputs
