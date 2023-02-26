@@ -136,18 +136,15 @@ def check_fuel_conf(date, odometer, litres, cost):
     return False
 
 
-def check_expense_conf(date, description, cost):
+def user_conf(dictionary):
     """
     Checks the inputs passed in by the user are correct
     If user has made an error they can start again
     """
     utils.new_terminal()
     utils.print_colour("\nPlease check the below details are correct", "cyan")
-    print(f"""\n
-        Date: {date}
-        Description: {description}
-        Cost: £{cost}
-        """)
+    for x in dictionary:
+        print(x, ": ", dictionary[x])
     while True:
         is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
         if check_yes_no_input(is_correct):

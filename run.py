@@ -302,21 +302,20 @@ def add_fuel(vehicle_choice):
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("+F u e l"), "white")
-
+    fuel_dict = {}
     utils.print_colour("\nIs this fuel entry for today?", "cyan")
     date_response = input("Enter 'y' for yes or 'n' for no: ")
     if date_response.lower() == "y" or date_response.lower() == "yes":
         utils.print_colour(
             f"\nTodays date, {utils.get_today()}, is saved", "cyan")
-        entry_date = utils.get_today()
+        fuel_dict['Date'] = utils.get_today()
     elif date_response == "n":
-        entry_date = utils.get_entry_date()
-    new_odometer = input("Enter your odometer reading: ")
-    litres = float(input("Enter the number of litres in: "))
-    cost_per_litre = float(input("Enter the cost per litre: £"))
+        fuel_dict['Date'] = utils.get_entry_date()
+    fuel_dict['Odometer'] = input("Enter your odometer reading: ")
+    fuel_dict['Litres'] = float(input("Enter the number of litres in: "))
+    fuel_dict['Cost'] = float(input("Enter the cost per litre: £"))
     # Check for user to confirm details:
-    if checks.check_fuel_conf(
-            entry_date, new_odometer, litres, cost_per_litre):
+    if checks.user_conf(fuel_dict):
         utils.print_colour("Great! One more question...", "magenta")
     else:
         utils.print_colour("Okay let's try again...", "magenta")
@@ -324,11 +323,11 @@ def add_fuel(vehicle_choice):
     # Create list with user inputs:
     fuel_entry = [
         user_id,
-        entry_date,
+        fuel_dict['Date'],
         vehicle_choice,
-        new_odometer,
-        litres,
-        cost_per_litre
+        fuel_dict['Odometer'],
+        fuel_dict['Litres'],
+        fuel_dict['Cost']
     ]
     # Check if this is the first fuel entry
     # If not first entry calculate mpg:
@@ -343,7 +342,10 @@ def add_fuel(vehicle_choice):
             elif first_input.lower() == "n" or first_input.lower() == "no":
                 try:
                     prev_odometer = gsheets.find_prev_odometer(vehicle_choice)
-                    mpg = utils.calc_mpg(new_odometer, prev_odometer, litres)
+                    mpg = utils.calc_mpg(
+                        fuel_dict['Odometer'],
+                        prev_odometer,
+                        fuel_dict['Litres'])
                     fuel_entry.append(mpg)
                     break
                 except IndexError:
@@ -368,11 +370,12 @@ def add_expenses(vehicle_choice):
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("+E X P E N S E S"), "white")
-    entry_date = input("Please enter the date (dd/mm/yy): ")
-    description = input("Enter a short description of the expense: ")
-    expense_cost = input("Enter the total cost: £")
+    expenses = {}
+    expenses['Date'] = input("Please enter the date (dd/mm/yy): ")
+    expenses['Description'] = input("Enter a short description of the expense: ")
+    expenses['Cost'] = input("Enter the total cost: £")
     # Check for user to confirm details:
-    if checks.check_expense_conf(entry_date, description, expense_cost):
+    if checks.user_conf(expenses):
         utils.print_colour("Great!", "cyan")
     else:
         utils.print_colour("Okay let's try again...", "magenta")
@@ -380,10 +383,10 @@ def add_expenses(vehicle_choice):
     # Create list with user inputs
     expense_entry = [
         user_id,
-        entry_date,
+        expenses['Date'],
         vehicle_choice,
-        description,
-        expense_cost
+        expenses['Description'],
+        expenses['Cost']
     ]
     gsheets.expenses_sheet.append_row(expense_entry)
     utils.print_colour("Updating...", "magenta")
