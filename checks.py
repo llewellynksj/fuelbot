@@ -44,7 +44,6 @@ def check_username(username):
     Data validation of the username input by the user
     Checks the string is a minimum of 6 characters
     Checks the username does not match any other usernames already logged
-    Returns False if validation is not valid
     """
     usernames = gsheets.logins.col_values(1)
 
@@ -97,3 +96,17 @@ def check_login_details(username, password):
         return False
     return True
 
+
+def check_nickname(nickname):
+    """
+    Validates that the vehicle nickname is unique
+    """
+    nickname_list = []
+    nickname_list.append(gsheets.logins.col_values(3))
+    nickname_list.append(gsheets.logins.col_values(4))
+    nickname_list.append(gsheets.logins.col_values(5))
+
+    if nickname in (x for sublist in nickname_list for x in sublist):
+        utils.print_colour("Not available. Please try something else", "grey")
+        return False
+    return True

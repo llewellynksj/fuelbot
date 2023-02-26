@@ -228,7 +228,20 @@ def add_vehicle(username, col_step):
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("A d d"), "white")
-    nickname = input("\nPlease enter a nickname for this vehicle: ")
+    
+    while True:
+        utils.print_colour(
+            "Please choose a NICKNAME for your vehicle that is UNIQUE", "cyan")
+        nickname = input("\nEnter a nickname for this vehicle: ")
+        utils.print_colour("Checking database, please wait...", "magenta")
+        utils.delay()
+        if checks.user_quits(username):
+            display_login_options()
+        elif checks.check_nickname(nickname):
+            break
+    
+    utils.print_colour(
+        f"\nVehicle's nickname is confirmed: {nickname}\n", "cyan")
     vehicle_type = input("What is your vehicle type (e.g. Car/Motorbike): ")
     make = input("What is the make of your vehicle: ")
     model = input("What is the model of your vehicle: ")
@@ -473,7 +486,7 @@ def display_fuel_trends(vehicle_choice):
     trends_table = {
         'Date': date_list,
         'Cost p/litre': fuel_price,
-        'Difference': difference
+        'Difference': "hi"
     }
 
     print(tabulate(trends_table, headers='keys', tablefmt='fancy_outline'))
