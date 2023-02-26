@@ -9,7 +9,7 @@ def user_quits(user_input):
     """
     if user_input == "q":
         utils.print_colour("Quitting....please wait...", "magenta")
-        utils.delay()
+        utils.delay(1.5)
         return True
     return False
 

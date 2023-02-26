@@ -152,7 +152,7 @@ def user_login():
         if checks.user_quits(password):
             display_login_options()
         utils.print_colour("Searching....please wait...", "magenta")
-        utils.delay()
+        utils.delay(1.5)
         if checks.check_login_details(username, password):
             break
     display_users_vehicles(user_id)
@@ -230,7 +230,7 @@ def add_vehicle(username, col_step):
             "Please choose a NICKNAME for your vehicle that is UNIQUE", "cyan")
         nickname = input("\nEnter a nickname for this vehicle: ")
         utils.print_colour("Checking database, please wait...", "magenta")
-        utils.delay()
+        utils.delay(1.5)
         if checks.user_quits(username):
             display_login_options()
         elif checks.check_nickname(nickname):
@@ -358,11 +358,11 @@ def add_fuel(vehicle_choice):
                         "magenta")
     # Add entry to worksheet:
     utils.print_colour("Updating....", "magenta")
-    utils.delay()
+    utils.delay(1)
     gsheets.fuel_sheet.append_row(fuel_entry)
     utils.print_colour("Success! Your fuel entry has been added", "magenta")
     utils.print_colour(f"Going back to {vehicle_choice}'s Menu...", "magenta")
-    utils.delay()
+    utils.delay(1.5)
     vehicle_account_menu(vehicle_choice)
 
 
@@ -400,10 +400,10 @@ def add_expenses(vehicle_choice):
     ]
     gsheets.expenses_sheet.append_row(expense_entry)
     utils.print_colour("Updating...", "magenta")
-    utils.delay()
+    utils.delay(1)
     utils.print_colour("Success! Your expense entry has been added", "magenta")
     utils.print_colour(f"Going back to {vehicle_choice}'s Menu...", "magenta")
-    utils.delay()
+    utils.delay(1.5)
     vehicle_account_menu(vehicle_choice)
 
 
@@ -522,7 +522,7 @@ def display_fuel_insights(vehicle_choice):
         utils.print_colour(
             "Oops something went wrong! You haven't entered enough data to be"
             "\nable to show stats. Try again.", "magenta")
-        utils.delay()
+        utils.delay(2.5)
         vehicle_account_menu(vehicle_choice)
     total_distance = utils.calc_distance(odometer_list)
     date_list = utils.get_dates(gsheets.fuel_sheet, vehicle_choice)
@@ -587,7 +587,7 @@ def display_expense_insights(vehicle_choice):
         utils.print_colour(
             "Oops something went wrong! You haven't entered enough data to be"
             "\nable to show stats. Try again.", "magenta")
-        utils.delay()
+        utils.delay(2.5)
         vehicle_account_menu(vehicle_choice)
     days = utils.get_days(date_list)
     weeks = days // 7
@@ -626,11 +626,11 @@ def display_expense_insights(vehicle_choice):
             break
     if view_records.lower() == "y" or view_records.lower() == "yes":
         utils.print_colour("Great! Stand by...", "cyan")
-        utils.delay()
+        utils.delay(1.5)
         display_expense_records(vehicle_choice)
     elif view_records.lower() == 'n' or view_records.lower() == "no":
         utils.print_colour("Okay, let's go back to the menu...", "magenta")
-        utils.delay()
+        utils.delay(1.5)
         display_insights_menu(vehicle_choice)
 
 

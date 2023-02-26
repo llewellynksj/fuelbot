@@ -32,11 +32,11 @@ def new_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def delay():
+def delay(seconds):
     """
     Creates a delay before executing next code
     """
-    time.sleep(1.5)
+    time.sleep(seconds)
 
 
 def get_today():
@@ -154,12 +154,11 @@ def get_months(date_list):
     return months
 
 
-def calc_distance(vehicle_choice):
+def calc_distance(odometer_list):
     """
     Retrieves odometer readings from the worksheet
     Calculates the total distance travelled
     """
-    odometer_list = get_list(vehicle_choice, 3)
     latest_reading = odometer_list.pop(-1)
     first_reading = odometer_list.pop(0)
     total_distance = float(latest_reading) - float(first_reading)

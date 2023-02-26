@@ -38,7 +38,7 @@ def update_worksheet_vehicle(username, col_step, vehicle_nickname):
     alongside the username and password
     """
     utils.print_colour("Saving vehicle to your account...\n", "cyan")
-    utils.delay()
+    utils.delay(1.5)
     current_user = logins.find(username)
     current_user_col = current_user.col + col_step
     logins.update_cell(current_user.row, current_user_col, vehicle_nickname)
