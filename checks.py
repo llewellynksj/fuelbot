@@ -16,7 +16,7 @@ def user_quits(user_input):
 
 def check_number_input(choice, max_num):
     """
-    Validates the users input is between 1 and 4
+    Validates the users input is between 1 and a max_num(param)
     """
     try:
         if int(choice) > max_num or int(choice) < 1:
