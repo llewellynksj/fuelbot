@@ -24,6 +24,9 @@ class Vehicle:
         self.model = model
         self.fuel_type = fuel_type
 
+    def __str__(self):
+        return f"This {self.vehicle_type} is a {self.make} {self.model}"
+
 
 def main():
     """
