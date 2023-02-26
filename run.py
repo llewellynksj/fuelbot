@@ -28,8 +28,7 @@ class Vehicle:
 
 def main():
     """
-    Entry point
-    Prints logo and welcome message
+    Entry point; prints logo and welcome message
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("F u e l B o t"), "white")
@@ -130,7 +129,7 @@ def create_account():
     # Update worksheet
     gsheets.update_worksheet_new_user(username, password)
     input("Press Enter to Login")
-    user_login()
+    display_users_vehicles(username)
 
 
 def user_login():
@@ -147,14 +146,14 @@ def user_login():
             "\nPress q to quit and go back to the menu\n", "cyan")
         username = input("Enter your username: \n")
         user_id = username
-        password = input("\nEnter your password: \n")
-        utils.print_colour("Searching....please wait...", "magenta")
-        utils.delay()
         if checks.user_quits(username):
             display_login_options()
-        elif checks.user_quits(password):
+        password = input("\nEnter your password: \n")
+        if checks.user_quits(password):
             display_login_options()
-        elif checks.check_login_details(username, password):
+        utils.print_colour("Searching....please wait...", "magenta")
+        utils.delay()
+        if checks.check_login_details(username, password):
             break
 
     display_users_vehicles(user_id)
