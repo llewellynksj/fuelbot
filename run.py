@@ -187,11 +187,9 @@ def display_users_vehicles(username):
         vehicle_choice = input("\nEnter the number of your selection: ")
         if checks.user_quits(vehicle_choice):
             display_login_options()
-        elif int(vehicle_choice) < 4 and int(vehicle_choice) > 0:
-            if lookup_vehicle_cell(username, vehicle_choice):
-                break
-        else:
-            print("Try again. Please select a number between 1 and 3.")
+        elif checks.check_number_input(vehicle_choice, 3):
+            lookup_vehicle_cell(username, vehicle_choice)
+            break
 
 
 def lookup_vehicle_cell(username, vehicle_choice):
@@ -257,12 +255,12 @@ def add_vehicle(username, col_step):
         is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
         if checks.check_yes_no_input(is_correct):
             break
-    if is_correct == "y":
+    if is_correct.lower() == "y" or is_correct.lower() == "yes":
         utils.print_colour("Great!", "cyan")
         gsheets.update_worksheet_vehicle(username, col_step, nickname)
         nickname = Vehicle(vehicle_type, make, model, fuel_type)
         display_users_vehicles(username)
-    elif is_correct == 'n':
+    elif is_correct.lower() == 'n' or is_correct.lower() == "no":
         utils.print_colour("Okay let's try again...", "magenta")
         add_vehicle(username, col_step)
 
@@ -332,9 +330,9 @@ def add_fuel(vehicle_choice):
             vehicle_account_menu(vehicle_choice)
         if checks.check_yes_no_input(is_correct):
             break
-    if is_correct == "y":
+    if is_correct.lower() == "y" or is_correct.lower() == "yes":
         utils.print_colour("Great!", "cyan")
-    elif is_correct == 'n':
+    elif is_correct.lower() == 'n' or is_correct.lower() == "no":
         utils.print_colour("Okay let's try again...", "magenta")
         add_fuel(vehicle_choice)
 
@@ -355,7 +353,7 @@ def add_fuel(vehicle_choice):
         if checks.check_yes_no_input(first_entry_choice):
             break
     # If not first entry calculates mpg
-    if first_entry_choice == "n":
+    if first_entry_choice.lower() == "n" or first_entry_choice.lower() == "no":
         prev_odometer = gsheets.find_prev_odometer(vehicle_choice)
         mpg = utils.calc_mpg(current_odometer, prev_odometer, litres_in)
         fuel_entry.append(mpg)
@@ -393,9 +391,9 @@ def add_expenses(vehicle_choice):
             vehicle_account_menu(vehicle_choice)
         if checks.check_yes_no_input(is_correct):
             break
-    if is_correct == "y":
+    if is_correct.lower() == "y" or is_correct.lower() == "yes":
         utils.print_colour("Great!", "cyan")
-    elif is_correct == 'n':
+    elif is_correct.lower() == 'n' or is_correct.lower() == "no":
         utils.print_colour("Okay let's try again...", "magenta")
         add_expenses(vehicle_choice)
 

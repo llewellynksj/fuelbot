@@ -33,7 +33,9 @@ def check_yes_no_input(user_input):
     """
     Checks users input is equal to 'y' or 'n'
     """
-    if user_input == "y" or user_input == "n":
+    if user_input.lower() == "y" or user_input.lower() == "n":
+        return True
+    elif user_input.lower() == "yes" or user_input.lower() == "no":
         return True
     else:
         print("Something went wrong. Please enter y or no.")
