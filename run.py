@@ -288,7 +288,7 @@ def vehicle_account_menu(vehicle_choice):
         features_choice = input("Enter the number of your selection: ")
         if checks.user_quits(features_choice):
             display_login_options()
-        if checks.check_number_input(features_choice):
+        if checks.check_number_input(features_choice, 4):
             if int(features_choice) == 1:
                 add_fuel(vehicle_choice)
             elif int(features_choice) == 2:
@@ -326,8 +326,11 @@ def add_fuel(vehicle_choice):
         Litres in: {litres_in}
         Cost p/litre: {cost_per_litre}
         """)
+    utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
     while True:
         is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
+        if checks.user_quits(is_correct):
+            vehicle_account_menu(vehicle_choice)
         if checks.check_yes_no_input(is_correct):
             break
     if is_correct == "y":
@@ -384,15 +387,18 @@ def add_expenses(vehicle_choice):
         Description: {description}
         Cost: £{expense_cost}
         """)
+    utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
     while True:
         is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
+        if checks.user_quits(is_correct):
+            vehicle_account_menu(vehicle_choice)
         if checks.check_yes_no_input(is_correct):
             break
     if is_correct == "y":
         utils.print_colour("Great!", "cyan")
     elif is_correct == 'n':
         utils.print_colour("Okay let's try again...", "magenta")
-        add_expenses(vehicle_choice)(vehicle_choice)
+        add_expenses(vehicle_choice)
 
     expense_entry = [
         user_id,
