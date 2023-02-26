@@ -471,9 +471,14 @@ def display_fuel_insights(vehicle_choice):
     weeks = days // 7
     months = utils.get_months(date_list)
 
-    average_cost_month = round(spend / months, 2)
-    average_cost_week = round(spend / weeks, 2)
-    average_cost_day = round(spend / days, 2)
+    try:
+        average_cost_month = round(spend / months, 2)
+        average_cost_week = round(spend / weeks, 2)
+        average_cost_day = round(spend / days, 2)
+    except:
+        average_cost_month = "N/A"
+        average_cost_week = "N/A"
+        average_cost_day = "N/A"
 
     averages = {
         'mpg': utils.calc_average(utils.get_list(vehicle_choice, 6)),
@@ -496,6 +501,7 @@ def display_fuel_insights(vehicle_choice):
     console = Console()
     console.print(table)
 
+    utils.print_colour("\nN/A: Not enough data available", "magenta")
     input("Hit Enter to return to the menu")
     display_insights(vehicle_choice)
 
