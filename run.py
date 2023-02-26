@@ -331,7 +331,7 @@ def add_fuel(vehicle_choice):
         if checks.check_yes_no_input(is_correct):
             break
     if is_correct.lower() == "y" or is_correct.lower() == "yes":
-        utils.print_colour("Great!", "cyan")
+        utils.print_colour("Great! One more question...", "magenta")
     elif is_correct.lower() == 'n' or is_correct.lower() == "no":
         utils.print_colour("Okay let's try again...", "magenta")
         add_expenses(vehicle_choice)
@@ -344,12 +344,11 @@ def add_fuel(vehicle_choice):
         litres_in,
         cost_per_litre
     ]
-    print(entry_date)
     # Check if this is first fuel entry
     # If not first entry calculates mpg
     utils.print_colour(
-        "\nIs this the first fuel entry for this vehicle?", "magenta"
-        )
+        "Is this the FIRST fuel entry for this vehicle?"
+        "\nPlease note if you select Y mpg stats will be reset", "magenta")
     while True:
         first_entry_choice = input("Enter 'y' or 'n': ")
         if checks.check_yes_no_input(first_entry_choice):
