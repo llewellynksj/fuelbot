@@ -7,7 +7,7 @@ def user_quits(user_input):
     """
     Checks if the user has input 'q' to quit
     """
-    if user_input == "q":
+    if user_input.lower() == "q" or user_input.lower() == "quit":
         utils.print_colour("Quitting....please wait...", "magenta")
         utils.delay(1.5)
         return True

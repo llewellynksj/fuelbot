@@ -37,7 +37,7 @@ def main():
     utils.print_colour("""Welcome to your Fuel Cost Analysis programme
                 \nRegister an account & add your car details
                 \nLog your fuel costs to view insights & trends\n""", "cyan")
-    input("\nShall we get started? Hit Enter to continue")
+    input("\nShall we get started? Hit Enter to continue\n")
     display_login_options()
 
 
@@ -55,7 +55,7 @@ def display_login_options():
             3. About
             4. Quit
         """, "cyan")
-        user_login_choice = input("Enter the number of your selection: ")
+        user_login_choice = input("Enter the number of your selection: \n")
         if checks.check_number_input(user_login_choice, 4):
             if int(user_login_choice) == 1:
                 user_login()
@@ -87,7 +87,7 @@ def display_about():
         "\ntopped up and the cost."
         "\nYou'll then be able to view your insights! This should help "
         "\nyou to budget and manage your costs.\n", "cyan")
-    input("Press Enter to return to the menu")
+    input("Press Enter to return to the menu\n")
     display_login_options()
 
 
@@ -128,7 +128,7 @@ def create_account():
     utils.print_colour(f"\nYour password is confirmed: {password}\n", "cyan")
     # Update worksheet:
     gsheets.update_worksheet_new_user(username, password)
-    input("Press Enter to Login")
+    input("Press Enter to Login\n")
     user_login()
 
 
@@ -184,7 +184,7 @@ def display_users_vehicles(username):
         "\nYou can add up to 3 vehicles"
         "\nPress q to quit", "magenta")
     while True:
-        vehicle_choice = input("\nEnter the number of your selection: ")
+        vehicle_choice = input("\nEnter the number of your selection: \n")
         if checks.user_quits(vehicle_choice):
             display_login_options()
         elif checks.check_number_input(vehicle_choice, 3):
@@ -228,7 +228,7 @@ def add_vehicle(username, col_step):
     while True:
         utils.print_colour(
             "Please choose a NICKNAME for your vehicle that is UNIQUE", "cyan")
-        nickname = input("\nEnter a nickname for this vehicle: ")
+        nickname = input("\nEnter a nickname for this vehicle: \n")
         utils.print_colour("Checking database, please wait...", "magenta")
         utils.delay(1.5)
         if checks.user_quits(username):
@@ -238,10 +238,10 @@ def add_vehicle(username, col_step):
 
     utils.print_colour(
         f"\nVehicle's nickname is confirmed: {nickname}\n", "cyan")
-    vehicle_type = input("What is your vehicle type (e.g. Car/Motorbike): ")
-    make = input("What is the make of your vehicle: ")
-    model = input("What is the model of your vehicle: ")
-    fuel_type = input("What is the Fuel type (Petrol or Diesel): ")
+    vehicle_type = input("What is your vehicle type (e.g. Car/Motorbike): \n")
+    make = input("What is the make of your vehicle: \n")
+    model = input("What is the model of your vehicle: \n")
+    fuel_type = input("What is the Fuel type (Petrol or Diesel): \n")
     utils.new_terminal()
     # Checks the user inputs are correct:
     utils.print_colour("\nPlease check the below details are correct", "cyan")
@@ -253,7 +253,7 @@ def add_vehicle(username, col_step):
         Fuel Type: {fuel_type}
         """)
     while True:
-        is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
+        is_correct = input("\nEnter 'y' for yes or 'n' to start again: \n")
         if checks.check_yes_no_input(is_correct):
             break
     if is_correct.lower() == "y" or is_correct.lower() == "yes":
@@ -283,7 +283,7 @@ def vehicle_account_menu(vehicle_choice):
             4. View Insights
             """, "cyan")
         utils.print_colour("Enter q to quit", "magenta")
-        features_choice = input("Enter the number of your selection: ")
+        features_choice = input("Enter the number of your selection: \n")
         if checks.user_quits(features_choice):
             display_users_vehicles(user_id)
         if checks.check_number_input(features_choice, 4):
@@ -306,17 +306,18 @@ def add_fuel(vehicle_choice):
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("+F u e l"), "white")
     fuel_dict = {}
+    # Get date from user in proper format:
     utils.print_colour("\nIs this fuel entry for today?", "cyan")
-    date_response = input("Enter 'y' for yes or 'n' for no: ")
+    date_response = input("Enter 'y' for yes or 'n' for no: \n")
     if date_response.lower() == "y" or date_response.lower() == "yes":
         utils.print_colour(
             f"\nTodays date, {utils.get_today()}, is saved", "cyan")
         fuel_dict['Date'] = utils.get_today()
     elif date_response == "n":
         fuel_dict['Date'] = utils.get_entry_date()
-    fuel_dict['Odometer'] = input("Enter your odometer reading: ")
-    fuel_dict['Litres'] = float(input("Enter the number of litres in: "))
-    fuel_dict['Cost'] = float(input("Enter the cost per litre: £"))
+    fuel_dict['Odometer'] = input("Enter your odometer reading: \n")
+    fuel_dict['Litres'] = float(input("Enter the number of litres in: \n"))
+    fuel_dict['Cost'] = float(input("Enter the cost per litre: £\n"))
     # Check for user to confirm details:
     if checks.user_conf(fuel_dict):
         utils.print_colour("Great! One more question...", "magenta")
@@ -338,7 +339,7 @@ def add_fuel(vehicle_choice):
         "Is this the FIRST fuel entry for this vehicle?"
         "\nPlease note if you select 'y' mpg stats will be reset", "magenta")
     while True:
-        first_input = input("Enter 'y' or 'n': ")
+        first_input = input("Enter 'y' or 'n': \n")
         if checks.check_yes_no_input(first_input):
             if first_input.lower() == "y" or first_input.lower() == "yes":
                 break
@@ -374,16 +375,17 @@ def add_expenses(vehicle_choice):
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("+E X P E N S E S"), "white")
     expenses = {}
+    # Get date from user in proper format:
     utils.print_colour("\nIs this expenses entry for today?", "cyan")
-    date_response = input("Enter 'y' for yes or 'n' for no: ")
+    date_response = input("Enter 'y' for yes or 'n' for no: \n")
     if date_response.lower() == "y" or date_response.lower() == "yes":
         utils.print_colour(
             f"\nTodays date, {utils.get_today()}, is saved", "cyan")
         expenses['Date'] = utils.get_today()
     elif date_response == "n":
         expenses['Date'] = utils.get_entry_date()
-    expenses['Description'] = input("Enter a short description: ")
-    expenses['Cost'] = input("Enter the total cost: £")
+    expenses['Description'] = input("Enter a short description: \n")
+    expenses['Cost'] = input("Enter the total cost: £\n")
     # Check for user to confirm details:
     if checks.user_conf(expenses):
         utils.print_colour("Great!", "cyan")
@@ -419,7 +421,7 @@ def display_records_menu(vehicle_choice):
             2. Expenses
             """, "cyan")
     utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
-    records_choice = input("Enter the number of your selection: ")
+    records_choice = input("Enter the number of your selection: \n")
     if checks.user_quits(records_choice):
         vehicle_account_menu(vehicle_choice)
     if checks.check_number_input(records_choice, 2):
@@ -457,7 +459,7 @@ def display_fuel_records(vehicle_choice):
     console = Console()
     console.print(table)
 
-    input("Hit Enter to return to the menu")
+    input("Hit Enter to return to the menu\n")
     display_records_menu(vehicle_choice)
 
 
@@ -485,7 +487,7 @@ def display_expense_records(vehicle_choice):
     console = Console()
     console.print(table)
 
-    input("Hit Enter to return to the menu")
+    input("Hit Enter to return to the menu\n")
     display_records_menu(vehicle_choice)
 
 
@@ -501,7 +503,7 @@ def display_insights_menu(vehicle_choice):
             2. Expenses
             """, "cyan")
     utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
-    insights_choice = input("Enter the number of your selection: ")
+    insights_choice = input("Enter the number of your selection: \n")
     if checks.user_quits(insights_choice):
         vehicle_account_menu(vehicle_choice)
     if checks.check_number_input(insights_choice, 2):
@@ -568,7 +570,7 @@ def display_fuel_insights(vehicle_choice):
     utils.print_colour(
         "\nIf you see N/A, there is not currently enough data available",
         "magenta")
-    input("Hit Enter to return to the menu")
+    input("Hit Enter to return to the menu\n")
     display_insights_menu(vehicle_choice)
 
 
@@ -621,7 +623,7 @@ def display_expense_insights(vehicle_choice):
         "\nIf you see N/A, there is not currently enough data available",
         "magenta")
     view_records = input(
-        "\nWould you like to see the full records of your expenses? (y/n): ")
+        "\nWould you like to see the full records of your expenses? (y/n): \n")
     while True:
         if checks.check_yes_no_input(view_records):
             break

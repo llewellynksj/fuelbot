@@ -54,7 +54,7 @@ def get_entry_date():
     Returns date as the entry_date to be saved
     """
     while True:
-        entry_date = input("Enter the date of this fuel entry (dd/mm/yy): ")
+        entry_date = input("Enter the date of this fuel entry (dd/mm/yy): \n")
         # code to match the date taken from:
         # https://bit.ly/3kqGLD0
         match_date = re.match(
