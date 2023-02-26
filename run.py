@@ -227,7 +227,7 @@ def add_vehicle(username, col_step):
     """
     utils.new_terminal()
     utils.print_colour(utils.title.renderText("A d d"), "white")
-    
+
     while True:
         utils.print_colour(
             "Please choose a NICKNAME for your vehicle that is UNIQUE", "cyan")
@@ -238,7 +238,7 @@ def add_vehicle(username, col_step):
             display_login_options()
         elif checks.check_nickname(nickname):
             break
-    
+
     utils.print_colour(
         f"\nVehicle's nickname is confirmed: {nickname}\n", "cyan")
     vehicle_type = input("What is your vehicle type (e.g. Car/Motorbike): ")
@@ -318,6 +318,24 @@ def add_fuel(vehicle_choice):
     current_odometer = input("Enter your odometer reading: ")
     litres_in = float(input("Enter the number of litres in: "))
     cost_per_litre = float(input("Enter the cost per litre: £"))
+    # Check for user to confirm details
+    utils.print_colour("\nPlease check the below details are correct", "cyan")
+    print(f"""\n
+        Date: {entry_date}
+        Odometer: {current_odometer}
+        Litres in: {litres_in}
+        Cost p/litre: {cost_per_litre}
+        """)
+    while True:
+        is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
+        if checks.check_yes_no_input(is_correct):
+            break
+    if is_correct == "y":
+        utils.print_colour("Great!", "cyan")
+    elif is_correct == 'n':
+        utils.print_colour("Okay let's try again...", "magenta")
+        add_fuel(vehicle_choice)
+
     fuel_entry = [
         user_id,
         entry_date,
@@ -359,6 +377,23 @@ def add_expenses(vehicle_choice):
     entry_date = input("Please enter the date (dd/mm/yy): ")
     description = input("Enter a short description of the expense: ")
     expense_cost = input("Enter the total cost: £")
+    # Check for user to confirm details
+    utils.print_colour("\nPlease check the below details are correct", "cyan")
+    print(f"""\n
+        Date: {entry_date}
+        Description: {description}
+        Cost: £{expense_cost}
+        """)
+    while True:
+        is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
+        if checks.check_yes_no_input(is_correct):
+            break
+    if is_correct == "y":
+        utils.print_colour("Great!", "cyan")
+    elif is_correct == 'n':
+        utils.print_colour("Okay let's try again...", "magenta")
+        add_fuel(vehicle_choice)
+
     expense_entry = [
         user_id,
         entry_date,
