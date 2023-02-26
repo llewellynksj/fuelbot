@@ -112,3 +112,24 @@ def check_nickname(nickname):
         utils.print_colour("Not available. Please try something else", "grey")
         return False
     return True
+
+
+def check_fuel_conf(date, odometer, litres, cost):
+    """
+    Checks
+    """
+    utils.new_terminal()
+    utils.print_colour("\nPlease check the below details are correct", "cyan")
+    print(f"""\n
+        Date: {date}
+        Odometer: {odometer}
+        Litres: £{litres}
+        Cost: £{cost}
+        """)
+    while True:
+        is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
+        if check_yes_no_input(is_correct):
+            break
+    if is_correct.lower() == "y" or is_correct.lower() == "yes":
+        return True
+    return False

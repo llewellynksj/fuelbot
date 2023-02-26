@@ -315,26 +315,12 @@ def add_fuel(vehicle_choice):
     litres_in = float(input("Enter the number of litres in: "))
     cost_per_litre = float(input("Enter the cost per litre: £"))
     # Check for user to confirm details
-    utils.new_terminal()
-    utils.print_colour("\nPlease check the below details are correct", "cyan")
-    print(f"""\n
-        Date: {entry_date}
-        Odometer: {current_odometer}
-        Litres: £{litres_in}
-        Cost: £{cost_per_litre}
-        """)
-    utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
-    while True:
-        is_correct = input("\nEnter 'y' for yes or 'n' to start again: ")
-        if checks.user_quits(is_correct):
-            vehicle_account_menu(vehicle_choice)
-        if checks.check_yes_no_input(is_correct):
-            break
-    if is_correct.lower() == "y" or is_correct.lower() == "yes":
+    if checks.check_fuel_conf(
+            entry_date, current_odometer, litres_in, cost_per_litre):
         utils.print_colour("Great! One more question...", "magenta")
-    elif is_correct.lower() == 'n' or is_correct.lower() == "no":
+    else:
         utils.print_colour("Okay let's try again...", "magenta")
-        add_expenses(vehicle_choice)
+        add_fuel(vehicle_choice)
     # Create list with user inputs
     fuel_entry = [
         user_id,
@@ -348,15 +334,22 @@ def add_fuel(vehicle_choice):
     # If not first entry calculates mpg
     utils.print_colour(
         "Is this the FIRST fuel entry for this vehicle?"
-        "\nPlease note if you select Y mpg stats will be reset", "magenta")
+        "\nPlease note if you select 'y' mpg stats will be reset", "magenta")
     while True:
         first_entry_choice = input("Enter 'y' or 'n': ")
         if checks.check_yes_no_input(first_entry_choice):
-            break
-    if first_entry_choice.lower() == "n" or first_entry_choice.lower() == "no":
-        prev_odometer = gsheets.find_prev_odometer(vehicle_choice)
-        mpg = utils.calc_mpg(current_odometer, prev_odometer, litres_in)
-        fuel_entry.append(mpg)
+            if first_entry_choice.lower() == "y" or first_entry_choice.lower() == "yes":
+                break
+            elif first_entry_choice.lower() == "n" or first_entry_choice.lower() == "no":
+                try:
+                    prev_odometer = gsheets.find_prev_odometer(vehicle_choice)
+                    mpg = utils.calc_mpg(current_odometer, prev_odometer, litres_in)
+                    fuel_entry.append(mpg)
+                    break
+                except IndexError:
+                    utils.print_colour(
+                        "Invalid! No other records are found for this vehicle."
+                        "Please select 'y' as this is your first entry", "magenta")
     # Add entry to worksheet
     utils.print_colour("Updating....", "magenta")
     utils.delay()
