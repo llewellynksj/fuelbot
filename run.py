@@ -476,7 +476,6 @@ def display_expense_records(vehicle_choice):
     table.add_column("Date", style="chartreuse4")
     table.add_column("Vehicle", style="chartreuse4")
     table.add_column("Description", style="chartreuse4")
-    table.add_column("Litres in", style="chartreuse4")
     table.add_column("Cost £", style="chartreuse4")
 
     for entry in previous_entries:
