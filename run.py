@@ -515,6 +515,8 @@ def display_fuel_insights(vehicle_choice):
     """
     Calculate averages and displays to user in a table
     """
+    utils.new_terminal()
+    utils.print_colour(utils.title.renderText("I N S I G H T S"), "white")
     spend = utils.calc_total_spend(vehicle_choice)
     total_distance = utils.calc_distance(vehicle_choice)
     date_list = utils.get_dates(gsheets.fuel_sheet, vehicle_choice)
@@ -575,6 +577,8 @@ def display_expense_insights(vehicle_choice):
     """
     Calculate averages and displays to user in a table
     """
+    utils.new_terminal()
+    utils.print_colour(utils.title.renderText("I N S I G H T S"), "white")
     cost_list = gsheets.expenses_sheet.col_values(5)
     cost_list.remove("cost")
     conv_cost_list = [float(x) for x in cost_list]
