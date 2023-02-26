@@ -392,7 +392,7 @@ def add_expenses(vehicle_choice):
         utils.print_colour("Great!", "cyan")
     elif is_correct == 'n':
         utils.print_colour("Okay let's try again...", "magenta")
-        add_fuel(vehicle_choice)
+        add_expenses(vehicle_choice)(vehicle_choice)
 
     expense_entry = [
         user_id,
@@ -449,24 +449,18 @@ def display_insights(vehicle_choice):
     utils.print_colour(utils.title.renderText("I N S I G H T S"), "white")
     utils.print_colour(
             """Please select one:
-            1. Average Consumption
-            2. Fuel Cost Trends
-            3. Expenses Overview
-            4. Quit
+            1. Fuel
+            2. Expenses
             """, "cyan")
+    utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
     insights_choice = input("Enter the number of your selection: ")
     if checks.user_quits(insights_choice):
         display_login_options()
-    if checks.check_number_input(insights_choice):
+    if checks.check_number_input(insights_choice, 2):
         if int(insights_choice) == 1:
             display_averages_all(vehicle_choice)
         elif int(insights_choice) == 2:
-            display_fuel_trends(vehicle_choice)
-        elif int(insights_choice) == 3:
             display_expense_trends(vehicle_choice)
-        else:
-            utils.print_colour("Returning to vehicle menu...", "magenta")
-            vehicle_account_menu(vehicle_choice)
 
 
 def display_averages_all(vehicle_choice):

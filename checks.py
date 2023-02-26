@@ -14,17 +14,17 @@ def user_quits(user_input):
     return False
 
 
-def check_number_input(choice):
+def check_number_input(choice, max_num):
     """
     Validates the users input is between 1 and 4
     """
     try:
-        if int(choice) > 4 or int(choice) < 1:
+        if int(choice) > max_num or int(choice) < 1:
             raise ValueError(
-                "Please enter a number between 1 and 4"
+                f"Please enter a number between 1 and {max_num}"
             )
     except ValueError:
-        print("Invalid data. Please enter a number between 1 and 4")
+        print(f"Invalid data. Please enter a number between 1 and {max_num}")
         return False
     return True
 
