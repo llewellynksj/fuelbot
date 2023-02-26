@@ -470,8 +470,9 @@ def display_expense_records(vehicle_choice):
     utils.print_colour(utils.title.renderText("R E C O R D S"), "white")
     previous_entries = gsheets.get_all_records(
         gsheets.expenses_sheet, vehicle_choice)
-    # Display table 
-    table = Table(title=f"{vehicle_choice} Expense Records", header_style="magenta")
+    # Display table
+    table = Table(
+        title=f"{vehicle_choice} Expense Records", header_style="magenta")
 
     table.add_column("Date", style="cyan1")
     table.add_column("Vehicle", style="cyan1")
