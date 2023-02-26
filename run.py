@@ -458,12 +458,12 @@ def display_insights(vehicle_choice):
         display_login_options()
     if checks.check_number_input(insights_choice, 2):
         if int(insights_choice) == 1:
-            display_averages_all(vehicle_choice)
+            display_fuel_insights(vehicle_choice)
         elif int(insights_choice) == 2:
-            display_expense_trends(vehicle_choice)
+            display_expense_insights(vehicle_choice)
 
 
-def display_averages_all(vehicle_choice):
+def display_fuel_insights(vehicle_choice):
     """
     Calculate averages and displays to user in a table
     """
@@ -502,30 +502,9 @@ def display_averages_all(vehicle_choice):
     display_insights(vehicle_choice)
 
 
-def display_fuel_trends(vehicle_choice):
+def display_expense_insights(vehicle_choice):
     """
-    Calculate fuel trends
-    """
-    vehicle_records = gsheets.get_all_records(
-        gsheets.fuel_sheet, vehicle_choice)
-    date_list = [i[1] for i in vehicle_records]
-    fuel_price = [i[5] for i in vehicle_records]
-
-    trends_table = {
-        'Date': date_list,
-        'Cost p/litre': fuel_price,
-        'Difference': "hi"
-    }
-
-    print(tabulate(trends_table, headers='keys', tablefmt='fancy_outline'))
-
-    input("Hit Enter to return to the menu")
-    display_insights(vehicle_choice)
-
-
-def display_expense_trends(vehicle_choice):
-    """
-    Calculate expense trends
+    Calculate averages and displays to user in a table
     """
     cost_list = gsheets.expenses_sheet.col_values(5)
     cost_list.remove("cost")
@@ -554,10 +533,10 @@ def display_expense_trends(vehicle_choice):
 
     # Display Table
     table = Table(title=f"{vehicle_choice} Averages", header_style="dark_red")
-    # Table columns
+   
     table.add_column("Expenses", style="chartreuse4")
     table.add_column("Average", style="chartreuse4")
-    # Table rows
+
     table.add_row("£ per month", expense_averages['per_month'])
     table.add_row("£ per week", expense_averages['per_week'])
     table.add_row("£ per day", expense_averages['per_day'])
