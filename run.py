@@ -316,19 +316,9 @@ def add_fuel(vehicle_choice):
     fuel_dict = {}
     # Get date from user in proper format:
     utils.print_colour("\nIs this fuel entry for today?", constants.COLOR1)
-    while True:
-        date_response = input("Enter 'y' for yes or 'n' for no: \n")
-        if checks.check_yes_no_input(date_response):
-            if date_response.lower() == "y" or date_response.lower() == "yes":
-                utils.print_colour(
-                    f"\nTodays date, {utils.get_today()}, is saved",
-                    constants.COLOR1)
-                fuel_dict['Date'] = utils.get_today()
-                break
-            elif date_response == "n":
-                fuel_dict['Date'] = utils.get_entry_date()
-                break
-    # Get fuel entry details
+    date_of_entry = utils.check_users_date()
+    fuel_dict['Date'] = date_of_entry
+    # Get fuel entry details:
     while True:
         odometer = input("Enter your odometer reading: \n")
         litres_in = input("Enter the number of litres in: \n")
@@ -401,16 +391,8 @@ def add_expenses(vehicle_choice):
     expenses = {}
     # Get date from user in proper format:
     utils.print_colour("\nIs this expenses entry for today?", constants.COLOR1)
-    while True:
-        date_response = input("Enter 'y' for yes or 'n' for no: \n")
-        if checks.check_yes_no_input(date_response):
-            if date_response.lower() == "y" or date_response.lower() == "yes":
-                utils.print_colour(
-                    f"\nTodays date, {utils.get_today()}, is saved",
-                    constants.COLOR1)
-                expenses['Date'] = utils.get_today()
-            elif date_response == "n":
-                expenses['Date'] = utils.get_entry_date()
+    date_of_entry = utils.check_users_date()
+    expenses['Date'] = date_of_entry
     # Get expense entry details:
     while True:
         description = input("Enter a short description: \n")
@@ -425,7 +407,7 @@ def add_expenses(vehicle_choice):
     else:
         utils.print_colour("Okay let's try again...", constants.COLOR2)
         add_expenses(vehicle_choice)
-    # Create list with user inputs
+    # Create list with user inputs:
     expense_entry = [
         user_id,
         expenses['Date'],
@@ -433,6 +415,7 @@ def add_expenses(vehicle_choice):
         expenses['Description'],
         expenses['Cost']
     ]
+    # Add entry to worksheet:
     gsheets.expenses_sheet.append_row(expense_entry)
     utils.print_colour("Updating...", constants.COLOR2)
     utils.delay(1)

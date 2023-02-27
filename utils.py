@@ -12,6 +12,7 @@ from dateutil import relativedelta
 # Local imports
 import gsheets
 import constants
+import checks
 
 # Global variables
 title = Figlet(font="slant")
@@ -40,6 +41,26 @@ def delay(seconds):
     time.sleep(seconds)
 
 
+def check_users_date():
+    """
+    Checks if the user is inputting an entry for today or another date
+    Triggers either the get_today or get_entry_date function
+    """
+    while True:
+        date_response = input("Enter 'y' for yes or 'n' for no: \n")
+        if checks.check_yes_no_input(date_response):
+            if date_response.lower() == "y" or date_response.lower() == "yes":
+                print_colour(
+                    f"\nTodays date, {get_today()}, is saved",
+                    constants.COLOR1)
+                date_of_entry = get_today()
+                break
+            elif date_response == "n":
+                date_of_entry = get_entry_date()
+                break
+    return date_of_entry
+
+
 def get_today():
     """
     Gets todays date
@@ -55,7 +76,7 @@ def get_entry_date():
     Returns date as the entry_date to be saved
     """
     while True:
-        entry_date = input("Enter the date of this fuel entry (dd/mm/yy): \n")
+        entry_date = input("Enter the date of this entry (dd/mm/yy): \n")
         # code to match the date taken from:
         # https://bit.ly/3kqGLD0
         match_date = re.match(
@@ -66,8 +87,9 @@ def get_entry_date():
             print_colour(
                 "Invalid date format. Please try again using format dd/mm/yy",
                 constants.COLOR2)
-    if is_matched is True:
-        return entry_date
+        elif is_matched is True:
+            break
+    return entry_date
 
 
 def calc_mpg(current_odometer, prev_odometer, litres_in):
