@@ -456,7 +456,8 @@ def display_fuel_records(vehicle_choice):
         gsheets.fuel_sheet, vehicle_choice)
     # Display table
     table = Table(
-        title=f"{vehicle_choice} Fuel Records", header_style=constants.COLOR2)
+        title=f"{vehicle_choice} 10 Latest Fuel Records",
+        header_style=constants.COLOR2)
 
     table.add_column("Date", style="cyan1")
     table.add_column("Vehicle", style="cyan1")
@@ -465,7 +466,7 @@ def display_fuel_records(vehicle_choice):
     table.add_column("£ per litre", style="cyan1")
     table.add_column("MPG", style="cyan1")
 
-    for entry in previous_entries:
+    for entry in previous_entries[:10]:
         table.add_row(
             entry[1], entry[2], entry[3],
             entry[4], entry[5], entry[6])
