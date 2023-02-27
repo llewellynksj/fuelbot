@@ -44,7 +44,7 @@ def check_yes_no_input(user_input):
         return False
 
 
-def check_input_digits(input_list):
+def check_is_digits(input_list):
     """
     Checks users input is a number
     """

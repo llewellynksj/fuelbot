@@ -328,18 +328,17 @@ def add_fuel(vehicle_choice):
             elif date_response == "n":
                 fuel_dict['Date'] = utils.get_entry_date()
                 break
-
+    # Get fuel entry details
     while True:
         odometer = input("Enter your odometer reading: \n")
         litres_in = input("Enter the number of litres in: \n")
         cost_per_l = input("Enter the cost per litre: £\n")
         answer_list = [odometer, litres_in, cost_per_l]
-        if checks.check_input_digits(answer_list):
+        if checks.check_is_digits(answer_list):
             fuel_dict['Odometer'] = odometer
             fuel_dict['Litres'] = litres_in
             fuel_dict['Cost'] = cost_per_l
             break
-
     # Check for user to confirm details:
     if checks.user_conf(fuel_dict):
         utils.print_colour("Great! One more question...", constants.COLOR2)
@@ -402,15 +401,24 @@ def add_expenses(vehicle_choice):
     expenses = {}
     # Get date from user in proper format:
     utils.print_colour("\nIs this expenses entry for today?", constants.COLOR1)
-    date_response = input("Enter 'y' for yes or 'n' for no: \n")
-    if date_response.lower() == "y" or date_response.lower() == "yes":
-        utils.print_colour(
-            f"\nTodays date, {utils.get_today()}, is saved", constants.COLOR1)
-        expenses['Date'] = utils.get_today()
-    elif date_response == "n":
-        expenses['Date'] = utils.get_entry_date()
-    expenses['Description'] = input("Enter a short description: \n")
-    expenses['Cost'] = input("Enter the total cost: £\n")
+    while True:
+        date_response = input("Enter 'y' for yes or 'n' for no: \n")
+        if checks.check_yes_no_input(date_response):
+            if date_response.lower() == "y" or date_response.lower() == "yes":
+                utils.print_colour(
+                    f"\nTodays date, {utils.get_today()}, is saved",
+                    constants.COLOR1)
+                expenses['Date'] = utils.get_today()
+            elif date_response == "n":
+                expenses['Date'] = utils.get_entry_date()
+    # Get expense entry details:
+    while True:
+        description = input("Enter a short description: \n")
+        expense_cost = input("Enter the total cost: £\n")
+        if checks.check_is_digits(expense_cost):
+            expenses['Description'] = description
+            expenses['Cost'] = expense_cost
+            break
     # Check for user to confirm details:
     if checks.user_conf(expenses):
         utils.print_colour("Great!", constants.COLOR1)
