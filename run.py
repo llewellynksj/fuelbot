@@ -440,14 +440,17 @@ def display_records_menu(vehicle_choice):
             """, constants.COLOR1)
     utils.print_colour(
         "Hit q to quit and return to the menu\n", constants.COLOR2)
-    records_choice = input("Enter the number of your selection: \n")
-    if checks.user_quits(records_choice):
-        vehicle_account_menu(vehicle_choice)
-    if checks.check_number_input(records_choice, 2):
-        if int(records_choice) == 1:
-            display_fuel_records(vehicle_choice)
-        elif int(records_choice) == 2:
-            display_expense_records(vehicle_choice)
+    while True:
+        records_choice = input("Enter the number of your selection: \n")
+        if checks.user_quits(records_choice):
+            vehicle_account_menu(vehicle_choice)
+        if checks.check_number_input(records_choice, 2):
+            if int(records_choice) == 1:
+                display_fuel_records(vehicle_choice)
+                break
+            elif int(records_choice) == 2:
+                display_expense_records(vehicle_choice)
+                break
 
 
 def display_fuel_records(vehicle_choice):
