@@ -4,8 +4,8 @@ from google.oauth2.service_account import Credentials
 
 # Global Constants
 COLOR1 = "light_cyan"
-COLOR2 = "light_magenta"
-COLOR3 = "light_red"
+COLOR2 = "yellow"
+COLOR3 = "red"
 
 # API Constants
 SCOPE = [
