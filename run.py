@@ -316,13 +316,18 @@ def add_fuel(vehicle_choice):
     fuel_dict = {}
     # Get date from user in proper format:
     utils.print_colour("\nIs this fuel entry for today?", constants.COLOR1)
-    date_response = input("Enter 'y' for yes or 'n' for no: \n")
-    if date_response.lower() == "y" or date_response.lower() == "yes":
-        utils.print_colour(
-            f"\nTodays date, {utils.get_today()}, is saved", constants.COLOR1)
-        fuel_dict['Date'] = utils.get_today()
-    elif date_response == "n":
-        fuel_dict['Date'] = utils.get_entry_date()
+    while True:
+        date_response = input("Enter 'y' for yes or 'n' for no: \n")
+        if checks.check_yes_no_input(date_response):
+            if date_response.lower() == "y" or date_response.lower() == "yes":
+                utils.print_colour(
+                    f"\nTodays date, {utils.get_today()}, is saved",
+                    constants.COLOR1)
+                fuel_dict['Date'] = utils.get_today()
+                break
+            elif date_response == "n":
+                fuel_dict['Date'] = utils.get_entry_date()
+                break
     fuel_dict['Odometer'] = input("Enter your odometer reading: \n")
     fuel_dict['Litres'] = float(input("Enter the number of litres in: \n"))
     fuel_dict['Cost'] = float(input("Enter the cost per litre: £\n"))
