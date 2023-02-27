@@ -105,8 +105,9 @@ def create_account():
             """Please choose a USERNAME that:
             - has a minimum of 6 characters
             - is unique
-        """, "magenta")
-        utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
+        """, constants.COLOR2)
+        utils.print_colour(
+            "Hit q to quit and return to the menu\n", constants.COLOR2)
         username = input("Enter a unique username: \n")
         if checks.user_quits(username):
             display_login_options()
@@ -120,8 +121,9 @@ def create_account():
             """Please choose a PASSWORD that:
             - has a minimum of 6 characters
             - contains at least 1 number
-        """, "magenta")
-        utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
+        """, constants.COLOR2)
+        utils.print_colour(
+            "Hit q to quit and return to the menu\n", constants.COLOR2)
         password = input("Enter your password: \n")
         if checks.user_quits(password):
             display_login_options()
@@ -154,7 +156,7 @@ def user_login():
         password = input("\nEnter your password: \n")
         if checks.user_quits(password):
             display_login_options()
-        utils.print_colour("Searching....please wait...", "magenta")
+        utils.print_colour("Searching....please wait...", constants.COLOR2)
         utils.delay(1.5)
         if checks.check_login_details(username, password):
             break
@@ -185,7 +187,7 @@ def display_users_vehicles(username):
     utils.print_colour(
         "To ADD a vehicle please select an empty slot"
         "\nYou can add up to 3 vehicles"
-        "\nPress q to quit", "magenta")
+        "\nPress q to quit", constants.COLOR2)
     while True:
         vehicle_choice = input("\nEnter the number of your selection: \n")
         if checks.user_quits(vehicle_choice):
@@ -233,7 +235,8 @@ def add_vehicle(username, col_step):
             "Choose a NICKNAME for your vehicle that is UNIQUE",
             constants.COLOR1)
         nickname = input("\nEnter a nickname for this vehicle: \n")
-        utils.print_colour("Checking database, please wait...", "magenta")
+        utils.print_colour(
+            "Checking database, please wait...", constants.COLOR2)
         utils.delay(1.5)
         if checks.user_quits(username):
             display_login_options()
@@ -267,7 +270,7 @@ def add_vehicle(username, col_step):
         nickname = Vehicle(vehicle_type, make, model, fuel_type)
         display_users_vehicles(username)
     elif is_correct.lower() == 'n' or is_correct.lower() == "no":
-        utils.print_colour("Okay let's try again...", "magenta")
+        utils.print_colour("Okay let's try again...", constants.COLOR2)
         add_vehicle(username, col_step)
 
 
@@ -287,7 +290,7 @@ def vehicle_account_menu(vehicle_choice):
             3. View previous entries
             4. View Insights
             """, constants.COLOR1)
-        utils.print_colour("Enter q to quit", "magenta")
+        utils.print_colour("Enter q to quit", constants.COLOR2)
         features_choice = input("Enter the number of your selection: \n")
         if checks.user_quits(features_choice):
             display_users_vehicles(user_id)
@@ -325,9 +328,9 @@ def add_fuel(vehicle_choice):
     fuel_dict['Cost'] = float(input("Enter the cost per litre: £\n"))
     # Check for user to confirm details:
     if checks.user_conf(fuel_dict):
-        utils.print_colour("Great! One more question...", "magenta")
+        utils.print_colour("Great! One more question...", constants.COLOR2)
     else:
-        utils.print_colour("Okay let's try again...", "magenta")
+        utils.print_colour("Okay let's try again...", constants.COLOR2)
         add_fuel(vehicle_choice)
     # Create list with user inputs:
     fuel_entry = [
@@ -342,7 +345,8 @@ def add_fuel(vehicle_choice):
     # If not first entry calculate mpg:
     utils.print_colour(
         "Is this the FIRST fuel entry for this vehicle?"
-        "\nPlease note if you select 'y' mpg stats will be reset", "magenta")
+        "\nPlease note if you select 'y' mpg stats will be reset",
+        constants.COLOR2)
     while True:
         first_input = input("Enter 'y' or 'n': \n")
         if checks.check_yes_no_input(first_input):
@@ -361,13 +365,15 @@ def add_fuel(vehicle_choice):
                     utils.print_colour(
                         "Invalid! No other records are found for this vehicle."
                         "Please select 'y' as this is your first entry",
-                        "magenta")
+                        constants.COLOR2)
     # Add entry to worksheet:
-    utils.print_colour("Updating....", "magenta")
+    utils.print_colour("Updating....", constants.COLOR2)
     utils.delay(1)
     gsheets.fuel_sheet.append_row(fuel_entry)
-    utils.print_colour("Success! Your fuel entry has been added", "magenta")
-    utils.print_colour(f"Going back to {vehicle_choice}'s Menu...", "magenta")
+    utils.print_colour(
+        "Success! Your fuel entry has been added", constants.COLOR2)
+    utils.print_colour(
+        f"Going back to {vehicle_choice}'s Menu...", constants.COLOR2)
     utils.delay(1.5)
     vehicle_account_menu(vehicle_choice)
 
@@ -395,7 +401,7 @@ def add_expenses(vehicle_choice):
     if checks.user_conf(expenses):
         utils.print_colour("Great!", constants.COLOR1)
     else:
-        utils.print_colour("Okay let's try again...", "magenta")
+        utils.print_colour("Okay let's try again...", constants.COLOR2)
         add_expenses(vehicle_choice)
     # Create list with user inputs
     expense_entry = [
@@ -406,10 +412,12 @@ def add_expenses(vehicle_choice):
         expenses['Cost']
     ]
     gsheets.expenses_sheet.append_row(expense_entry)
-    utils.print_colour("Updating...", "magenta")
+    utils.print_colour("Updating...", constants.COLOR2)
     utils.delay(1)
-    utils.print_colour("Success! Your expense entry has been added", "magenta")
-    utils.print_colour(f"Going back to {vehicle_choice}'s Menu...", "magenta")
+    utils.print_colour(
+        "Success! Your expense entry has been added", constants.COLOR2)
+    utils.print_colour(
+        f"Going back to {vehicle_choice}'s Menu...", constants.COLOR2)
     utils.delay(1.5)
     vehicle_account_menu(vehicle_choice)
 
@@ -425,7 +433,8 @@ def display_records_menu(vehicle_choice):
             1. Fuel
             2. Expenses
             """, constants.COLOR1)
-    utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
+    utils.print_colour(
+        "Hit q to quit and return to the menu\n", constants.COLOR2)
     records_choice = input("Enter the number of your selection: \n")
     if checks.user_quits(records_choice):
         vehicle_account_menu(vehicle_choice)
@@ -447,7 +456,7 @@ def display_fuel_records(vehicle_choice):
         gsheets.fuel_sheet, vehicle_choice)
     # Display table
     table = Table(
-        title=f"{vehicle_choice} Fuel Records", header_style="magenta")
+        title=f"{vehicle_choice} Fuel Records", header_style=constants.COLOR2)
 
     table.add_column("Date", style="cyan1")
     table.add_column("Vehicle", style="cyan1")
@@ -479,7 +488,8 @@ def display_expense_records(vehicle_choice):
         gsheets.expenses_sheet, vehicle_choice)
     # Display table
     table = Table(
-        title=f"{vehicle_choice} Expense Records", header_style="magenta")
+        title=f"{vehicle_choice} Expense Records",
+        header_style=constants.COLOR2)
 
     table.add_column("Date", style="cyan1")
     table.add_column("Vehicle", style="cyan1")
@@ -506,8 +516,9 @@ def display_insights_menu(vehicle_choice):
             """Please select one:
             1. Fuel
             2. Expenses
-            """, "light_cyan")
-    utils.print_colour("Hit q to quit and return to the menu\n", "magenta")
+            """, constants.COLOR1)
+    utils.print_colour(
+        "Hit q to quit and return to the menu\n", constants.COLOR2)
     insights_choice = input("Enter the number of your selection: \n")
     if checks.user_quits(insights_choice):
         vehicle_account_menu(vehicle_choice)
@@ -529,7 +540,7 @@ def display_fuel_insights(vehicle_choice):
     if len(odometer_list) < 2:
         utils.print_colour(
             "Oops something went wrong! You haven't entered enough data to be"
-            "\nable to show stats. Try again.", "magenta")
+            "\nable to show stats. Try again.", constants.COLOR2)
         utils.delay(2.5)
         vehicle_account_menu(vehicle_choice)
     total_distance = utils.calc_distance(odometer_list)
@@ -557,7 +568,8 @@ def display_fuel_insights(vehicle_choice):
     }
 
     # Display table
-    table = Table(title=f"{vehicle_choice} Averages", header_style="magenta")
+    table = Table(
+        title=f"{vehicle_choice} Averages", header_style=constants.COLOR2)
 
     table.add_column("", style="cyan1")
     table.add_column("Average", style="cyan1")
@@ -576,7 +588,7 @@ def display_fuel_insights(vehicle_choice):
 
     utils.print_colour(
         "\nIf you see N/A, there is not currently enough data available",
-        "magenta")
+        constants.COLOR2)
     input("Hit Enter to return to the menu\n")
     display_insights_menu(vehicle_choice)
 
@@ -596,7 +608,7 @@ def display_expense_insights(vehicle_choice):
     if len(date_list) < 2:
         utils.print_colour(
             "Oops something went wrong! You haven't entered enough data to be"
-            "\nable to show stats. Try again.", "magenta")
+            "\nable to show stats. Try again.", constants.COLOR2)
         utils.delay(2.5)
         vehicle_account_menu(vehicle_choice)
     days = utils.get_days(date_list)
@@ -614,7 +626,8 @@ def display_expense_insights(vehicle_choice):
     }
 
     # Display Table
-    table = Table(title=f"{vehicle_choice} Averages", header_style="magenta")
+    table = Table(
+        title=f"{vehicle_choice} Averages", header_style=constants.COLOR2)
 
     table.add_column("", style="cyan1")
     table.add_column("Average", style="cyan1")
@@ -628,7 +641,7 @@ def display_expense_insights(vehicle_choice):
 
     utils.print_colour(
         "\nIf you see N/A, there is not currently enough data available",
-        "magenta")
+        constants.COLOR2)
     view_records = input(
         "\nWould you like to see the full records of your expenses? (y/n): \n")
     while True:
@@ -639,7 +652,8 @@ def display_expense_insights(vehicle_choice):
         utils.delay(1.5)
         display_expense_records(vehicle_choice)
     elif view_records.lower() == 'n' or view_records.lower() == "no":
-        utils.print_colour("Okay, let's go back to the menu...", "magenta")
+        utils.print_colour(
+            "Okay, let's go back to the menu...", constants.COLOR2)
         utils.delay(1.5)
         display_insights_menu(vehicle_choice)
 

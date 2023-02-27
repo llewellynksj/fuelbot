@@ -9,7 +9,7 @@ def user_quits(user_input):
     Checks if the user has input 'q' to quit
     """
     if user_input.lower() == "q" or user_input.lower() == "quit":
-        utils.print_colour("Quitting....please wait...", "magenta")
+        utils.print_colour("Quitting....please wait...", constants.COLOR2)
         utils.delay(1.5)
         return True
     return False
@@ -54,10 +54,12 @@ def check_username(username):
     username_length = len(username)
 
     if username_length < 6:
-        utils.print_colour("Please enter at least 6 characters", "grey")
+        utils.print_colour(
+            "Please enter at least 6 characters", constants.COLOR3)
         return False
     elif username in usernames:
-        utils.print_colour("Not available. Please try something else", "grey")
+        utils.print_colour(
+            "Not available. Please try something else", constants.COLOR3)
         return False
     else:
         return True
@@ -71,10 +73,11 @@ def check_password(password):
     # code for checking if password contains integer from:
     # https://www.geeksforgeeks.org/password-validation-in-python/
     if not any(char.isdigit() for char in password):
-        utils.print_colour("You forgot to include a number! Try again", "grey")
+        utils.print_colour(
+            "You forgot to include a number! Try again", constants.COLOR3)
         return False
     if password_length < 6:
-        utils.print_colour("That's too short! Try again", "grey")
+        utils.print_colour("That's too short! Try again", constants.COLOR3)
         return False
     return True
 
@@ -87,7 +90,7 @@ def check_login_details(username, password):
     usernames_list = gsheets.logins.col_values(1)
     users_dict = gsheets.logins.get_all_records()
     if username not in usernames_list:
-        utils.print_colour("Username not found. Try again\n", "grey")
+        utils.print_colour("Username not found. Try again\n", constants.COLOR3)
         return False
     current_user = next(
         (x for x in users_dict if x['username'] == username))
@@ -96,7 +99,7 @@ def check_login_details(username, password):
         utils.print_colour(
             "User account found. Please wait...\n", constants.COLOR1)
     else:
-        utils.print_colour("Password incorrect. Try again\n", "grey")
+        utils.print_colour("Password incorrect. Try again\n", constants.COLOR3)
         return False
     return True
 
@@ -111,7 +114,8 @@ def check_nickname(nickname):
     nickname_list.append(gsheets.logins.col_values(5))
 
     if nickname in (x for sublist in nickname_list for x in sublist):
-        utils.print_colour("Not available. Please try something else", "grey")
+        utils.print_colour(
+            "Not available. Please try something else", constants.COLOR3)
         return False
     return True
 
