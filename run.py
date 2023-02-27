@@ -328,9 +328,18 @@ def add_fuel(vehicle_choice):
             elif date_response == "n":
                 fuel_dict['Date'] = utils.get_entry_date()
                 break
-    fuel_dict['Odometer'] = input("Enter your odometer reading: \n")
-    fuel_dict['Litres'] = float(input("Enter the number of litres in: \n"))
-    fuel_dict['Cost'] = float(input("Enter the cost per litre: £\n"))
+
+    while True:
+        odometer = input("Enter your odometer reading: \n")
+        litres_in = input("Enter the number of litres in: \n")
+        cost_per_l = input("Enter the cost per litre: £\n")
+        answer_list = [odometer, litres_in, cost_per_l]
+        if checks.check_input_digits(answer_list):
+            fuel_dict['Odometer'] = odometer
+            fuel_dict['Litres'] = litres_in
+            fuel_dict['Cost'] = cost_per_l
+            break
+
     # Check for user to confirm details:
     if checks.user_conf(fuel_dict):
         utils.print_colour("Great! One more question...", constants.COLOR2)

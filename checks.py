@@ -44,6 +44,19 @@ def check_yes_no_input(user_input):
         return False
 
 
+def check_input_digits(input_list):
+    """
+    Checks users input is a number
+    """
+    for answer in input_list:
+        if answer.isdigit():
+            return True
+        else:
+            utils.print_colour(
+                "Please only enter numbers for Odometer reading, litres, and"
+                "\ncost per litre.Try again.", constants.COLOR2)
+
+
 def check_username(username):
     """
     Data validation of the username input by the user
