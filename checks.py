@@ -1,5 +1,6 @@
 # Local imports
 import utils
+import constants
 import gsheets
 
 
@@ -92,7 +93,8 @@ def check_login_details(username, password):
         (x for x in users_dict if x['username'] == username))
     stored_password = current_user.get("password")
     if password == stored_password:
-        utils.print_colour("User account found. Please wait...\n", "cyan")
+        utils.print_colour(
+            "User account found. Please wait...\n", constants.COLOR1)
     else:
         utils.print_colour("Password incorrect. Try again\n", "grey")
         return False
@@ -120,7 +122,8 @@ def user_conf(dictionary):
     If user has made an error they can start again
     """
     utils.new_terminal()
-    utils.print_colour("\nPlease check the below details are correct", "cyan")
+    utils.print_colour(
+        "\nPlease check the below details are correct", constants.COLOR1)
     for x in dictionary:
         print(x, ": ", dictionary[x])
     while True:

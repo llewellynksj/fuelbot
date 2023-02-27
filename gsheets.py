@@ -1,26 +1,11 @@
-# Imports
-import gspread
-from google.oauth2.service_account import Credentials
-
 # Local imports
+import constants
 import utils
 
-# API
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
-
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('fuelbot')
-
 # Variables for spreadsheet worksheets
-logins = SHEET.worksheet("logins")
-fuel_sheet = SHEET.worksheet("add_fuel")
-expenses_sheet = SHEET.worksheet("add_expenses")
+logins = constants.SHEET.worksheet("logins")
+fuel_sheet = constants.SHEET.worksheet("add_fuel")
+expenses_sheet = constants.SHEET.worksheet("add_expenses")
 
 
 def update_worksheet_new_user(username, password):
@@ -28,7 +13,7 @@ def update_worksheet_new_user(username, password):
     Saves the username and password to google sheets
     """
     user_data = [username, password, "Empty", "Empty", "Empty"]
-    utils.print_colour("Saving account information...\n", "cyan")
+    utils.print_colour("Saving account information...\n", constants.COLOR1)
     logins.append_row(user_data)
 
 
@@ -37,7 +22,7 @@ def update_worksheet_vehicle(username, col_step, vehicle_nickname):
     Saves the vehicle variable name (nickname) to the worksheet
     alongside the username and password
     """
-    utils.print_colour("Saving vehicle to your account...\n", "cyan")
+    utils.print_colour("Saving vehicle to your account...\n", constants.COLOR1)
     utils.delay(1.5)
     current_user = logins.find(username)
     current_user_col = current_user.col + col_step
