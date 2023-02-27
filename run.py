@@ -648,9 +648,9 @@ def display_expense_insights(vehicle_choice):
     utils.print_colour(
         "\nIf you see N/A, there is not currently enough data available",
         constants.COLOR2)
-    view_records = input(
-        "\nWould you like to see the full records of your expenses? (y/n): \n")
     while True:
+        view_records = input(
+            "\nWould you like to see your full expense records? (y/n): \n")
         if checks.check_yes_no_input(view_records):
             break
     if view_records.lower() == "y" or view_records.lower() == "yes":
