@@ -36,7 +36,7 @@ def main():
     utils.print_colour(utils.title.renderText("F u e l B o t"), "white")
     utils.print_colour("""Welcome to your Fuel Cost Analysis programme
                 \nRegister an account & add your car details
-                \nLog your fuel costs to view insights & trends\n""", "cyan")
+                \nLog your fuel costs to view insights\n""", "light_cyan")
     input("\nShall we get started? Hit Enter to continue\n")
     display_login_options()
 
