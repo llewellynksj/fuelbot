@@ -553,8 +553,10 @@ def display_fuel_insights(vehicle_choice):
 
     # Display table
     table = Table(title=f"{vehicle_choice} Averages", header_style="magenta")
+
     table.add_column("", style="cyan1")
     table.add_column("Average", style="cyan1")
+
     table.add_row("MPG", str(averages["mpg"]))
     table.add_row("£ per litre", str(averages["cost_litre"]))
     table.add_row("£ per month", averages["cost_month"])
