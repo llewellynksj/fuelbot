@@ -11,6 +11,7 @@ from dateutil import relativedelta
 
 # Local imports
 import gsheets
+import constants
 
 # Global variables
 title = Figlet(font="slant")
@@ -62,11 +63,9 @@ def get_entry_date():
             )
         is_matched = bool(match_date)
         if is_matched is False:
-            raise ValueError(
-                "Invalid date format. Please try again using format dd/mm/yy"
-                )
-        else:
-            break
+            print_colour(
+                "Invalid date format. Please try again using format dd/mm/yy",
+                constants.COLOR2)
     if is_matched is True:
         return entry_date
 
