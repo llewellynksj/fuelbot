@@ -27,6 +27,7 @@ def check_number_input(choice, max_num):
     except ValueError:
         print(f"Invalid data. Please enter a number between 1 and {max_num}")
         return False
+
     return True
 
 
