@@ -1,31 +1,149 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# FuelBot
 
-Welcome Kate Llewellyn,
+FuelBot is...
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+![Image of FuelBot]()
 
-## Reminders
+[Visit the FuelBot live app here](https://fuelbot.herokuapp.com/)
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+<br>
 
-## Creating the Heroku app
+## Contents
+----
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+### [User Experience (UX)](#user-experience-ux-1)
+- [Purpose](#purpose)
+- [User Stories](#user-stories)
 
-1. `heroku/python`
-2. `heroku/nodejs`
+### [Design](#design-1)
+- [Colour Scheme](#colour-scheme)
+- [Programme Model](#programme-model)
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+### [Features](#features-1)
+- [Existing Features](#existing-features)
+- [Future Features](#future-features)
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+### [Technologies](#technologies-1)
+- [3rd Party Modules](#modules)
 
-Connect your GitHub repository and deploy as normal.
+### [Version Control](#version-control-1)
 
-## Constraints
+### [Deployment](#deployment-1)
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+### [Testing](#testing-1)
+- [Pep8](#pep_8)
+- [User Story Testing](#user-story-testing)
+- [Bugs](#bugs)
 
------
-Happy coding!
+### [Credits](#credits-1)
+- [Resources](#resources)
+- [Acknowledgements](#acknowledgements)
+
+<br>
+
+----
+
+<br>
+
+## User Experience (UX)
+### **Purpose**
+
+FuelBot is...
+
+<br>
+
+### User Stories
+
+
+
+<br>
+
+----
+
+## Design
+### **Colour Scheme**
+
+<br>
+
+
+<br>
+
+### **Programme Model**
+
+Flowchart
+
+<br>
+
+----
+
+## Features
+### **Existing Features**
+
+<br>
+
+### **Future Features**
+
+
+<br>
+
+----
+
+## Technologies
+### **Languages Used**
+
+
+<br>
+
+**Frameworks, Libraries and Programs Used**
+
+<br>
+
+----
+
+## Version Control
+Version control has been maintained using Git. The code written for this website has been updated via regular commits to Github.
+
+<br>
+
+----
+
+## Deployment
+
+<br>
+
+----
+
+## Testing
+
+### **Pep 8**
+
+<br>
+
+### **User Story Testing**
+
+| User Story | Solution | Tested & Successfully Completed |
+| :----| :---| :----------------------:|
+| I want to  |  | Yes |
+| I want to  |  | Yes |
+
+<br>
+
+### **Bugs**
+  
+  | Raised by | Bug | Solution |
+  | :---      | :---| :---     |
+  |  |  |  |
+  |  |  |  |
+ 
+<br>
+
+----
+
+## Credits
+### **Resources**
+
+<br>
+
+### **Acknowledgements**
+
+
