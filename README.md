@@ -2,7 +2,7 @@
 
 With the rising cost of living and need to be able to easily manage one's budget, FuelBot is a simple tracking system to help vehicle users understand how much they are spending on fuel. This useful little tool can quickly analyse your average spend so that you can better manage your finances.
 
-![Image of FuelBot](documentation/readme-images/fuelbot_logo.PNG)
+![Image of FuelBot](documentation/readme-images/fuelbot_logo.png)
 
 [Visit the FuelBot live app here](https://fuelbot.herokuapp.com/)
 
@@ -100,16 +100,32 @@ This is the entry point to the programme. It provides to the user the programme 
 
 <br>
 
-![Screenshot of entry point to programme](documentation/readme-images/logo_screen.PNG)
+![Screenshot of entry point to programme](documentation/readme-images/logo_screen.png)
 </details>
 <details>
 <summary>Login Menu</summary>
-The main menu allows the user to login if they already have an account, to create an account or to view an 'About' page.
+This first menu allows the user to login if they already have an account, to create an account or to view an 'About' page.
 
 <br>
 
-![Screenshot of login menu](documentation/readme-images/menu.PNG)
+![Screenshot of login menu](documentation/readme-images/menu.png)
 </details>
+<details>
+<summary>Create Account</summary>
+
+
+<br>
+
+![Screenshot of account creation page](documentation/readme-images/sign_up.png)
+</details>
+<summary>Login</summary>
+
+
+<br>
+
+![Screenshot of login page](documentation/readme-images/login.png)
+</details>
+
 
 
 
