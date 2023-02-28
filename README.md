@@ -57,7 +57,15 @@ Once they have entered a minimum of 3 entries this handy programme will be able 
 
 ### User Stories
 
+Users:
+ - People wanting to cut their spending down and save
+ - Motor enthusiasts who like to track their vehicles efficiency
 
+ Goals:
+  - I want to see my average spend on fuel per month/week/day
+  - I want to be able to add multiple vehicles
+  - I want to know my vehicles mpg
+  - I want to be able to see my past records
 
 <br>
 
@@ -66,8 +74,11 @@ Once they have entered a minimum of 3 entries this handy programme will be able 
 ## Design
 ### **Colour Scheme**
 
-<br>
+Coloured fonts were used to make the programme more visually appealing. The primary colour was used for core text, while the secondary colour was used mostly to inidicate a system message to the user.
 
+Primary colour: Light cyan
+
+Secondary colour: Yellow
 
 <br>
 
