@@ -124,6 +124,7 @@ This first menu allows the user to login if they already have an account, to cre
 
 ![Screenshot of account creation page](documentation/readme-images/sign_up.png)
 </details>
+<details>
 <summary>Login</summary>
 
 
@@ -131,7 +132,22 @@ This first menu allows the user to login if they already have an account, to cre
 
 ![Screenshot of login page](documentation/readme-images/login.png)
 </details>
+<details>
+<summary>Vehicles Choice Page</summary>
 
+
+<br>
+
+![Screenshot of vehicles choice page](documentation/readme-images/vehicles.png)
+</details>
+<details>
+<summary>Vehicle Account Menu</summary>
+
+
+<br>
+
+![Screenshot of vehicle account menu](documentation/readme-images/vehicle_menu.png)
+</details>
 
 
 
