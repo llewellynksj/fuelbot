@@ -84,7 +84,7 @@ Secondary colour: Yellow
 
 ### **Programme Model**
 
-The below flowchart was created when thinking about the structure of this programme. A clear vision of the process helped to design a core model.
+The below [Lucid](https://www.lucidchart.com/pages/) flowchart was created when thinking about the structure of this programme. A clear vision of the process helped to design a core model.
 
 ![Image of process Flowchart](documentation/readme-images/flowchart.png)
 
@@ -94,6 +94,24 @@ The below flowchart was created when thinking about the structure of this progra
 
 ## Features
 ### **Existing Features**
+<details>
+<summary>Welcome Page</summary>
+This is the entry point to the programme. It provides to the user the programme name, logo and core function information.
+
+<br>
+
+![Screenshot of entry point to programme](documentation/readme-images/logo_screen.PNG)
+</details>
+<details>
+<summary>Login Menu</summary>
+The main menu allows the user to login if they already have an account, to create an account or to view an 'About' page.
+
+<br>
+
+![Screenshot of login menu](documentation/readme-images/menu.PNG)
+</details>
+
+
 
 <br>
 
