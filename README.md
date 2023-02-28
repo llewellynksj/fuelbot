@@ -24,7 +24,8 @@ With the rising cost of living and need to be able to easily manage one's budget
 - [Future Features](#future-features)
 
 ### [Technologies](#technologies-1)
-- [3rd Party Modules](#modules)
+- [Languages Used](#languages-used)
+- [External Modules](#external-modules)
 
 ### [Version Control](#version-control-1)
 
@@ -231,11 +232,35 @@ There is certainly further functionality I would have liked to add to this tool 
 
 ## Technologies
 ### **Languages Used**
+FuelBot is written in Python
 
+![Python badge](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
 
 <br>
 
-**Frameworks, Libraries and Programs Used**
+**External Modules**
+
+[rich.table](https://rich.readthedocs.io/en/stable/tables.html) : used to create data tables
+
+[os](https://docs.python.org/3/library/os.html) : used in function to clear the terminal
+
+[time](https://docs.python.org/3/library/time.html) : used to create a delay function
+
+[re](https://docs.python.org/3/library/re.html) : re.match used to check the date pattern is correct
+
+[statistics](https://docs.python.org/3/library/statistics.html) : the mean function from statistics was used to calculate averages
+
+[datetime](https://docs.python.org/3/library/datetime.html) : used in date calculations and also to get the entry date from the user
+
+[pyfiglet](https://pypi.org/project/pyfiglet/0.7/) : figlet was used to create the logo
+
+[termcolor](https://pypi.org/project/termcolor/) : colored from terncolor was used to add colour to fonts
+
+[dateutil](https://pypi.org/project/python-dateutil/) : relativedelta from dateutil was used to calculate the number of months between two dates
+
+[gspread](https://docs.gspread.org/en/latest/) : used to access and update google worksheets
+
+[google.oauth2.service_account](https://google-auth.readthedocs.io/en/master/reference/google.oauth2.service_account.html) : needed as part of the google drive api
 
 <br>
 
