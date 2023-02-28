@@ -8,7 +8,7 @@ With the rising cost of living and need to be able to easily manage one's budget
 
 ### Dummy Account:
 
-For the purposes of project assessment, a dummy account with the below details has been set up with a number of dummy details so that records and insights can be viewed fully without the need to complete a number of entries:
+For the purposes of project assessment a dummy account with the below details has been set up with a cars details, so that records and insights can be viewed fully without the need to complete a number of entries:
 
 Username: joebloggs
 
@@ -275,7 +275,7 @@ FuelBot is written in Python
 ----
 
 ## Version Control
-Version control has been maintained using Git. The code written for this website has been updated via regular commits to Github.
+Version control has been maintained using Git. The code written for this website has been updated via regular commits to GitHub.
 
 <br>
 
@@ -333,7 +333,7 @@ This project was built using a [Code Institute template](https://github.com/Code
 
 ### Dummy Account:
 
-For the purposes of project assessment, a dummy account with the below details has been set up with a number of dummy details so that records and insights can be viewed fully without the need to complete a number of entries:
+For the purposes of project assessment a dummy account with the below details has been set up with a cars details, so that records and insights can be viewed fully without the need to complete a number of entries:
 
 Username: joebloggs
 
