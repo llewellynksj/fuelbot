@@ -1,8 +1,8 @@
-# FuelBot
+# FuelBot: Fuel Tracking System
 
-FuelBot is...
+With the rising cost of living and need to be able to easily manage one's budget, FuelBot is a simple tracking system to help vehicle users understand how much they are spending on fuel. This useful little tool can quickly analyse your average spend so that you can better manage your finances.
 
-![Image of FuelBot]()
+![Image of FuelBot](documentation/readme-images/fuelbot_logo.PNG)
 
 [Visit the FuelBot live app here](https://fuelbot.herokuapp.com/)
 
@@ -48,7 +48,7 @@ FuelBot is...
 ## User Experience (UX)
 ### **Purpose**
 
-FuelBot is...
+
 
 <br>
 
