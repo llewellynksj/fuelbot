@@ -117,8 +117,16 @@ This first menu allows the user to login if they already have an account, to cre
 ![Screenshot of login menu](documentation/readme-images/menu.png)
 </details>
 <details>
-<summary>Create Account</summary>
+<summary>About</summary>
+This is a straight forward information page about how FuelBot works. There is no interactivity for the user except to hit the return button when they are finished reading.
 
+<br>
+
+![Screenshot of the about page](documentation/readme-images/about.png)
+</details>
+<details>
+<summary>Create Account</summary>
+The sign page allows the user to create an account by setting a unique username and choosing a password. These details are saved to a google worksheet.
 
 <br>
 
@@ -126,7 +134,7 @@ This first menu allows the user to login if they already have an account, to cre
 </details>
 <details>
 <summary>Login</summary>
-
+The below screenshot shows the login details for a dummy account.
 
 <br>
 
@@ -134,19 +142,76 @@ This first menu allows the user to login if they already have an account, to cre
 </details>
 <details>
 <summary>Vehicles Choice Page</summary>
-
+This is the first page that is displayed to the user after they have successfully logged in. It lists any already saved vehicles. If the user wants to add a new vehicle they simply select an empty slot as instructed.
 
 <br>
 
 ![Screenshot of vehicles choice page](documentation/readme-images/vehicles.png)
 </details>
 <details>
-<summary>Vehicle Account Menu</summary>
+<summary>Add Vehicle</summary>
+The below screenshot shows an example vehicle being added
 
+<br>
+
+![Screenshot of add vehicle page](documentation/readme-images/add_vehicle.png)
+</details>
+<details>
+<summary>Vehicle Account Menu</summary>
+The vehicle account menu provides access to the main features of FuelBot. Here the user can select to add a fuel entry, add expenses, view previous records, or view insights.
 
 <br>
 
 ![Screenshot of vehicle account menu](documentation/readme-images/vehicle_menu.png)
+</details>
+<details>
+<summary>Add Fuel</summary>
+The below screenshot shows an example fuel entry being completed
+
+<br>
+
+![Screenshot of add fuel page](documentation/readme-images/add_fuel.png)
+</details>
+<details>
+<summary>Add Expenses</summary>
+The below screenshot shows an example expense being entered
+
+<br>
+
+![Screenshot of add expenses page](documentation/readme-images/add_expenses.png)
+</details>
+<details>
+<summary>Previous Records</summary>
+The user will be shown a menu where they can select if they want to view records for fuel or expenses. They will then be taken to a new screen that displays all their previous records for that specific vehicle.
+
+<br>
+
+![Screenshot of a the records menu](documentation/readme-images/records_menu.png)
+
+![Screenshot of a dummy accounts previous fuel records](documentation/readme-images/records_fuel.png)
+
+![Screenshot of a dummy accounts previous expenses records](documentation/readme-images/records_expenses.png)
+
+</details>
+<details>
+<summary>Insights</summary>
+The user will be shown a menu where they can select if they want to view insights for fuel or expenses. They will then be taken to a new screen that displays these insights for that specific vehicle.
+
+<br>
+
+![Screenshot of a the insights menu](documentation/readme-images/insights_menu.png)
+
+<br>
+
+Fuel insights show averages for mpg, cost per litre, cost per month, week and day, and miles per month, week and day:
+
+![Screenshot of a dummy accounts fuel insights](documentation/readme-images/insights_fuel.png)
+
+<br>
+
+Expense insights show averages for cost per month, week and day:
+
+![Screenshot of a dummy accounts expenses insights](documentation/readme-images/insights_expenses.png)
 </details>
 
 
