@@ -305,8 +305,9 @@ Given more time I would have liked to explore this issue further as it appears t
   
   | Raised by | Bug | Solution |
   | :---      | :---| :---     |
-  |  |  |  |
-  |  |  |  |
+  | User tester | Username not being found when logging in straight after account creation | Moved relative variable to within the correct function so that it was being called and the correct time |
+  | User tester | Average cost per litre and average cost per week and day not returning as float | Used the round() method to ensure the result of the calculation is rounded to 2 decimal places |
+  | 
  
 <br>
 
