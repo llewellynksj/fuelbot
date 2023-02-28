@@ -416,6 +416,13 @@ Given more time I would have liked to explore this issue further as it appears t
 
 [Stack Overflow](https://bit.ly/3SQEC0p) : 'Proper indentation for multiline strings?' Question and answers
 
+<br>
 
+### Acknowledgements
+Without the following people this project would not have been possible:
+ - James Llewellyn: For his patience and for giving up all of his free time to be dad 24/7 so that I could code
+ - My mentor Ronan: For telling me I shouldn't be so hard on myself and for always guiding me to the absolute best online resources
+ - Lewys Brace: For all his brainy advice and help
+ - The Code Institute Slack Community
 
 
