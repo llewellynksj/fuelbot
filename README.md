@@ -73,12 +73,18 @@ Users:
 
 ## Design
 ### **Colour Scheme**
-
 Coloured fonts were used to make the programme more visually appealing. The primary colour was used for core text, while the secondary colour was used mostly to inidicate a system message to the user.
 
 Primary colour: Light cyan
 
 Secondary colour: Yellow
+
+<br>
+
+### **Typography**
+For each core screen the heading is presented in a chunky font. This has been created using [pyfiglet](https://pypi.org/project/pyfiglet/0.7/) font "slant".
+The font has a motorsport feel to it and so is in keeping with a tool based around vehicle performance.
+
 
 <br>
 
