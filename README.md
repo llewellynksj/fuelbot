@@ -360,6 +360,49 @@ Given more time I would have liked to explore this issue further as it appears t
 ## Credits
 ### **Resources**
 
+[Khuyen Tran, published in Towards Data Science](https://bit.ly/3kxoSlZ) : 'Prettify your Terminal Text with Termcolor and Pyfiglet'
+
+[Rich](https://rich.readthedocs.io/en/stable/tables.html#table-options) : Module documentation for using rich.table
+
+[Pep8 Style Guide](https://peps.python.org/pep-0008/#introduction) : Used for general guidance throughout
+
+[Stack Overflow](https://bit.ly/41wBmuK) : 'Clear terminal in Python' Question and answers
+
+[gspread](https://bit.ly/3mbUXAi) : Module documentation for using g.spread
+
+[GeeksforGeeks](https://bit.ly/3IFH1WG) : 'Password validation in Python'
+
+[GeeksforGeeks](https://bit.ly/3EJIgmQ) : 'Python - Find dictionary matching value in list'
+
+[Code Academy](https://bit.ly/3J2Joog): Python Dictionaries Cheatsheet
+
+[datetime](https://bit.ly/2NOUZLC) : Module documentation for using datetime
+
+[Austin Cepalia, Real Python](https://bit.ly/3KLYbF6) : 'Intro to Object-Oriented Programming (OOP) in Python'
+
+[GeeksforGeeks](https://bit.ly/3KRKVyq) : 'Global and Local Variables in Python'
+
+[Digital Ocean](https://do.co/3Zq8Ol0) : '5 Ways to Find the Average of a List in Python'
+
+[Care4Air](https://bit.ly/3EJqEY1) : 'How to Calculate your Fuel Consumption'
+
+[Finxter](https://bit.ly/3Ycovem) : 'How to Filter a List of Lists in Python?'
+
+[Sourav Dutta, published on Code Speedy](https://bit.ly/3ZdBWft) : 'How to find the number of weeks between two dates in Python?'
+
+[Digital Ocean](https://do.co/41zP2oK) : 'How to Convert a String to a datetime or time Object in Python'
+
+[Adam Smith](https://bit.ly/3IZQHN8) : 'How to check if a string matches a pattern in Python'
+
+[Dan Bader, Real Python](https://bit.ly/3IF0h6Y): 'How and When to use _ _str_ _'
+
+[Programiz](https://bit.ly/3YnEsid) : 'Python Global Keyword'
+
+[Stack Overflow](https://bit.ly/3SQEC0p) : 'Proper indentation for multiline strings?' Question and answers
+
+
+
+
 <br>
 
 ### **Acknowledgements**
