@@ -48,7 +48,7 @@ def check_is_digits(input_list):
     """
     Checks users input is a number
     """
-    return all(answer.isdigit() for answer in input_list)
+    return all(float(answer) for answer in input_list)
 
 
 def check_username(username):
