@@ -367,6 +367,7 @@ Given more time I would have liked to explore this issue further as it appears t
   | User tester | Average cost per litre and average cost per week and day not returning as float | Used the round() method to ensure the result of the calculation is rounded to 2 decimal places |
   | User tester | Error when trying to calculate fuel stats as not enough data | Add a requirement for the list of entries to be 3 or more otherwise prints error |
   | Pep8 Linter | Error (‘catching classes that do not inherit from baseexception is not allowed’) when using a try/except statement to handle a ZeroDivisionError for the insights calculations | Attempted to use Exception and BaseException however these did not resolve the issue and I understand it is not best practice. Used a different piece of code to circumvent needing this but it is something I hope to investigate more thoroughly in the future |
+  | User tester | Error when adding fuel if numerical answers aren't given for odometer, litres and cost. There is a function to handle this but it was returning an error as it checked the first item in the list and immediately returned true or false. | Amended the check_is_digits function to use the all() method to ensure all items in the list were true |
   | Heroku deployment | Getting an error as not able to find rich.table module or dateutil module | rich and dateutil not appearing in requirements.txt file so manually added these |
  
 <br>
