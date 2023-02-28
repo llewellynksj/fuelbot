@@ -220,6 +220,10 @@ Expense insights show averages for cost per month, week and day:
 
 ### **Future Features**
 
+There is certainly further functionality I would have liked to add to this tool given time. This includes:
+ - Use of graphs via matplotlib or pandas would really enhance the visual expenerience for the user. For example it would be great to plot the change in fuel price over a period of time.
+ - I would like to add the functionality to delete entries and to edit or remove vehicles attached to a persons account.
+
 
 <br>
 
