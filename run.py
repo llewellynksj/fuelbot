@@ -614,7 +614,7 @@ def display_expense_insights(vehicle_choice):
     spend = sum(conv_cost_list)
 
     date_list = utils.get_dates(gsheets.expenses_sheet, vehicle_choice)
-    if len(date_list) < 2:
+    if len(date_list) < 3:
         utils.print_colour(
             "Oops something went wrong! You haven't entered enough data to be"
             "\nable to show stats. Try again.", constants.COLOR2)
