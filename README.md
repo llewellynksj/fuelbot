@@ -6,6 +6,14 @@ With the rising cost of living and need to be able to easily manage one's budget
 
 [Visit the FuelBot live app here](https://fuelbot.herokuapp.com/)
 
+### Dummy Account:
+
+For the purposes of project assessment, a dummy account with the below details has been set up with a number of dummy details so that records and insights can be viewed fully without the need to complete a number of entries:
+
+Username: joebloggs
+
+Password: password1
+
 <br>
 
 ## Contents
@@ -323,6 +331,14 @@ This project was built using a [Code Institute template](https://github.com/Code
 
 ## Testing
 
+### Dummy Account:
+
+For the purposes of project assessment, a dummy account with the below details has been set up with a number of dummy details so that records and insights can be viewed fully without the need to complete a number of entries:
+
+Username: joebloggs
+
+Password: password1
+
 ### **Pep 8**
 The Pep8 Linter shows no errors in the final code of this programme. It does however show 4 warning messages. These message all realte to my use of global variables.
 
@@ -401,10 +417,5 @@ Given more time I would have liked to explore this issue further as it appears t
 [Stack Overflow](https://bit.ly/3SQEC0p) : 'Proper indentation for multiline strings?' Question and answers
 
 
-
-
-<br>
-
-### **Acknowledgements**
 
 
