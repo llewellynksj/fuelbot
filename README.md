@@ -379,9 +379,9 @@ Given more time I would have liked to explore this issue further as it appears t
 
 [Khuyen Tran, published in Towards Data Science](https://bit.ly/3kxoSlZ) : 'Prettify your Terminal Text with Termcolor and Pyfiglet'
 
-[Rich](https://rich.readthedocs.io/en/stable/tables.html#table-options) : Module documentation for using rich.table
+[Rich](https://bit.ly/3ZvxqZk) : Module documentation for using rich.table
 
-[Pep8 Style Guide](https://peps.python.org/pep-0008/#introduction) : Used for general guidance throughout
+[Pep8 Style Guide](https://bit.ly/3L28uVJ) : Used for general guidance throughout
 
 [Stack Overflow](https://bit.ly/41wBmuK) : 'Clear terminal in Python' Question and answers
 
@@ -416,6 +416,8 @@ Given more time I would have liked to explore this issue further as it appears t
 [Programiz](https://bit.ly/3YnEsid) : 'Python Global Keyword'
 
 [Stack Overflow](https://bit.ly/3SQEC0p) : 'Proper indentation for multiline strings?' Question and answers
+
+[W3Schools](https://bit.ly/3ZoK2lL) : Python all() Function
 
 <br>
 
