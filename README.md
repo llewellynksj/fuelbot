@@ -48,7 +48,10 @@ With the rising cost of living and need to be able to easily manage one's budget
 ## User Experience (UX)
 ### **Purpose**
 
+Aimed at people who want to better understand how much they are spending on their vehicles so they can be better informed when making financial decisions. 
 
+FuelBot allows the user to log details for up to 3 vehicles. They can regularly track their fuel spend and any additional costs on general vehicle expenses.
+Once they have entered a minimum of 3 entries this handy programme will be able to offer insights about their average spend per month/week/day as well as average cost per litre and mpg.
 
 <br>
 
@@ -70,7 +73,9 @@ With the rising cost of living and need to be able to easily manage one's budget
 
 ### **Programme Model**
 
-Flowchart
+The below flowchart was created when thinking about the structure of this programme. A clear vision of the process helped to design a core model.
+
+![Image of process Flowchart](documentation/readme-images/flowchart.png)
 
 <br>
 
