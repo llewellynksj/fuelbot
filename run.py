@@ -546,7 +546,7 @@ def display_fuel_insights(vehicle_choice):
     utils.print_colour(utils.title.renderText("I N S I G H T S"), "white")
     spend = utils.calc_total_spend(vehicle_choice)
     odometer_list = utils.get_list(vehicle_choice, 3)
-    if len(odometer_list) < 2:
+    if len(odometer_list) < 3:
         utils.print_colour(
             "Oops something went wrong! You haven't entered enough data to be"
             "\nable to show stats. Try again.", constants.COLOR2)
