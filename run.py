@@ -325,10 +325,14 @@ def add_fuel(vehicle_choice):
         cost_per_l = input("Enter the cost per litre: £\n")
         answer_list = [odometer, litres_in, cost_per_l]
         if checks.check_is_digits(answer_list):
-            fuel_dict['Odometer'] = int(odometer)
-            fuel_dict['Litres'] = float(litres_in)
-            fuel_dict['Cost'] = float(cost_per_l)
             break
+        else:
+            utils.print_colour(
+                "Please only enter numbers for Odometer reading, litres, and"
+                "\ncost per litre.Try again.", constants.COLOR2)
+    fuel_dict['Odometer'] = int(odometer)
+    fuel_dict['Litres'] = float(litres_in)
+    fuel_dict['Cost'] = float(cost_per_l)
     # Check for user to confirm details:
     if checks.user_conf(fuel_dict):
         utils.print_colour("Great! One more question...", constants.COLOR2)

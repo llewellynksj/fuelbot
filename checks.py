@@ -48,13 +48,7 @@ def check_is_digits(input_list):
     """
     Checks users input is a number
     """
-    for answer in input_list:
-        if answer.isdigit():
-            return True
-        else:
-            utils.print_colour(
-                "Please only enter numbers for Odometer reading, litres, and"
-                "\ncost per litre.Try again.", constants.COLOR2)
+    return all(answer.isdigit() for answer in input_list)
 
 
 def check_username(username):
