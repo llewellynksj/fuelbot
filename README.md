@@ -282,6 +282,11 @@ Version control has been maintained using Git. The code written for this website
 ## Testing
 
 ### **Pep 8**
+The Pep8 Linter shows no errors in the final code of this programme. It does however show 4 warning messages. These message all realte to my use of global variables.
+
+From what I understood from online resources(such as [this article from Programiz](https://www.programiz.com/python-programming/global-keyword) and [this article from GeeksforGeeks](https://www.geeksforgeeks.org/global-local-variables-python/)) you can declare a global variable outside of functions, and if you are re-assigning it’s value within a function you need to use the global keyword to do this.
+Linter wants me to change these variables to uppercase as it thinks they are constants but they are not constants as their value changes.
+Given more time I would have liked to explore this issue further as it appears this is not the pythonic way to do this. It is something I intend to fix in the future.
 
 <br>
 
@@ -289,8 +294,10 @@ Version control has been maintained using Git. The code written for this website
 
 | User Story | Solution | Tested & Successfully Completed |
 | :----| :---| :----------------------:|
-| I want to  |  | Yes |
-| I want to  |  | Yes |
+| I want to see my average spend on fuel per month/week/day  | Fuel insights provides averages per month, week and day | Yes |
+| I want to be able to add multiple vehicles  | The first page after logging in displays any currently saved vehicles and allows the user to add up to a maximum of 3 vehicles all together | Yes |
+| I want to know my vehicles mpg | Mpg is calculated automatically when a fuel entry is put through the 'Add Fuel' feature. The user must have a minimum of 3 fuel entries to view the mpg on the insights page | Yes |
+| I want to be able to see my past records | The previous records options allows the user to view any previous fuel and expense entries related to a specific vehicle | Yes |
 
 <br>
 
