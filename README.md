@@ -1,6 +1,6 @@
 # FuelBot: Fuel Tracking System
 
-With the rising cost of living and need to be able to easily manage one's budget, FuelBot is a simple tracking system to help vehicle users understand how much they are spending on fuel. This useful little tool can quickly analyse your average spend so that you can better manage your finances.
+With the rising cost of living, and the need to be able to easily manage one's budget, FuelBot is a simple tracking system to help vehicle users understand how much they are spending on fuel. This useful little tool can quickly analyse your average spend so that you can better manage your finances.
 
 ![Image of FuelBot](documentation/readme-images/fuelbot_logo.png)
 
@@ -8,7 +8,7 @@ With the rising cost of living and need to be able to easily manage one's budget
 
 ### Dummy Account:
 
-For the purposes of project assessment a dummy account with the below details has been set up with a cars details, so that records and insights can be viewed fully without the need to complete a number of entries:
+For the purposes of project assessment a dummy account with the below details has been set up and the details of a car have been added. This means records and insights can be viewed fully without the need to complete a number of entries:
 
 Username: joebloggs
 
@@ -60,7 +60,7 @@ Password: password1
 Aimed at people who want to better understand how much they are spending on their vehicles so they can be better informed when making financial decisions. 
 
 FuelBot allows the user to log details for up to 3 vehicles. They can regularly track their fuel spend and any additional costs on general vehicle expenses.
-Once they have entered a minimum of 3 entries this handy programme will be able to offer insights about their average spend per month/week/day as well as average cost per litre and mpg.
+Once they have completed a minimum of 3 entries this handy programme will be able to offer insights about their average spend per month/week/day as well as average cost per litre and mpg.
 
 <br>
 
@@ -333,16 +333,16 @@ This project was built using a [Code Institute template](https://github.com/Code
 
 ### Dummy Account:
 
-For the purposes of project assessment a dummy account with the below details has been set up with a cars details, so that records and insights can be viewed fully without the need to complete a number of entries:
+For the purposes of project assessment a dummy account with the below details has been set up and the details of a car have been added. This means records and insights can be viewed fully without the need to complete a number of entries:
 
 Username: joebloggs
 
 Password: password1
 
 ### **Pep 8**
-The Pep8 Linter shows no errors in the final code of this programme. It does however show 4 warning messages. These message all realte to my use of global variables.
+The Pep8 Linter shows no errors in the final code of this programme. It does however show 4 warning messages. These messages all realte to my use of global variables.
 
-From what I understood from online resources(such as [this article from Programiz](https://www.programiz.com/python-programming/global-keyword) and [this article from GeeksforGeeks](https://www.geeksforgeeks.org/global-local-variables-python/)) you can declare a global variable outside of functions, and if you are re-assigning it’s value within a function you need to use the global keyword to do this.
+From what I understood from online resources (such as [this article from Programiz](https://www.programiz.com/python-programming/global-keyword) and [this article from GeeksforGeeks](https://www.geeksforgeeks.org/global-local-variables-python/)) you can declare a global variable outside of functions, and if you are re-assigning it’s value within a function you need to use the global keyword to do this.
 Linter wants me to change these variables to uppercase as it thinks they are constants but they are not constants as their value changes.
 Given more time I would have liked to explore this issue further as it appears this is not the pythonic way to do this. It is something I intend to fix in the future.
 
