@@ -274,6 +274,48 @@ Version control has been maintained using Git. The code written for this website
 ----
 
 ## Deployment
+This project was built using a [Code Institute template](https://github.com/Code-Institute-Org/python-essentials-template) on [Github](https://github.com/), and has been deployed on [Heroku](https://www.heroku.com/)
+
+## Heroku
+## How to deploy
+1. Log in to Heroku account
+2. Click on button to 'Create new app'
+3. Enter a name for your app (this must be unique)
+4. Select the relevant region, and click 'Create app'
+5. On the main app page, select the 'Settings' tab
+6. Click on the 'Reveal Config Vars' button
+7. Using uppercase letters add 'PORT' to the key box, and '8000' to the value box
+8. Click 'Add'
+9. Using uppercase letters again add 'CREDS' to the key box
+10. From the workspace copy details from the creds.json file and paste them into the value box
+11. Click 'Add'
+12. Click 'Add Buildpack'
+13. Select Python and click 'Save changes'
+14. Select Node.js and click 'Save changes'
+15. Ensure Python appears above Node.js
+16. Go to the 'Deploy' tab 
+17. Select the GitHub button to connect to GitHub
+18. Search for the Repository name and click 'Connect'
+19. If wanted, click to 'Enable Automatic Deploys'
+20. Click 'Deploy Branch' (if you do not enable automatic deployments you will need to manually deploy each time a change is pushed to the repo)
+21. Click 'Open app' to view the live app
+
+
+<br>
+
+## GitHub
+## How to Fork
+1. Log in to Github account
+2. Navigate to the project repository [here](https://github.com/llewellynksj/kitchen-catastrophe)
+3. Click on the 'Fork' button in the top right corner of the page
+
+## How to Clone
+1. Log in to Github account
+2. Navigate to the project repository [here](https://github.com/llewellynksj/kitchen-catastrophe)
+3. Click on the green 'Code' button which will open a drop down menu
+4. Copy the clone link you require (e.g. HTTPS/SSH)
+5. In your code editor change the working directory to the location where you want the clone
+6. Type 'git clone' and paste in the link
 
 <br>
 
