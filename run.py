@@ -554,7 +554,7 @@ def display_fuel_insights(vehicle_choice):
         utils.print_colour(
             "Oops something went wrong! You haven't entered enough data to be"
             "\nable to show stats. Try again.", constants.COLOR2)
-        utils.delay(2.5)
+        utils.delay(3)
         vehicle_account_menu(vehicle_choice)
     total_distance = utils.calc_distance(odometer_list)
     date_list = utils.get_dates(gsheets.fuel_sheet, vehicle_choice)
@@ -622,7 +622,7 @@ def display_expense_insights(vehicle_choice):
         utils.print_colour(
             "Oops something went wrong! You haven't entered enough data to be"
             "\nable to show stats. Try again.", constants.COLOR2)
-        utils.delay(2.5)
+        utils.delay(3)
         vehicle_account_menu(vehicle_choice)
     days = utils.get_days(date_list)
     weeks = days // 7
